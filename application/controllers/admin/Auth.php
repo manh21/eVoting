@@ -682,12 +682,14 @@ class Auth extends CI_Controller
 				'name'  => 'group_name',
 				'id'    => 'group_name',
 				'type'  => 'text',
+				'class'  => 'form-control',
 				'value' => $this->form_validation->set_value('group_name'),
 			];
 			$this->data['description'] = [
 				'name'  => 'description',
 				'id'    => 'description',
 				'type'  => 'text',
+				'class'  => 'form-control',
 				'value' => $this->form_validation->set_value('description'),
 			];
 
@@ -743,6 +745,7 @@ class Auth extends CI_Controller
 			'name'    => 'group_name',
 			'id'      => 'group_name',
 			'type'    => 'text',
+			'class'    => 'form-control',
 			'value'   => $this->form_validation->set_value('group_name', $group->name),
 		];
 		if ($this->config->item('admin_group', 'ion_auth') === $group->name) {
@@ -753,6 +756,7 @@ class Auth extends CI_Controller
 			'name'  => 'group_description',
 			'id'    => 'group_description',
 			'type'  => 'text',
+			'class'    => 'form-control',
 			'value' => $this->form_validation->set_value('group_description', $group->description),
 		];
 
