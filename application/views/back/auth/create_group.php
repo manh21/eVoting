@@ -6,56 +6,42 @@
       <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <div class="content-header">
-                  <div class="container-fluid">
-                        <div class="row mb-2">
-                              <div class="col-sm-6">
-                                    <h1 class="m-0 text-dark">Data User
-                              </div><!-- /.col -->
-                              <div class="col-sm-6">
-                                    <ol class="breadcrumb float-sm-right">
-                                          <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                          <li class="breadcrumb-item">User</li>
-                                          <li class="breadcrumb-item active">Tambah Group Baru</li>
-                                    </ol>
-                              </div><!-- /.col -->
-                        </div><!-- /.row -->
-                  </div><!-- /.container-fluid -->
-            </div>
+                  <h1>Tambah Group Baru</h1>
+                  <ol class="breadcrumb">
+                        <li><a href="<?php echo base_url('admin/auth') ?>"><i class="fa fa-users"></i> Users</a></li>
+                        <li>Tambah Group Baru</li>
+                  </ol>
+            </div><!-- /.col -->
             <!-- /.content-header -->
             <!-- Main content -->
             <section class="content">
-                  <div class="container-fluid">
-                        <div class="row">
-                              <div class="col-lg-6">
-                                    <div class="card card-primary">
-                                          <div class="card-header">
-                                                <h3 class="card-title">Tambah Group Baru</h3>
+                  <div class="row">
+                        <div class="col-md-6">
+                              <div class="box box-primary">
+                                    <div class="box-header with-border">
+                                          <h3 class="boc-title">Tambah Group Baru</h3>
+                                    </div>
+                                    <div id="infoMessage"><?php echo $message; ?></div>
+
+                                    <?php echo form_open("admin/auth/create_group"); ?>
+                                    <div class="box-body">
+                                          <div class="form-group">
+                                                <?php echo lang('create_group_name_label', 'group_name'); ?> <br />
+                                                <?php echo form_input($group_name); ?>
                                           </div>
-                                          <div class="card-body">
-                                                <div class="form-group">
-                                                      <div id="infoMessage"><?php echo $message; ?></div>
 
-                                                      <?php echo form_open("admin/auth/create_group"); ?>
-
-                                                      <p>
-                                                            <?php echo lang('create_group_name_label', 'group_name'); ?> <br />
-                                                            <?php echo form_input($group_name); ?>
-                                                      </p>
-
-                                                      <p>
-                                                            <?php echo lang('create_group_desc_label', 'description'); ?> <br />
-                                                            <?php echo form_input($description); ?>
-                                                      </p>
-                                                      <p>
-                                                            <button type="submit" class="btn btn-primary">Kirim</button>
-                                                      </p>
-                                                      <?php echo form_close(); ?>
-                                                </div>
+                                          <div class="form-group">
+                                                <?php echo lang('create_group_desc_label', 'description'); ?> <br />
+                                                <?php echo form_input($description); ?>
                                           </div>
                                     </div>
+                                    <div class="box-footer">
+                                          <button type="submit" class="btn btn-success">Kirim</button>
+                                    </div>
+                                    <?php echo form_close(); ?>
                               </div>
-                        </div><!-- /.row -->
-                  </div><!-- /.container-fluid -->
+                        </div>
+                  </div><!-- /.row -->
             </section><!-- /.content -->
       </div><!-- /.content-wrapper -->
       <?php $this->load->view('back/footer') ?>

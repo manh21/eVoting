@@ -144,23 +144,27 @@ class Auth extends CI_Controller
 				'name' => 'old',
 				'id' => 'old',
 				'type' => 'password',
+				'class' => 'form-control',
 			];
 			$this->data['new_password'] = [
 				'name' => 'new',
 				'id' => 'new',
 				'type' => 'password',
+				'class' => 'form-control',
 				'pattern' => '^.{' . $this->data['min_password_length'] . '}.*$',
 			];
 			$this->data['new_password_confirm'] = [
 				'name' => 'new_confirm',
 				'id' => 'new_confirm',
 				'type' => 'password',
+				'class' => 'form-control',
 				'pattern' => '^.{' . $this->data['min_password_length'] . '}.*$',
 			];
 			$this->data['user_id'] = [
 				'name' => 'user_id',
 				'id' => 'user_id',
 				'type' => 'hidden',
+				'class' => 'form-control',
 				'value' => $user->id,
 			];
 
@@ -203,6 +207,7 @@ class Auth extends CI_Controller
 			$this->data['identity'] = [
 				'name' => 'identity',
 				'id' => 'identity',
+				'class' => 'form-control',
 			];
 
 			if ($this->config->item('identity', 'ion_auth') != 'email') {
@@ -276,18 +281,21 @@ class Auth extends CI_Controller
 					'name' => 'new',
 					'id' => 'new',
 					'type' => 'password',
+					'class' => 'form-control',
 					'pattern' => '^.{' . $this->data['min_password_length'] . '}.*$',
 				];
 				$this->data['new_password_confirm'] = [
 					'name' => 'new_confirm',
 					'id' => 'new_confirm',
 					'type' => 'password',
+					'class' => 'form-control',
 					'pattern' => '^.{' . $this->data['min_password_length'] . '}.*$',
 				];
 				$this->data['user_id'] = [
 					'name' => 'user_id',
 					'id' => 'user_id',
 					'type' => 'hidden',
+					'class' => 'form-control',
 					'value' => $user->id,
 				];
 				$this->data['csrf'] = $this->_get_csrf_nonce();

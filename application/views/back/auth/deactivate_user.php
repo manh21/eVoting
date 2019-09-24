@@ -1,18 +1,69 @@
-<h1><?php echo lang('deactivate_heading');?></h1>
-<p><?php echo sprintf(lang('deactivate_subheading'), $user->username);?></p>
+<?php $this->load->view('back/meta') ?>
+<?php $this->load->view('back/head') ?>
+<?php $this->load->view('back/sidebar') ?>
 
-<?php echo form_open("auth/deactivate/".$user->id);?>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      Deactivate User
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="<?php echo base_url('admin/auth') ?>"><i class="fa fa-users"></i> Users</a></li>
+      <li class="active">Deactivate Users</li>
+    </ol>
+  </section>
 
-  <p>
-  	<?php echo lang('deactivate_confirm_y_label', 'confirm');?>
-    <input type="radio" name="confirm" value="yes" checked="checked" />
-    <?php echo lang('deactivate_confirm_n_label', 'confirm');?>
-    <input type="radio" name="confirm" value="no" />
-  </p>
+  <!-- Main content -->
+  <section class="content">
+    <!-- Small boxes (Stat box) -->
+    <div class="row">
+      <div class="col-md-6">
+        <div class="box box-primary">
+          <div class="box-header">
+            <h3 class="box-title">Edit Group</h3>
+          </div>
+          <?php echo form_open("auth/deactivate/" . $user->id); ?>
+          <div class="box-body">
+            <div class="form-group">
+              <label>
+                <input type="radio" class="flat-red" name="confirm" value="yes" checked="checked" />
+                Yes
+              </label>
+              <label>
+                <input type="radio" class="flat-red" name="confirm" value="no" />
+                No
+              </label>
+            </div>
 
-  <?php echo form_hidden($csrf); ?>
-  <?php echo form_hidden(['id' => $user->id]); ?>
+            <?php echo form_hidden($csrf); ?>
+            <?php echo form_hidden(['id' => $user->id]); ?>
 
-  <p><?php echo form_submit('submit', lang('deactivate_submit_btn'));?></p>
+          </div>
+          <div class="box-footer">
+            <button type="submit" class="btn btn-success">Submit</button>
+          </div>
 
-<?php echo form_close();?>
+          <?php echo form_close(); ?>
+        </div>
+      </div>
+      <!-- /.row -->
+  </section>
+  <!-- /.content -->
+</div>
+
+<?php $this->load->view('back/js') ?>
+<!-- iCheck 1.0.1 -->
+<script src="<?php echo base_url('assets/template/backend/') ?>plugins/iCheck/icheck.min.js"></script>
+<script>
+  //Flat green color scheme for iCheck
+  $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+    checkboxClass: 'icheckbox_flat-green',
+    radioClass: 'iradio_flat-green'
+  })
+</script>
+
+</body>
+
+</html>

@@ -1,122 +1,108 @@
-/**
- * --------------------------------------------
- * AdminLTE TodoList.js
- * License MIT
- * --------------------------------------------
+/* TodoList()
+ * =========
+ * Converts a list into a todoList.
+ *
+ * @Usage: $('.my-list').todoList(options)
+ *         or add [data-widget="todo-list"] to the ul element
+ *         Pass any option as data-option="value"
  */
++function ($) {
+  'use strict';
 
-const TodoList = (($) => {
-  /**
-   * Constants
-   * ====================================================
-   */
+  var DataKey = 'lte.todolist';
 
-  const NAME               = 'TodoList'
-  const DATA_KEY           = 'lte.todolist'
-  const EVENT_KEY          = `.${DATA_KEY}`
-  const JQUERY_NO_CONFLICT = $.fn[NAME]
-
-  const Selector = {
-    DATA_TOGGLE: '[data-widget="todo-list"]'
-  }
-
-  const ClassName = {
-    TODO_LIST_DONE: 'done'
-  }
-
-  const Default = {
-    onCheck: function (item) {
+  var Default = {
+    onCheck  : function (item) {
       return item;
     },
     onUnCheck: function (item) {
       return item;
     }
-  }
+  };
 
-  /**
-   * Class Definition
-   * ====================================================
-   */
+  var Selector = {
+    data: '[data-widget="todo-list"]'
+  };
 
-  class TodoList {
-    constructor(element, config) {
-      this._config  = config
-      this._element = element
+  var ClassName = {
+    done: 'done'
+  };
 
-      this._init()
+  // TodoList Class Definition
+  // =========================
+  var TodoList = function (element, options) {
+    this.element = element;
+    this.options = options;
+
+    this._setUpListeners();
+  };
+
+  TodoList.prototype.toggle = function (item) {
+    item.parents(Selector.li).first().toggleClass(ClassName.done);
+    if (!item.prop('checked')) {
+      this.unCheck(item);
+      return;
     }
 
-    // Public
+    this.check(item);
+  };
 
-    toggle(item) {
-      item.parents('li').toggleClass(ClassName.TODO_LIST_DONE);
-      if (! $(item).prop('checked')) {
-        this.unCheck($(item));
-        return;
+  TodoList.prototype.check = function (item) {
+    this.options.onCheck.call(item);
+  };
+
+  TodoList.prototype.unCheck = function (item) {
+    this.options.onUnCheck.call(item);
+  };
+
+  // Private
+
+  TodoList.prototype._setUpListeners = function () {
+    var that = this;
+    $(this.element).on('change ifChanged', 'input:checkbox', function () {
+      that.toggle($(this));
+    });
+  };
+
+  // Plugin Definition
+  // =================
+  function Plugin(option) {
+    return this.each(function () {
+      var $this = $(this);
+      var data  = $this.data(DataKey);
+
+      if (!data) {
+        var options = $.extend({}, Default, $this.data(), typeof option == 'object' && option);
+        $this.data(DataKey, (data = new TodoList($this, options)));
       }
 
-      this.check(item);
-    }
-
-    check (item) {
-      this._config.onCheck.call(item);
-    }
-
-    unCheck (item) {
-      this._config.onUnCheck.call(item);
-    }
-
-    // Private
-
-    _init() {
-      var that = this
-      $(Selector.DATA_TOGGLE).find('input:checkbox:checked').parents('li').toggleClass(ClassName.TODO_LIST_DONE)
-      $(Selector.DATA_TOGGLE).on('change', 'input:checkbox', (event) => {
-        that.toggle($(event.target))
-      })
-    }
-
-    // Static
-
-    static _jQueryInterface(config) {
-      return this.each(function () {
-        let data      = $(this).data(DATA_KEY)
-        const _config = $.extend({}, Default, $(this).data())
-
-        if (!data) {
-          data = new TodoList($(this), _config)
-          $(this).data(DATA_KEY, data)
+      if (typeof data == 'string') {
+        if (typeof data[option] == 'undefined') {
+          throw new Error('No method named ' + option);
         }
-
-        if (config === 'init') {
-          data[config]()
-        }
-      })
-    }
+        data[option]();
+      }
+    });
   }
 
-  /**
-   * Data API
-   * ====================================================
-   */
+  var old = $.fn.todoList;
 
-  $(window).on('load', () => {
-    TodoList._jQueryInterface.call($(Selector.DATA_TOGGLE))
-  })
+  $.fn.todoList             = Plugin;
+  $.fn.todoList.Constructor = TodoList;
 
-  /**
-   * jQuery API
-   * ====================================================
-   */
+  // No Conflict Mode
+  // ================
+  $.fn.todoList.noConflict = function () {
+    $.fn.todoList = old;
+    return this;
+  };
 
-  $.fn[NAME] = TodoList._jQueryInterface
-  $.fn[NAME].Constructor = TodoList
-  $.fn[NAME].noConflict = function () {
-    $.fn[NAME] = JQUERY_NO_CONFLICT
-    return TodoList._jQueryInterface
-  }
+  // TodoList Data API
+  // =================
+  $(window).on('load', function () {
+    $(Selector.data).each(function () {
+      Plugin.call($(this));
+    });
+  });
 
-  return TodoList
-})(jQuery)
-
-export default TodoList
+}(jQuery);

@@ -1,70 +1,47 @@
-<aside class="main-sidebar sidebar-dark-primary elevation-4">
-  <!-- Brand Logo -->
-  <a href="index3.html" class="brand-link">
-    <img src="<?php echo base_url('assets/template/backend/') ?>dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-    <span class="brand-text font-weight-light">SysB21</span>
-  </a>
-
-  <!-- Sidebar -->
-  <div class="sidebar">
-    <!-- Sidebar user panel (optional) -->
-    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-      <div class="image">
-        <img src="<?php echo base_url('assets/template/backend/') ?>dist/img/avatar5.png" class="img-circle elevation-2" alt="User Image">
+<aside class="main-sidebar">
+  <!-- sidebar: style can be found in sidebar.less -->
+  <section class="sidebar">
+    <!-- Sidebar user panel -->
+    <div class="user-panel">
+      <div class="pull-left image">
+        <img src="<?php echo base_url('assets/template/backend/') ?>dist/img/avatar5.png" class="img-circle" alt="User Image">
       </div>
-      <div class="info">
-        <a href="#" class="d-block"><?php echo $this->session->userdata('identity') ?></a>
+      <div class="pull-left info">
+        <p><?php echo $this->session->userdata('identity') ?></p>
+        <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
       </div>
     </div>
-
-    <!-- Sidebar Menu -->
-    <nav class="mt-2">
-      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-        <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-        <li class="nav-item">
-          <a href="<?php echo base_url('admin/dashboard') ?>" class="nav-link">
-            <i class="nav-icon fas fa-tachometer-alt"></i>
-            <p>
-              Dashboard
-            </p>
-          </a>
-        </li>
-        <li class="nav-item has-treeview">
-          <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-users"></i>
-            <p>
-              User Management
-              <i class="fas fa-angle-left right"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="<?php echo base_url('admin/auth') ?>" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>User List</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="<?php echo base_url('admin/auth') ?>" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>User Group</p>
-              </a>
-            </li>
-          </ul>
-        </li>
-        <li class="nav-header">Dev</li>
-        <li class="nav-item">
-          <a href="pages/gallery.html" class="nav-link">
-            <i class="nav-icon far fa-image"></i>
-            <p>
-              Gallery
-            </p>
-          </a>
-        </li>
-      </ul>
-    </nav>
-    <!-- /.sidebar-menu -->
-  </div>
+    <!-- sidebar menu: : style can be found in sidebar.less -->
+    <ul class="sidebar-menu" data-widget="tree">
+      <li class="header">MAIN NAVIGATION</li>
+      <li>
+        <a href="<?php echo base_url('admin/dashboard') ?>">
+          <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+        </a>
+      </li>
+      <li class="treeview">
+        <a href="#">
+          <i class="fa fa-users"></i>
+          <span>User Management</span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
+        </a>
+        <ul class="treeview-menu">
+          <li>
+            <a href="<?php echo base_url('admin/auth') ?>">
+              <i class="fa fa-circle-o"></i> User List
+            </a>
+          </li>
+          <li>
+            <a href="<?php echo base_url('admin/auth') ?>">
+              <i class="fa fa-circle-o"></i> User Group
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class="header">Dev</li>
+      <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
+  </section>
   <!-- /.sidebar -->
 </aside>

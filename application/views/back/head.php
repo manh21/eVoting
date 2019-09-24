@@ -1,27 +1,47 @@
-<nav class="main-header navbar navbar-expand navbar-white navbar-light">
-    <!-- Left navbar links -->
-    <ul class="navbar-nav">
-        <li class="nav-item">
-            <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
-        </li>
-    </ul>
+<header class="main-header">
+    <!-- Logo -->
+    <a href="<?php echo base_url('admin/dashboard') ?>" class="logo">
+        <!-- mini logo for sidebar mini 50x50 pixels -->
+        <span class="logo-mini"><b>S</b>21</span>
+        <!-- logo for regular state and mobile devices -->
+        <span class="logo-lg"><b>System</b>21</span>
+    </a>
+    <!-- Header Navbar: style can be found in header.less -->
+    <nav class="navbar navbar-static-top">
+        <!-- Sidebar toggle button-->
+        <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+            <span class="sr-only">Toggle navigation</span>
+        </a>
 
-    <!-- Right navbar links -->
-    <ul class="navbar-nav ml-auto">
-        <!-- Notifications Dropdown Menu -->
-        <li class="nav-item dropdown">
-            <a class="nav-link" data-toggle="dropdown" href="#">
-                <i class="fas fa-cog"></i>
-            </a>
-            <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
-                <!-- <span class="dropdown-item dropdown-header">Settings</span> -->
-                <div class="dropdown-divider"></div>
-                <a href="<?php echo base_url('admin/auth/logout') ?>" class="dropdown-item">
-                    <i class="fas fa-sign-out-alt"></i>
-                    <span class="float-right">Logout</span>
-                </a>
-                <div class="dropdown-divider"></div>
-            </div>
-        </li>
-    </ul>
-</nav>
+        <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+                <!-- User Account: style can be found in dropdown.less -->
+                <li class="dropdown user user-menu">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <img src="<?php echo base_url('assets/template/backend/') ?>dist/img/avatar5.png" class="user-image" alt="User Image">
+                        <span class="hidden-xs"><?php echo $this->session->userdata('identity') ?></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <!-- User image -->
+                        <li class="user-header">
+                            <img src="<?php echo base_url('assets/template/backend/') ?>dist/img/avatar5.png" class="img-circle" alt="User Image">
+                            <p>
+                                <?php echo $this->session->userdata('identity') ?>
+                            </p>
+                        </li>
+                        <!-- Menu Footer-->
+                        <li class="user-footer">
+                            <div class="pull-right">
+                                <a href="<?php echo base_url('admin/auth/logout') ?>" class="btn btn-default btn-flat">Sign out</a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <!-- Control Sidebar Toggle Button -->
+                <li>
+                    <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>

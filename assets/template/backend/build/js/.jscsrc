@@ -1,12 +1,9 @@
 {
-  "esnext": true,
-  "verbose": true,
   "disallowEmptyBlocks": true,
   "disallowKeywords": ["with"],
   "disallowMixedSpacesAndTabs": true,
   "disallowMultipleLineStrings": true,
   "disallowMultipleVarDecl": true,
-  "disallowQuotedKeysInObjects": "allButReserved",
   "disallowSpaceAfterPrefixUnaryOperators": ["++", "--", "+", "-", "~", "!"],
   "disallowSpaceBeforeBinaryOperators": [","],
   "disallowSpaceBeforePostfixUnaryOperators": ["++", "--"],
@@ -29,7 +26,7 @@
   "requireSpaceAfterLineComment": true,
   "requireSpaceBeforeBinaryOperators": ["+", "-", "/", "*", "=", "==", "===", "!=", "!==", ">", "<", ">=", "<="],
   "requireSpaceBetweenArguments": true,
-  "requireSpacesInAnonymousFunctionExpression": { "beforeOpeningCurlyBrace": true, "beforeOpeningRoundBrace": true, "allExcept": ["shorthand"] },
+  "requireSpacesInAnonymousFunctionExpression": { "beforeOpeningCurlyBrace": true, "beforeOpeningRoundBrace": true },
   "requireSpacesInConditionalExpression": true,
   "requireSpacesInForStatement": true,
   "requireSpacesInFunctionDeclaration": { "beforeOpeningCurlyBrace": true },
@@ -40,5 +37,6 @@
   "validateIndentation": 2,
   "validateLineBreaks": "LF",
   "validateNewlineAfterArrayElements": true,
-  "validateQuoteMarks": "'"
+  "validateQuoteMarks": "'",
+  "maxErrors": "3000"
 }
