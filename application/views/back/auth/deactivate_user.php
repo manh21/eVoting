@@ -24,7 +24,7 @@
           <div class="box-header">
             <h3 class="box-title">Edit Group</h3>
           </div>
-          <?php echo form_open("auth/deactivate/" . $user->id); ?>
+          <?php echo form_open("admin/auth/deactivate/" . $user->id); ?>
           <div class="box-body">
             <div class="form-group">
               <label>

@@ -25,7 +25,7 @@
                                           <h3 class="box-title">Tambah User Baru</h3>
                                     </div>
                                     <div id="infoMessage"><?php echo $message; ?></div>
-                                    <?php echo form_open("auth/create_user"); ?>
+                                    <?php echo form_open("admin/auth/create_user"); ?>
                                     <div class="box-body">
                                           <div class="form-group">
                                                 <?php echo lang('create_user_fname_label', 'first_name'); ?> <br />
