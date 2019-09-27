@@ -52,7 +52,12 @@
 													</div>
 												</td>
 												<td><?php echo ($user->active) ? anchor("admin/auth/deactivate/" . $user->id, lang('index_active_link')) : anchor("admin/auth/activate/" . $user->id, lang('index_inactive_link')); ?></td>
-												<td><a href="<?php echo base_url('admin/auth/edit_user/' . $user->id) ?>" class="btn btn-sm btn-flat bg-orange"><i class="fa fa-edit"></i></a></td>
+												<td>
+													<div class="btn-group">
+														<a href="<?php echo base_url('admin/auth/edit_user/' . $user->id) ?>" class="btn btn-sm btn-flat bg-orange"><i class="fa fa-edit"></i></a>
+														<button type="button" class="btn btn-sm btn-flat btn-danger" data-whatever="<?php echo base_url('admin/auth/delete_user/' . $user->id) ?>" data-toggle="modal" data-target="#modal-danger"><i class="fa fa-trash"></i></button>
+													</div>
+												</td>
 											</tr>
 										<?php endforeach; ?>
 									</tbody>
@@ -62,11 +67,30 @@
 							</div>
 						</div>
 					</div>
+				</div><!-- /.row (main row) -->
+			</div>
+			<div class="modal modal-danger fade" id="modal-danger">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title">Apakah anda yakin</h4>
+						</div>
+						<div class="modal-body">
+							<p>Semua perubahan tidak dapat diulang kembali</p>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-outline" data-dismiss="modal">Close</button>
+							<a href="" type="button" class="btn btn-outline" id="saveChanges">Save changes</a>
+						</div>
+					</div>
+					<!-- /.modal-content -->
 				</div>
-				<!-- /.row (main row) -->
-			</div><!-- /.container-fluid -->
-		</section>
-		<!-- /.content -->
+				<!-- /.modal-dialog -->
+			</div>
+			<!-- /.modal -->
+		</section><!-- /.content -->
 	</div>
 	<!-- /.content-wrapper -->
 	<?php $this->load->view('back/footer') ?>

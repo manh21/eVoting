@@ -85,7 +85,7 @@ class Ion_auth
 		$this->ion_auth_model->trigger_events('library_constructor');
 	}
 
-	/**
+	/**s
 	 * __call
 	 *
 	 * Acts as a simple way to call model methods without loads of stupid alias'

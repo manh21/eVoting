@@ -105,10 +105,11 @@ class Auth extends CI_Controller
 		}
 	}
 
+	/**
+	 * Display all aviabel group and the user count
+	 */
 	public function group()
 	{
-		// Display all aviabel group and the user count
-
 		// Security check if the user is admin
 		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
 			redirect('admin/auth', 'refresh');
@@ -120,6 +121,47 @@ class Auth extends CI_Controller
 		$this->_render_page('back/auth' . DIRECTORY_SEPARATOR . 'group', $this->data);
 	}
 
+	/**
+	 * Delete User
+	 */
+	public function delete_user($id)
+	{
+		// Security check if the user is admin
+		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
+			redirect('admin/auth', 'refresh');
+		}
+
+		$user_delete = $this->ion_auth->delete_user($id);
+
+		if (!$user_delete) {
+			$this->session->set_flashdata('message', $this->ion_auth->messages());
+			redirect('admin/auth/', 'refresh');
+		} else {
+			redirect('admin/auth/', 'refresh');
+		}
+	}
+
+	/**
+	 * Delete group
+	 */
+	public function delete_group($id)
+	{
+		// Security check if the user is admin
+		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
+			redirect('admin/auth', 'refresh');
+		}
+
+		// pass the right arguments and it's done
+		$group_delete = $this->ion_auth->delete_group($id);
+
+		if (!$group_delete) {
+			$this->session->set_flashdata('message', $this->ion_auth->messages());
+			redirect('admin/auth/group', 'refresh');
+		} else {
+			// do more cool stuff
+			redirect('admin/auth/group', 'refresh');
+		}
+	}
 
 	/**
 	 * Log the user out
