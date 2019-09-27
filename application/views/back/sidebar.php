@@ -7,15 +7,15 @@
         <img src="<?php echo base_url('assets/template/backend/') ?>dist/img/avatar5.png" class="img-circle" alt="User Image">
       </div>
       <div class="pull-left info">
-        <p><?php echo $this->session->userdata('identity') ?></p>
-        <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+        <p><?php echo $this->session->userdata('userName') ?></p>
+        <a href="#"><?php echo $this->session->userdata('identity'); ?></a>
       </div>
     </div>
     <!-- sidebar menu: : style can be found in sidebar.less -->
     <ul class="sidebar-menu" data-widget="tree">
       <li class="header">MAIN NAVIGATION</li>
       <li>
-        <a href="<?php echo base_url('admin/dashboard') ?>">
+        <a href="<?php echo base_url('admin') ?>">
           <i class="fa fa-dashboard"></i> <span>Dashboard</span>
         </a>
       </li>
@@ -34,7 +34,7 @@
             </a>
           </li>
           <li>
-            <a href="<?php echo base_url('admin/auth') ?>">
+            <a href="<?php echo base_url('admin/auth/group') ?>">
               <i class="fa fa-circle-o"></i> User Group
             </a>
           </li>

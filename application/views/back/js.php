@@ -31,3 +31,28 @@
 <script src="<?php echo base_url('assets/template/backend/') ?>bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
 <script src="<?php echo base_url('assets/template/backend/') ?>dist/js/adminlte.min.js"></script>
+
+<!-- Breadcumb -->
+<script>
+    //Breadcrumbs based on URL location
+    if ($('#content-header ol.breadcrumb')) {
+        var here = location.href.replace(/(\?.*)$/, '').split('/').slice(3);
+
+        var parts = [{
+            "text": 'Home',
+            "link": '/'
+        }];
+
+        for (var j = 0; j < here.length; j++) {
+            var part = here[j];
+            var pageName = part.toLowerCase();
+            pageName = part.charAt(0).toUpperCase() + part.slice(1);
+            var link = '/' + here.slice(0, j + 1).join('/');
+            $('#siteBreadcrumb ol.breadcrumb').append('<li><a href="' + link + '">' + pageName.replace(/\.(htm[l]?|asp[x]?|php|jsp)$/, '') + '</a></li>');
+            parts.push({
+                "text": pageName,
+                "link": link
+            });
+        }
+    }
+</script>

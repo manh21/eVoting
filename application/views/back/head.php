@@ -19,14 +19,15 @@
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <img src="<?php echo base_url('assets/template/backend/') ?>dist/img/avatar5.png" class="user-image" alt="User Image">
-                        <span class="hidden-xs"><?php echo $this->session->userdata('identity') ?></span>
+                        <span class="hidden-xs"><?php echo $this->session->userdata('userName') ?></span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
                             <img src="<?php echo base_url('assets/template/backend/') ?>dist/img/avatar5.png" class="img-circle" alt="User Image">
                             <p>
-                                <?php echo $this->session->userdata('identity') ?>
+                                <?php echo $this->session->userdata('userName') ?>
+                                <small><?php echo $this->session->userdata('identity') ?></small>
                             </p>
                         </li>
                         <!-- Menu Footer-->

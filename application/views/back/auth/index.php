@@ -1,18 +1,16 @@
 <?php $this->load->view('back/meta') ?>
-<?php $this->load->view('back/head') ?>
-<?php $this->load->view('back/sidebar') ?>
 
 <div class="wrapper">
+	<?php $this->load->view('back/head') ?>
+	<?php $this->load->view('back/sidebar') ?>
 	<!-- Content Wrapper. Contains page content -->
-	<div class="content-wrapper">
+	<div id="siteBreadcrumb" class="content-wrapper">
 		<!-- Content Header (Page header) -->
 		<section class="content-header">
 			<h1>
 				User Data
 			</h1>
 			<ol class="breadcrumb">
-				<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-				<li class="active">User</li>
 			</ol>
 		</section>
 		<!-- Main content -->
@@ -47,18 +45,20 @@
 												<td><?php echo htmlspecialchars($user->last_name, ENT_QUOTES, 'UTF-8'); ?></td>
 												<td><?php echo htmlspecialchars($user->email, ENT_QUOTES, 'UTF-8'); ?></td>
 												<td>
-													<?php foreach ($user->groups as $group) : ?>
-														<?php echo anchor("admin/auth/edit_group/" . $group->id, htmlspecialchars($group->name, ENT_QUOTES, 'UTF-8')); ?><br />
-													<?php endforeach ?>
+													<div class="btn-group">
+														<?php foreach ($user->groups as $group) : ?>
+															<a href="<?php echo base_url('admin/auth/edit_group/' . $group->id) ?>" class="btn btn-flat btn-sm btn-default"><?php echo $group->name ?></a>
+														<?php endforeach ?>
+													</div>
 												</td>
 												<td><?php echo ($user->active) ? anchor("admin/auth/deactivate/" . $user->id, lang('index_active_link')) : anchor("admin/auth/activate/" . $user->id, lang('index_inactive_link')); ?></td>
-												<td><?php echo anchor("admin/auth/edit_user/" . $user->id, 'Edit'); ?></td>
+												<td><a href="<?php echo base_url('admin/auth/edit_user/' . $user->id) ?>" class="btn btn-sm btn-flat bg-orange"><i class="fa fa-edit"></i></a></td>
 											</tr>
 										<?php endforeach; ?>
 									</tbody>
 								</table>
 
-								<p><?php echo anchor('admin/auth/create_user', lang('index_create_user_link')) ?> | <?php echo anchor('admin/auth/create_group', lang('index_create_group_link')) ?></p>
+								<div class="btn-group"><a href="<?php echo base_url('admin/auth/create_user') ?>" class="btn btn-sm bg-blue btn-flat">Buat User Baru</a></div>
 							</div>
 						</div>
 					</div>
@@ -79,6 +79,7 @@
 <script src="<?php echo base_url('assets/template/backend/') ?>bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url('assets/template/backend/') ?>bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <script>
+	// DataTables Script
 	$(function() {
 		$('#example1').DataTable()
 		$('#example2').DataTable({

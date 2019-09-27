@@ -74,7 +74,7 @@ class Auth extends CI_Controller
 				//if the login is successful
 				//redirect them back to the home page
 				$this->session->set_flashdata('message', $this->ion_auth->messages());
-				redirect('admin/dashboard', 'refresh');
+				redirect('admin', 'refresh');
 			} else {
 				// if the login was un-successful
 				// redirect them back to the login page
@@ -104,6 +104,22 @@ class Auth extends CI_Controller
 			$this->_render_page('back/auth' . DIRECTORY_SEPARATOR . 'login', $this->data);
 		}
 	}
+
+	public function group()
+	{
+		// Display all aviabel group and the user count
+
+		// Security check if the user is admin
+		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
+			redirect('admin/auth', 'refresh');
+		}
+
+		//list the groups
+		$this->data['groups'] = $this->ion_auth->groups()->result();
+
+		$this->_render_page('back/auth' . DIRECTORY_SEPARATOR . 'group', $this->data);
+	}
+
 
 	/**
 	 * Log the user out
@@ -714,7 +730,7 @@ class Auth extends CI_Controller
 	{
 		// bail if no group id given
 		if (!$id || empty($id)) {
-			redirect('admin/auth', 'refresh');
+			redirect('admin/group', 'refresh');
 		}
 
 		$this->data['title'] = $this->lang->line('edit_group_title');
@@ -739,7 +755,7 @@ class Auth extends CI_Controller
 				} else {
 					$this->session->set_flashdata('message', $this->ion_auth->errors());
 				}
-				redirect("admin/auth", 'refresh');
+				redirect("admin/auth/group", 'refresh');
 			}
 		}
 
