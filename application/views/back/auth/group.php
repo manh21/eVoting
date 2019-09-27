@@ -42,7 +42,12 @@
                                             <td><?php echo htmlspecialchars($group->id, ENT_QUOTES, 'UTF-8');  ?></td>
                                             <td><?php echo htmlspecialchars($group->name, ENT_QUOTES, 'UTF-8');  ?></td>
                                             <td><?php echo htmlspecialchars($group->description, ENT_QUOTES, 'UTF-8');  ?></td>
-                                            <td><a href="<?php echo base_url('admin/auth/edit_group/' . $group->id) ?>" class="btn btn-sm btn-flat bg-orange"><i class="fa fa-edit"></i></a></td>
+                                            <td>
+                                                <div class="btn-group">
+                                                    <a href="<?php echo base_url('admin/auth/edit_group/' . $group->id) ?>" class="btn btn-sm btn-flat bg-orange"><i class="fa fa-edit"></i></a>
+                                                    <button type="button" class="btn btn-sm btn-flat btn-danger" data-whatever="<?php echo base_url('admin/auth/delete_group/' . $group->id) ?>" data-toggle="modal" data-target="#modal-danger"><i class="fa fa-trash"></i></button>
+                                                </div>
+                                            </td>
                                         </tr>
                                     <?php endforeach; ?>
                                 </tbody>
@@ -52,6 +57,27 @@
                     </div>
                 </div>
                 <!-- /.row -->
+                <div class="modal modal-danger fade" id="modal-danger">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">Apakah anda yakin</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>Semua perubahan tidak dapat diulang kembali</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline" data-dismiss="modal">Close</button>
+                                <a href="" type="button" class="btn btn-outline" id="saveChanges">Save changes</a>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
         </section>
         <!-- /.content -->
     </div>
@@ -75,7 +101,17 @@
         })
     })
 </script>
-
+<script>
+    $('#modal-danger').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var link = button.data('whatever') // Extract info from data-* attributes
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        // modal.find('#saveChanges').val(link)
+        var modal = document.getElementById("saveChanges")
+        modal.setAttribute("href", link);
+    })
+</script>
 
 </body>
 
