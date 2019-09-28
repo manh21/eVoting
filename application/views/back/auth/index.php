@@ -53,10 +53,8 @@
 												</td>
 												<td><?php echo ($user->active) ? anchor("admin/auth/deactivate/" . $user->id, lang('index_active_link')) : anchor("admin/auth/activate/" . $user->id, lang('index_inactive_link')); ?></td>
 												<td>
-													<div class="btn-group">
-														<a href="<?php echo base_url('admin/auth/edit_user/' . $user->id) ?>" class="btn btn-sm btn-flat bg-orange"><i class="fa fa-edit"></i></a>
-														<button type="button" class="btn btn-sm btn-flat btn-danger" data-whatever="<?php echo base_url('admin/auth/delete_user/' . $user->id) ?>" data-toggle="modal" data-target="#modal-danger"><i class="fa fa-trash"></i></button>
-													</div>
+													<a href="<?php echo base_url('admin/auth/edit_user/' . $user->id) ?>" class="btn btn-sm btn-flat bg-orange"><i class="fa fa-edit"></i></a>
+													<button type="button" class="btn btn-sm btn-flat btn-danger" data-whatever="<?php echo base_url('admin/auth/delete_user/' . $user->id) ?>" data-toggle="modal" data-target="#modal-danger"><i class="fa fa-trash"></i></button>
 												</td>
 											</tr>
 										<?php endforeach; ?>
@@ -105,7 +103,9 @@
 <script>
 	// DataTables Script
 	$(function() {
-		$('#example1').DataTable()
+		$('#example1').DataTable({
+			'info': false,
+		})
 		$('#example2').DataTable({
 			'paging': true,
 			'lengthChange': false,
@@ -114,6 +114,17 @@
 			'info': true,
 			'autoWidth': false
 		})
+	})
+</script>
+<script>
+	$('#modal-danger').on('show.bs.modal', function(event) {
+		var button = $(event.relatedTarget) // Button that triggered the modal
+		var link = button.data('whatever') // Extract info from data-* attributes
+		// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+		// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+		// modal.find('#saveChanges').val(link)
+		var modal = document.getElementById("saveChanges")
+		modal.setAttribute("href", link);
 	})
 </script>
 
