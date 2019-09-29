@@ -24,6 +24,11 @@
           <i class="glyphicon glyphicon-blackboard"></i> <span>Kelas</span>
         </a>
       </li>
+      <li>
+        <a href="<?php echo base_url('admin/pemilih') ?>">
+          <i class="fa fa-user"></i> <span>Data Pemilih</span>
+        </a>
+      </li>
       <li class="treeview">
         <a href="#">
           <i class="fa fa-users"></i>

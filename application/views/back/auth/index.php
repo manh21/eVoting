@@ -51,8 +51,8 @@
 														<?php endforeach ?>
 													</div>
 												</td>
-												<td><?php echo ($user->active) ? anchor("admin/auth/deactivate/" . $user->id, lang('index_active_link')) : anchor("admin/auth/activate/" . $user->id, lang('index_inactive_link')); ?></td>
-												<td>
+												<td class="text-center"><?php echo ($user->active) ? anchor("admin/auth/deactivate/" . $user->id, lang('index_active_link'), 'class="label label-info"') : anchor("admin/auth/activate/" . $user->id, lang('index_inactive_link'), 'class="label label-info"'); ?></td>
+												<td class="text-center">
 													<a href="<?php echo base_url('admin/auth/edit_user/' . $user->id) ?>" class="btn btn-sm btn-flat bg-orange"><i class="fa fa-edit"></i></a>
 													<button type="button" class="btn btn-sm btn-flat btn-danger" data-whatever="<?php echo base_url('admin/auth/delete_user/' . $user->id) ?>" data-toggle="modal" data-target="#modal-danger"><i class="fa fa-trash"></i></button>
 												</td>

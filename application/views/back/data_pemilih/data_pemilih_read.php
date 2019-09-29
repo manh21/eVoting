@@ -8,27 +8,51 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <div class="content-header">
-            <h1>Kelas Read</h1>
+            <h1>Data Pemilih Read</h1>
         </div><!-- /.col -->
         <section class="content">
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-lg-6">
                     <div class="box box-primary">
                         <div class="box-header">
-                            <h3 class="box-title">Kelas Read</h3>
+                            <h3 class="box-title">Read</h3>
                         </div>
                         <div class="box-body">
                             <table id="example2" class="table table-bordered table-striped">
                                 <thead>
-                                    <tr>
-                                        <td><strong>Kelas</strong></td>
-                                        <td><?php echo $kelas; ?></td>
-                                    </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td><strong>Jumlah</strong></td>
-                                        <td><?php echo $jumlah; ?></td>
+                                        <td><strong>NIS</strong></td>
+                                        <td><?php echo $nis; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Username</strong></td>
+                                        <td><?php echo $username; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Password</strong></td>
+                                        <td><?php echo $password; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Nama Lengkap</strong></td>
+                                        <td><?php print_r($nama); ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Kelas</strong></td>
+                                        <td><?php print_r($kelas); ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>L/P</strong></td>
+                                        <td><?php echo $jk; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Status</strong></td>
+                                        <td><a class="label label-success"><?php echo $status; ?></a></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Aktif</strong></td>
+                                        <td><?php ($aktif) ? print_r('<a class="label label-info disabled">Active</a>') : print_r('<a class="label label-info disabled">Inactive</a>') ?></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -37,7 +61,7 @@
                             <div class="row">
                                 <div class="col-sm-6"></div>
                                 <div class="col-sm-6 text-right">
-                                    <a href="<?php echo base_url('admin/kelas') ?>" class="btn btn-default">Cancel</a>
+                                    <a href="<?php echo base_url('admin/pemilih') ?>" class="btn btn-default">Cancel</a>
                                 </div>
                             </div>
                         </div>

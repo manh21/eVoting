@@ -8,7 +8,8 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Kelas List
+                Data Pemilih
+                <small>List</small>
             </h1>
             <ol class="breadcrumb">
             </ol>
@@ -21,24 +22,24 @@
                     <div class="col-lg-12">
                         <div class="box">
                             <div class="box-header">
-                                <h3 class="box-title">Kelas List Table</h3>
+                                <h3 class="box-title">Pemilih</h3>
                             </div>
                             <!-- /.box-header -->
                             <div class="box-body">
                                 <div id="infoMessage"><?php echo $this->session->userdata('message') <> '' ? $this->session->userdata('message') : ''; ?></div>
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <a href="<?php echo base_url('admin/kelas/create') ?>" class="btn btn-md bg-blue btn-flat">Create <i class="fa fa-plus"> </i></a>
+                                        <a href="<?php echo base_url('admin/data_pemilih/create') ?>" class="btn btn-md bg-blue btn-flat">Create <i class="fa fa-plus"> </i></a>
                                     </div>
                                     <div class="col-sm-6 text-right">
-                                        <form action="<?php echo base_url('admin/kelas/index'); ?>" class="form-inline" method="get">
+                                        <form action="<?php echo base_url('admin/data_pemilih/index'); ?>" class="form-inline" method="get">
                                             <div class="input-group">
                                                 <input type="text" class="form-control" name="q" value="<?php echo $q; ?>">
                                                 <span class="input-group-btn">
                                                     <?php
                                                     if ($q <> '') {
                                                         ?>
-                                                        <a href="<?php echo base_url('admin/kelas'); ?>" class="btn btn-default">Reset</a>
+                                                        <a href="<?php echo base_url('admin/pemilih'); ?>" class="btn btn-default">Reset</a>
                                                     <?php
                                                     }
                                                     ?>
@@ -52,21 +53,31 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
+                                            <th>NIS</th>
+                                            <th>Username</th>
+                                            <th>Nama</th>
                                             <th>Kelas</th>
-                                            <th>Jumlah</th>
+                                            <th>L/P</th>
+                                            <th>Status</th>
+                                            <th>Aktif</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php foreach ($kelas_data as $kelas) : ?>
+                                        <?php foreach ($data_pemilih_data as $data_pemilih) : ?>
                                             <tr>
-                                                <td><?php echo htmlspecialchars(++$start, ENT_QUOTES, 'UTF-8'); ?></td>
-                                                <td><?php echo htmlspecialchars($kelas->kelas, ENT_QUOTES, 'UTF-8'); ?></td>
-                                                <td><?php echo htmlspecialchars($kelas->jumlah, ENT_QUOTES, 'UTF-8'); ?></td>
+                                                <td width="10px"><?php echo htmlspecialchars(++$start, ENT_QUOTES, 'UTF-8'); ?></td>
+                                                <td><?php echo htmlspecialchars($data_pemilih->nis, ENT_QUOTES, 'UTF-8'); ?></td>
+                                                <td><?php echo htmlspecialchars($data_pemilih->username, ENT_QUOTES, 'UTF-8'); ?></td>
+                                                <td><?php echo htmlspecialchars($data_pemilih->nama, ENT_QUOTES, 'UTF-8'); ?></td>
+                                                <td><?php echo htmlspecialchars($data_pemilih->kelas, ENT_QUOTES, 'UTF-8'); ?></td>
+                                                <td width="10px"><?php echo htmlspecialchars($data_pemilih->jk, ENT_QUOTES, 'UTF-8'); ?></td>
+                                                <td class="text-center"><a class="label label-success"><?php echo htmlspecialchars($data_pemilih->status, ENT_QUOTES, 'UTF-8'); ?></a></td>
+                                                <td class="text-center"><?php echo ($data_pemilih->aktif) ? anchor("admin/data_pemilih/deactivate/" . $data_pemilih->id, 'Active', 'class="label label-info"') : anchor("admin/data_pemilih/activate/" . $data_pemilih->id, 'Inactive', 'class="label label-info"'); ?></td>
                                                 <td class="text-center">
-                                                    <a href="<?php echo base_url('admin/kelas/read/' . $kelas->idkelas) ?>" class="btn btn-sm btn-flat btn-info"><i class="fa fa-search"></i></a>
-                                                    <a href="<?php echo base_url('admin/kelas/edit/' . $kelas->idkelas) ?>" class="btn btn-sm btn-flat bg-orange"><i class="fa fa-edit"></i></a>
-                                                    <button type="button" class="btn btn-sm btn-flat btn-danger" data-whatever="<?php echo base_url('admin/kelas/delete/' . $kelas->idkelas) ?>" data-toggle="modal" data-target="#modal-danger"><i class="fa fa-trash"></i></button>
+                                                    <a href="<?php echo base_url('admin/data_pemilih/read/' . $data_pemilih->id) ?>" class="btn btn-sm btn-flat btn-info"><i class="fa fa-search"></i></a>
+                                                    <a href="<?php echo base_url('admin/data_pemilih/edit/' . $data_pemilih->id) ?>" class="btn btn-sm btn-flat bg-orange"><i class="fa fa-edit"></i></a>
+                                                    <button type="button" class="btn btn-sm btn-flat btn-danger" data-whatever="<?php echo base_url('admin/data_pemilih/delete/' . $data_pemilih->id) ?>" data-toggle="modal" data-target="#modal-danger"><i class="fa fa-trash"></i></button>
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>
@@ -75,8 +86,7 @@
                                 <div class="row">
                                     <div class="col-sm-5">
                                         <a class="btn btn-sm btn-info btn-flat">Total Record : <?php echo $total_rows ?></a>
-                                        <a href="<?php echo base_url('admin/kelas/create') ?>" class="btn btn-sm bg-blue btn-flat">Create</a>
-                                        <a href="<?php echo base_url('admin/kelas/excel') ?>" class="btn btn-sm bg-green btn-flat">Excel</a>
+                                        <a href="<?php echo base_url('admin/data_pemilih/create') ?>" class="btn btn-sm bg-blue btn-flat">Create</a>
                                     </div>
                                     <div class="col-sm-7 text-right">
                                         <?php echo $pagination ?>
@@ -132,8 +142,13 @@
             'autoWidth': true
         })
     })
-</script>
-<script>
+    // infoMassages Timer
+    window.setTimeout(function() {
+        $(".alert").fadeTo(500, 0).slideUp(500, function() {
+            $(this).remove();
+        });
+    }, 2000);
+    // Modal Controller
     $('#modal-danger').on('show.bs.modal', function(event) {
         var button = $(event.relatedTarget) // Button that triggered the modal
         var link = button.data('whatever') // Extract info from data-* attributes
@@ -148,6 +163,3 @@
 </body>
 
 </html>
-
-<!doctype html>
-<html>
