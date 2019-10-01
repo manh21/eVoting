@@ -27,11 +27,11 @@ class Data_pemilih extends CI_Controller
         $start = intval($this->input->get('start'));
 
         if ($q <> '') {
-            $config['base_url'] = base_url() . 'data_pemilih/index.html?q=' . urlencode($q);
-            $config['first_url'] = base_url() . 'data_pemilih/index.html?q=' . urlencode($q);
+            $config['base_url'] = base_url() . 'admin/data_pemilih/index.html?q=' . urlencode($q);
+            $config['first_url'] = base_url() . 'admin/data_pemilih/index.html?q=' . urlencode($q);
         } else {
-            $config['base_url'] = base_url() . 'data_pemilih/index.html';
-            $config['first_url'] = base_url() . 'data_pemilih/index.html';
+            $config['base_url'] = base_url() . 'admin/data_pemilih/index.html';
+            $config['first_url'] = base_url() . 'admin/data_pemilih/index.html';
         }
 
         $config['per_page'] = 10;
@@ -127,13 +127,26 @@ class Data_pemilih extends CI_Controller
         } else {
             $getKelas = $this->Data_pemilih_model->getKelas($this->input->post('kelas'));
 
+            $nis = $this->input->post('nis', TRUE);
+            $username = $this->input->post('username', TRUE);
+            $password = $this->input->post('password', TRUE);
+
+            if (empty($username) && empty($password)) {
+                $username = $nis;
+                $password = $nis;
+            } elseif (!empty($username) && empty($password)) {
+                $password = $nis;
+            } elseif (empty($username) && empty(!$password)) {
+                $username = $nis;
+            }
+
             $data = array(
-                'nis' => $this->input->post('nis', TRUE),
-                'username' => $this->input->post('username', TRUE),
-                'password' => $this->input->post('password', TRUE),
+                'nis' => $nis,
+                'username' => $username,
+                'password' => $password,
                 'nama' => $this->input->post('nama', TRUE),
                 'kelas' => $getKelas->kelas,
-                'idkelas' => $this->input->post('kelas'),
+                'idkelas' => $this->input->post('kelas', TRUE),
                 'jk' => $this->input->post('jk', TRUE),
                 'status' => 'Belum Memilih',
                 'aktif' => '1',
@@ -159,7 +172,6 @@ class Data_pemilih extends CI_Controller
         }
 
         $row = $this->Data_pemilih_model->get_by_id($id);
-        $getKelas = $this->Data_pemilih_model->getKelas($id);
 
         if ($row) {
             $data = array(

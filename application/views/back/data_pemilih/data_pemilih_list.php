@@ -21,9 +21,9 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="box">
-                            <div class="box-header">
+                            <!-- <div class="box-header">
                                 <h3 class="box-title">Pemilih</h3>
-                            </div>
+                            </div> -->
                             <!-- /.box-header -->
                             <div class="box-body">
                                 <div id="infoMessage"><?php echo $this->session->userdata('message') <> '' ? $this->session->userdata('message') : ''; ?></div>
@@ -71,7 +71,7 @@
                                                 <td><?php echo htmlspecialchars($data_pemilih->username, ENT_QUOTES, 'UTF-8'); ?></td>
                                                 <td><?php echo htmlspecialchars($data_pemilih->nama, ENT_QUOTES, 'UTF-8'); ?></td>
                                                 <td><?php echo htmlspecialchars($data_pemilih->kelas, ENT_QUOTES, 'UTF-8'); ?></td>
-                                                <td width="10px"><?php echo htmlspecialchars($data_pemilih->jk, ENT_QUOTES, 'UTF-8'); ?></td>
+                                                <td width="10px" class="text-center"><?php echo htmlspecialchars($data_pemilih->jk, ENT_QUOTES, 'UTF-8'); ?></td>
                                                 <td class="text-center"><a class="label label-success"><?php echo htmlspecialchars($data_pemilih->status, ENT_QUOTES, 'UTF-8'); ?></a></td>
                                                 <td class="text-center"><?php echo ($data_pemilih->aktif) ? anchor("admin/data_pemilih/deactivate/" . $data_pemilih->id, 'Active', 'class="label label-info"') : anchor("admin/data_pemilih/activate/" . $data_pemilih->id, 'Inactive', 'class="label label-info"'); ?></td>
                                                 <td class="text-center">

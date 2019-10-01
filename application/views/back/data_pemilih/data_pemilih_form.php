@@ -37,13 +37,19 @@
                                 <div class="form-group">
                                     <label for="varchar">Kelas<?php echo form_error('kelas') ?></label>
                                     <?php
-                                    $dd_kelas_attribute = 'class="form-control select2" id="kelas"';
+                                    $dd_kelas_attribute = 'class="form-control select2 js-example-basic-single" id="kelas"';
                                     echo form_dropdown('kelas', $dd_kelas, $kelas_selected, $dd_kelas_attribute);
                                     ?>
                                 </div>
                                 <div class="form-group">
-                                    <label for="varchar">L/P <?php echo form_error('jk') ?></label>
-                                    <input type="text" class="form-control" name="jk" id="jk" placeholder="L/P" value="<?php echo $jk; ?>" />
+                                    <label for="varchar">Jenis Kelamin <?php echo form_error('jk') ?></label>
+                                    <div class="form-group">
+                                        <input id="jk" name="jk" type="radio" class="form-control square-blue" <?php if ($jk == 'L') echo "checked"; ?> value="L" />
+                                        <label for="jk" class="">Laki - Laki</label>
+
+                                        <input id="jk" name="jk" type="radio" class="form-control square-blue" <?php if ($jk == 'P') echo 'checked'; ?> value="P" />
+                                        <label for="jk" class="">Perempuan</label>
+                                    </div>
                                 </div>
                                 <input type="hidden" name="id" value="<?php echo $id; ?>" />
                             </div>
@@ -64,13 +70,20 @@
 <?php $this->load->view('back/js') ?>
 <!-- Select2 -->
 <script src="<?php echo base_url('assets/template/backend/') ?>bower_components/select2/dist/js/select2.full.min.js"></script>
+<!-- iCheck 1.0.1 -->
+<link href="<?php echo base_url('assets/template/backend/') ?>plugins/iCheck/square/blue.css" rel="stylesheet">
+<script src="<?php echo base_url('assets/template/backend/') ?>plugins/iCheck/icheck.min.js"></script>
 <script>
-    $(function() {
-        $(document).ready(function() {
-            $(".select2").select2({
-                placeholder: "Please Select"
-            });
-        });
+    //for iCheck
+    $('input[type="checkbox"].square-blue, input[type="radio"].square-blue').iCheck({
+        checkboxClass: 'icheckbox_square-blue',
+        radioClass: 'iradio_square-blue'
+    });
+
+    $(document).ready(function() {
+        $('.js-example-basic-single').select2({
+            placeholder: 'Select an option',
+        });;
     });
 </script>
 
