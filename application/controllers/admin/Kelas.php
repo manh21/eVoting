@@ -3,6 +3,12 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
+//PhpSpreadsheet
+use PhpOffice\PhpSpreadsheet\Helper\Sample;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+// End load library phpspreadsheet
+
 class Kelas extends CI_Controller
 {
     function __construct()
@@ -70,7 +76,12 @@ class Kelas extends CI_Controller
             );
             $this->load->view('back/kelas/kelas_read', $data);
         } else {
-            $this->session->set_flashdata('message', 'Record Not Found');
+            $this->session->set_flashdata(
+                'message',
+                '<div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                Record Not Found </div>',
+            );
             redirect('admin/kelas', 'refresh');
         }
     }
@@ -110,7 +121,12 @@ class Kelas extends CI_Controller
             );
 
             $this->Kelas_model->insert($data);
-            $this->session->set_flashdata('message', 'Create Record Success');
+            $this->session->set_flashdata(
+                'message',
+                '<div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                Create Record Success </div>',
+            );
             redirect('admin/kelas', 'refresh');
         }
     }
@@ -134,7 +150,12 @@ class Kelas extends CI_Controller
             );
             $this->load->view('back/kelas/kelas_form', $data);
         } else {
-            $this->session->set_flashdata('message', 'Record Not Found');
+            $this->session->set_flashdata(
+                'message',
+                '<div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                Record Not Found </div>',
+            );
             redirect('admin/kelas', 'refresh');
         }
     }
@@ -157,7 +178,12 @@ class Kelas extends CI_Controller
             );
 
             $this->Kelas_model->update($this->input->post('idkelas', TRUE), $data);
-            $this->session->set_flashdata('message', 'Update Record Success');
+            $this->session->set_flashdata(
+                'message',
+                '<div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                Update Record Success </div>',
+            );
             redirect('admin/kelas', 'refresh');
         }
     }
@@ -173,10 +199,20 @@ class Kelas extends CI_Controller
 
         if ($row) {
             $this->Kelas_model->delete($id);
-            $this->session->set_flashdata('message', 'Delete Record Success');
+            $this->session->set_flashdata(
+                'message',
+                '<div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                Delete Record Success </div>',
+            );
             redirect('admin/kelas', 'refresh');
         } else {
-            $this->session->set_flashdata('message', 'Record Not Found');
+            $this->session->set_flashdata(
+                'message',
+                '<div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                Record Not Found </div>',
+            );
             redirect('admin/kelas', 'refresh');
         }
     }
@@ -190,50 +226,236 @@ class Kelas extends CI_Controller
         $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }
 
-    public function excel()
+    /**
+     *
+     *  Upload data kelas
+     * 
+     */
+    public function do_upload()
     {
         // Security check if the user is admin
         if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
             redirect('admin/auth', 'refresh');
         }
 
-        $this->load->helper('exportexcel');
-        $namaFile = "kelas.xls";
-        $judul = "kelas";
-        $tablehead = 0;
-        $tablebody = 1;
+        $config['upload_path'] = './assets/uploads/';
+        $config['allowed_types'] = 'xlsx|xls|csv';
+        $config['remove_spaces'] = TRUE;
+
+        $this->load->library('upload', $config);
+        $this->form_validation->set_rules('fileURL', 'Upload File', 'callback_checkFileValidation');
+
+        if ($this->form_validation->run() == false) {
+            $this->import();
+        } else {
+
+            if ($this->upload->do_upload('fileURL')) {
+
+                $upload_data = $this->upload->data();
+                $fileName = $upload_data['file_name']; //Nama File
+                $fileType = $upload_data['file_ext'];
+
+                $inputFileName = $upload_data['full_path'];
+
+                // Creating a Reader
+                if ($fileType == '.csv') {
+                    $reader = new \PhpOffice\PhpSpreadsheet\Reader\Csv();
+                } elseif ($fileType == '.xlsx') {
+                    $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+                } else {
+                    $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xls();
+                }
+
+                // Loading a Spreadsheet File
+                $spreadsheet = $reader->load($inputFileName);
+                $sheetData = $spreadsheet->getActiveSheet()->toArray(null, true, true, true);
+
+                // menghitung jumlah baris data yang ada
+                $jumlah_baris = count($sheetData);
+
+                // jumlah default data yang berhasil di import
+                $berhasil = 0;
+
+                // array Count
+                $createArray = array('kelas', 'jumlah');
+                $makeArray = array('kelas' => 'kelas', 'jumlah' => 'jumlah');
+                $SheetDataKey = array();
+                foreach ($sheetData as $dataInSheet) {
+                    foreach ($dataInSheet as $key => $value) {
+                        if (in_array(trim($value), $createArray)) {
+                            $value = preg_replace('/\s+/', '', $value);
+                            $SheetDataKey[trim($value)] = $key;
+                        }
+                    }
+                }
+                $dataDiff = array_diff_key($makeArray, $SheetDataKey);
+                if (empty($dataDiff)) {
+                    $berhasil = 1;
+                }
+
+                // match excel sheet column
+                if ($berhasil == 1) {
+                    for ($i = 2; $i <= $jumlah_baris; $i++) {
+                        $addresses = array();
+                        $kelas = $SheetDataKey['kelas'];
+                        $jumlah = $SheetDataKey['jumlah'];
+
+                        $kelas = filter_var(trim($sheetData[$i][$kelas]), FILTER_SANITIZE_STRING);
+                        $jumlah = filter_var(trim($sheetData[$i][$jumlah]), FILTER_SANITIZE_STRING);
+
+                        $fetchData[] = array(
+                            'kelas' => $kelas,
+                            'jumlah' => $jumlah,
+                        );
+                    }
+                    $this->Kelas_model->setBatchImport($fetchData);
+                    $this->Kelas_model->importData();
+                } else {
+                    $this->session->set_flashdata(
+                        'message',
+                        '<div class="alert alert-danger alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        Please import correct file, did not match excel sheet column </div>'
+                    );
+                }
+                unlink('./assets/uploads/' . $fileName);
+                $this->session->set_flashdata(
+                    'message',
+                    '<div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    Berhasil Mengimport Data </div>'
+                );
+                redirect('admin/kelas', 'refresh');
+            }
+        }
+    }
+
+    /**
+     *
+     *  Import data kelas
+     * 
+     */
+    public function import()
+    {
+        // Security check if the user is admin
+        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
+            redirect('admin/auth', 'refresh');
+        }
+
+        $data = array(
+            'action' => site_url('admin/kelas/do_upload'),
+            'button' => 'Import',
+        );
+        $this->load->view('back/kelas/kelas_import', $data);
+    }
+
+    /**
+     *
+     *  checkFileValidation
+     * 
+     */
+    public function checkFileValidation($string)
+    {
+
+        // Security check if the user is admin
+        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
+            redirect('admin/auth', 'refresh');
+        }
+
+        $file_mimes = array(
+            'text/x-comma-separated-values',
+            'text/comma-separated-values',
+            'application/octet-stream',
+            'application/vnd.ms-excel',
+            'application/x-csv',
+            'text/x-csv',
+            'text/csv',
+            'application/csv',
+            'application/excel',
+            'application/vnd.msexcel',
+            'text/plain',
+            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        );
+
+        if (isset($_FILES['fileURL']['name'])) {
+            $arr_file = explode('.', $_FILES['fileURL']['name']);
+            $extension = end($arr_file);
+            if (($extension == 'xlsx' || $extension == 'xls' || $extension == 'csv') && in_array($_FILES['fileURL']['type'], $file_mimes)) {
+                return true;
+            } else {
+                $this->form_validation->set_message('checkFileValidation', 'Please choose correct file.');
+                return false;
+            }
+        } else {
+            $this->form_validation->set_message('checkFileValidation', 'Please choose a file.');
+            return false;
+        }
+    }
+
+    /**
+     *
+     *  Export data kelas
+     * 
+     */
+    public function exportData()
+    {
+        // Security check if the user is admin
+        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
+            redirect('admin/auth', 'refresh');
+        }
+
+        $dataKelas = $this->Kelas_model->get_all();
         $nourut = 1;
-        //penulisan header
-        header("Pragma: public");
-        header("Expires: 0");
-        header("Cache-Control: must-revalidate, post-check=0,pre-check=0");
-        header("Content-Type: application/force-download");
-        header("Content-Type: application/octet-stream");
-        header("Content-Type: application/download");
-        header("Content-Disposition: attachment;filename=" . $namaFile . "");
-        header("Content-Transfer-Encoding: binary ");
+        // Create new Spreadsheet object
+        $spreadsheet = new Spreadsheet();
 
-        xlsBOF();
+        // Set document properties
+        $spreadsheet->getProperties()->setCreator('System - System21')
+            ->setLastModifiedBy('System21')
+            ->setTitle('Data Kelas')
+            ->setSubject('Data Kelas')
+            ->setDescription('Data Kelas - Generate by System21');
 
-        $kolomhead = 0;
-        xlsWriteLabel($tablehead, $kolomhead++, "No");
-        xlsWriteLabel($tablehead, $kolomhead++, "Kelas");
-        xlsWriteLabel($tablehead, $kolomhead++, "Jumlah");
+        // Add some data
+        $spreadsheet->setActiveSheetIndex(0)
+            ->setCellValue('A1', 'No')
+            ->setCellValue('B1', 'Kelas')
+            ->setCellValue('C1', 'Jumlah');
 
-        foreach ($this->Kelas_model->get_all() as $data) {
-            $kolombody = 0;
+        // Miscellaneous glyphs, UTF-8
+        $i = 2;
+        foreach ($dataKelas as $kelas) {
 
-            //ubah xlsWriteLabel menjadi xlsWriteNumber untuk kolom numeric
-            xlsWriteNumber($tablebody, $kolombody++, $nourut);
-            xlsWriteLabel($tablebody, $kolombody++, $data->kelas);
-            xlsWriteNumber($tablebody, $kolombody++, $data->jumlah);
-
-            $tablebody++;
+            $spreadsheet->setActiveSheetIndex(0)
+                ->setCellValue('A' . $i, $nourut)
+                ->setCellValue('B' . $i, $kelas->kelas)
+                ->setCellValue('C' . $i, $kelas->jumlah);
+            $i++;
             $nourut++;
         }
 
-        xlsEOF();
-        exit();
+        // Rename worksheet
+        $spreadsheet->getActiveSheet()->setTitle('Data Kelas ' . date('d-m-Y H'));
+
+        // Set active sheet index to the first sheet, so Excel opens this as the first sheet
+        $spreadsheet->setActiveSheetIndex(0);
+
+        // Redirect output to a client’s web browser (Xlsx)
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="Data Kelas.xlsx"');
+        header('Cache-Control: max-age=0');
+        // If you're serving to IE 9, then the following may be needed
+        header('Cache-Control: max-age=1');
+
+        // If you're serving to IE over SSL, then the following may be needed
+        header('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
+        header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT'); // always modified
+        header('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+        header('Pragma: public'); // HTTP/1.0
+
+        $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+        $writer->save('php://output');
+        exit;
     }
 }
 

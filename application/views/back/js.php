@@ -32,7 +32,7 @@
 <!-- AdminLTE App -->
 <script src="<?php echo base_url('assets/template/backend/') ?>dist/js/adminlte.min.js"></script>
 
-<!-- Breadcumb -->
+<!-- Breadcrumb -->
 <script>
     //Breadcrumbs based on URL location
     if ($('#content-header ol.breadcrumb')) {

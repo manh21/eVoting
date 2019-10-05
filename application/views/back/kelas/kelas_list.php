@@ -20,15 +20,17 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="box">
-                            <div class="box-header">
+                            <!-- <div class="box-header">
                                 <h3 class="box-title">Kelas List Table</h3>
-                            </div>
+                            </div> -->
                             <!-- /.box-header -->
                             <div class="box-body">
                                 <div id="infoMessage"><?php echo $this->session->userdata('message') <> '' ? $this->session->userdata('message') : ''; ?></div>
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <a href="<?php echo base_url('admin/kelas/create') ?>" class="btn btn-md bg-blue btn-flat">Create <i class="fa fa-plus"> </i></a>
+                                        <a href="<?php echo base_url('admin/kelas/create') ?>" class="btn btn-md bg-blue btn-flat"><i class="fa fa-plus"> Create</i></a>
+                                        <a href="<?php echo base_url('admin/kelas/import') ?>" class="btn btn-md bg-green btn-flat"><i class="fa fa-file-excel-o"> Import</i></a>
+                                        <a href="<?php echo base_url('admin/kelas/exportData') ?>" class="btn btn-md bg-yellow btn-flat"><i class="fa fa-download"> Export</i></a>
                                     </div>
                                     <div class="col-sm-6 text-right">
                                         <form action="<?php echo base_url('admin/kelas/index'); ?>" class="form-inline" method="get">
@@ -75,8 +77,6 @@
                                 <div class="row">
                                     <div class="col-sm-5">
                                         <a class="btn btn-sm btn-info btn-flat">Total Record : <?php echo $total_rows ?></a>
-                                        <a href="<?php echo base_url('admin/kelas/create') ?>" class="btn btn-sm bg-blue btn-flat">Create</a>
-                                        <a href="<?php echo base_url('admin/kelas/excel') ?>" class="btn btn-sm bg-green btn-flat">Excel</a>
                                     </div>
                                     <div class="col-sm-7 text-right">
                                         <?php echo $pagination ?>

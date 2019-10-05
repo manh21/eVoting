@@ -9,6 +9,7 @@ class Data_pemilih_model extends CI_Model
     public $table = 'data_pemilih';
     public $id = 'id';
     public $order = 'DESC';
+    private $_batchImport;
 
     function __construct()
     {
@@ -122,11 +123,26 @@ class Data_pemilih_model extends CI_Model
         return ($q->num_rows() > 0) ? $q->row() : row();
     }
 
-    public function getliningsale($id)
+    // get_idKelas
+    function get_idKelas($kelas)
     {
-        $this->db->select('*')->from('products')->join('tbl_lining', 'products.lining=tbl_lining.id', 'INNER')->where('products.id', $id);
-        $data = $this->db->get();
-        return $data->result();
+        $q = $this->db->select('*')
+            ->where(['kelas.kelas' => $kelas])
+            ->get('kelas');
+        return ($q->num_rows() > 0) ? $q->row() : row();
+    }
+
+    // Import_data
+    public function setBatchImport($batchImport)
+    {
+        $this->_batchImport = $batchImport;
+    }
+
+    // save data
+    public function importData()
+    {
+        $data = $this->_batchImport;
+        $this->db->insert_batch($this->table, $data);
     }
 }
 

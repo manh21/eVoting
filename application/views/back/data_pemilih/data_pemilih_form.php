@@ -13,9 +13,6 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="box box-primary">
-                        <div class="box-header">
-                            <h3 class="box-title">Pemilih</h3>
-                        </div>
                         <form action="<?php echo $action; ?>" method="post">
                             <div class="box-body">
                                 <div class="form-group">

@@ -14,9 +14,6 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="box box-primary">
-                        <div class="box-header">
-                            <h3 class="box-title">Read</h3>
-                        </div>
                         <div class="box-body">
                             <table id="example2" class="table table-bordered table-striped">
                                 <thead>

@@ -9,6 +9,7 @@ class Kelas_model extends CI_Model
     public $table = 'kelas';
     public $id = 'idkelas';
     public $order = 'DESC';
+    private $_batchImport;
 
     function __construct()
     {
@@ -68,6 +69,18 @@ class Kelas_model extends CI_Model
     {
         $this->db->where($this->id, $id);
         $this->db->delete($this->table);
+    }
+
+    public function setBatchImport($batchImport)
+    {
+        $this->_batchImport = $batchImport;
+    }
+
+    // save data
+    public function importData()
+    {
+        $data = $this->_batchImport;
+        $this->db->insert_batch($this->table, $data);
     }
 }
 

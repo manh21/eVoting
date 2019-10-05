@@ -14,9 +14,6 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="box box-primary">
-                        <div class="box-header">
-                            <h3 class="box-title">Kelas Read</h3>
-                        </div>
                         <div class="box-body">
                             <table id="example2" class="table table-bordered table-striped">
                                 <thead>
