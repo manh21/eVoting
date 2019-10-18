@@ -42,10 +42,10 @@
                                     <label for="varchar">Jenis Kelamin <?php echo form_error('jk') ?></label>
                                     <div class="form-group">
                                         <input id="jk" name="jk" type="radio" class="form-control square-blue" <?php if ($jk == 'L') echo "checked"; ?> value="L" />
-                                        <label for="jk" class="">Laki - Laki</label>
+                                        <label for="jk">Laki - Laki</label>
 
                                         <input id="jk" name="jk" type="radio" class="form-control square-blue" <?php if ($jk == 'P') echo 'checked'; ?> value="P" />
-                                        <label for="jk" class="">Perempuan</label>
+                                        <label for="jk">Perempuan</label>
                                     </div>
                                 </div>
                                 <input type="hidden" name="id" value="<?php echo $id; ?>" />

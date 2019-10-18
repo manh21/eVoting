@@ -165,7 +165,6 @@ class Data_pemilih extends CI_Controller
                 'message',
                 '<div class="alert alert-success alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <h4><i class="icon fa fa-check"></i> Success!</h4>
                 Create Record Success. </div>'
             );
             redirect('admin/pemilih', 'refresh');
@@ -204,7 +203,6 @@ class Data_pemilih extends CI_Controller
                 'message',
                 '<div class="alert alert-warning alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <h4><i class="icon fa fa-warning"></i> Alert!</h4>
                 Record Not Found </div>'
             );
             redirect('admin/pemilih', 'refresh');
@@ -234,7 +232,6 @@ class Data_pemilih extends CI_Controller
             'message',
             '<div class="alert alert-success alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            <h4><i class="icon fa fa-check"></i> Success!</h4>
             Berhasil menonaktifkan pemilih. </div>'
         );
         redirect('admin/pemilih', 'refresh');
@@ -263,7 +260,6 @@ class Data_pemilih extends CI_Controller
             'message',
             '<div class="alert alert-success alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            <h4><i class="icon fa fa-check"></i> Success!</h4>
             Berhasil mengaktfikan pemilih. </div>'
         );
         redirect('admin/pemilih', 'refresh');
@@ -575,14 +571,18 @@ class Data_pemilih extends CI_Controller
 
         if ($row) {
             $this->Data_pemilih_model->delete($id);
-            $this->session->set_flashdata('message', 'Delete Record Success');
+            $this->session->set_flashdata(
+                'message', 
+                '<div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                Delete Record Success </div>'
+            );
             redirect('admin/pemilih', 'refresh');
         } else {
             $this->session->set_flashdata(
                 'message',
                 '<div class="alert alert-warning alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <h4><i class="icon fa fa-warning"></i> Alert!</h4>
                 Record Not Found </div>'
             );
             redirect('admin/pemilih', 'refresh');

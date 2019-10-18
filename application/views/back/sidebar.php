@@ -29,6 +29,11 @@
           <i class="fa fa-user"></i> <span>Data Pemilih</span>
         </a>
       </li>
+      <li>
+        <a href="<?php echo base_url('admin/kandidat') ?>">
+          <i class="fa fa-user-secret"></i> <span>Kandidat</span>
+        </a>
+      </li>
       <li class="treeview">
         <a href="#">
           <i class="fa fa-users"></i>
