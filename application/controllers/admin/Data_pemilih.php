@@ -15,7 +15,7 @@ class Data_pemilih extends CI_Controller
     {
         parent::__construct();
         $this->load->library('ion_auth', 'form_validation', 'session', 'form_helper');
-        $this->load->helper('url', 'language', 'form');
+        $this->load->helper('url', 'language', 'form', 'file');
         $this->load->model('Data_pemilih_model');
     }
 
@@ -572,7 +572,7 @@ class Data_pemilih extends CI_Controller
         if ($row) {
             $this->Data_pemilih_model->delete($id);
             $this->session->set_flashdata(
-                'message', 
+                'message',
                 '<div class="alert alert-success alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                 Delete Record Success </div>'

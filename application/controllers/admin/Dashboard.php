@@ -25,6 +25,7 @@ class Dashboard extends CI_Controller
         $this->load->database();
         $this->load->library('ion_auth', 'form_validation', 'session');
         $this->load->helper('url', 'language');
+        $this->load->model('Dashboard_model');
     }
 
     public function index()
@@ -45,9 +46,24 @@ class Dashboard extends CI_Controller
         $array = array(
             'userName' => $firstName . ' ' . $lastName,
         );
-        $this->session->set_userdata($array);;
+        $this->session->set_userdata($array);
+
+        // Jumlah Kelas
+        $jumlahKelas = $this->Dashboard_model->total_rows('kelas');
+        // Jumlah Data Pemilih
+        $jumlahDataPemilih = $this->Dashboard_model->total_rows('data_Pemilih');
+        // Jumlah Kandidat
+        $jumlahKandidat = $this->Dashboard_model->total_rows('kandidat');
+        // Jumlah Suara Masuk
+        $jumlahSuara = $this->Dashboard_model->total_rows('kandidat');
+
+        $data = array(
+            'jumlahKelas' => $jumlahKelas,
+            'jumlahDataPemilih' => $jumlahDataPemilih,
+            'jumlahKandidat' => $jumlahKandidat,
+        );
 
         // load default view
-        $this->load->view('back/dashboard');
+        $this->load->view('back/dashboard', $data);
     }
 }

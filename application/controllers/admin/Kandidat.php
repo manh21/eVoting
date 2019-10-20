@@ -10,7 +10,7 @@ class Kandidat extends CI_Controller
         parent::__construct();
         $this->load->library('ion_auth', 'form_validation', 'session', 'form_helper');
         $this->load->model('Kandidat_model');
-        $this->load->helper('url', 'language', 'form');
+        $this->load->helper('url', 'language', 'form', 'file');
     }
 
     public function index()
@@ -114,13 +114,14 @@ class Kandidat extends CI_Controller
             redirect('admin/auth', 'refresh');
         }
 
-        $this->_rules();
-
         $config['upload_path'] = './assets/uploads/kandidat';
         $config['allowed_types'] = 'jpeg|jpg|png|gif';
         $config['remove_spaces'] = TRUE;
 
+        $this->load->helper('file');
         $this->load->library('upload', $config);
+        $this->form_validation->set_rules('image', 'Upload File', 'callback_checkFileValidation');
+        $this->_rules();
 
         if ($this->form_validation->run() == FALSE) {
             $this->create();
@@ -155,6 +156,7 @@ class Kandidat extends CI_Controller
                 redirect('admin/kandidat', 'refresh');
             } else {
                 $this->create();
+                $data['error_msg'] = $this->upload->display_errors();
             }
         }
     }
@@ -201,16 +203,17 @@ class Kandidat extends CI_Controller
             redirect('admin/auth', 'refresh');
         }
 
-        $this->_rules();
-
         $config['upload_path'] = './assets/uploads/kandidat';
         $config['allowed_types'] = 'jpeg|jpg|png|gif';
         $config['remove_spaces'] = TRUE;
 
+        $this->load->helper('file');
         $this->load->library('upload', $config);
+        $this->form_validation->set_rules('image', 'Upload File', 'callback_checkFileValidation');
+        $this->_rules();
 
         if ($this->form_validation->run() == FALSE) {
-            $this->update($this->input->post('idkandidat', TRUE));
+            $this->edit($this->input->post('idkandidat', TRUE));
         } else {
 
             if ($this->upload->do_upload('image')) {
@@ -241,6 +244,25 @@ class Kandidat extends CI_Controller
                     Update Record Success </div>'
                 );
                 redirect('admin/kandidat', 'refresh');
+            } else {
+                $data = array(
+                    'organisasi' => $this->input->post('organisasi', TRUE),
+                    'nama' => $this->input->post('nama', TRUE),
+                    'nourut' => $this->input->post('nourut', TRUE),
+                    'jumlahsuara' => $this->input->post('jumlahsuara', TRUE),
+                    'visi' => $this->input->post('visi', TRUE),
+                    'misi' => $this->input->post('misi', TRUE),
+                );
+
+                $this->Kandidat_model->update($this->input->post('idkandidat', TRUE), $data);
+                $this->session->set_flashdata(
+                    'message',
+                    '<div class="alert alert-info alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <h4><i class="icon fa fa-info"></i> Alert!</h4>
+                    Update Record Success </div>'
+                );
+                redirect('admin/kandidat', 'refresh');
             }
         }
     }
@@ -254,9 +276,11 @@ class Kandidat extends CI_Controller
         }
 
         $row = $this->Kandidat_model->get_by_id($id);
+        $image = $row->foto;
 
         if ($row) {
             $this->Kandidat_model->delete($id);
+            unlink('./assets/uploads/kandidat/' . $image);
             $this->session->set_flashdata(
                 'message',
                 '<div class="alert alert-success alert-dismissible">
@@ -346,6 +370,39 @@ class Kandidat extends CI_Controller
 
         $this->form_validation->set_rules('idkandidat', 'idkandidat', 'trim');
         $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
+    }
+
+    /*
+     * file value and type check during validation
+     */
+    public function checkFileValidation($str)
+    {
+
+        // Security check if the user is admin
+        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
+            redirect('admin/auth', 'refresh');
+        }
+
+        $allowed_mime_type_arr = array(
+            'image/gif',
+            'image/jpeg',
+            'image/pjpeg',
+            'image/png',
+            'image/x-png'
+        );
+
+        $mime = get_mime_by_extension($_FILES['image']['name']);
+        if (isset($_FILES['image']['name']) && $_FILES['image']['name'] != "") {
+            if (in_array($mime, $allowed_mime_type_arr)) {
+                return true;
+            } else {
+                $this->form_validation->set_message('checkFileValidation', 'Please select only gif/jpg/png file.');
+                return false;
+            }
+        } else {
+            $this->form_validation->set_message('checkFileValidation', 'Please choose a file to upload.');
+            return false;
+        }
     }
 }
 

@@ -13,6 +13,18 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="box box-primary">
+                        <?php if (!empty($error_msg)) { ?>
+                            <div class="alert alert-danger alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                <?php echo '<p class="statusMsg">' . $error_msg . '</p>' ?>
+                            </div>
+                        <?php } ?>
+                        <?php if (form_error('image')) { ?>
+                            <div class="alert alert-danger alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                <?php print form_error('image'); ?>
+                            </div>
+                        <?php } ?>
                         <?php echo form_open_multipart($action); ?>
                         <div class="box-body">
                             <div class="form-group">
@@ -84,25 +96,18 @@
             placeholder: 'Select an option',
         });;
     });
-</script>
-<script>
+
+    // infoMassages Timer
+    window.setTimeout(function() {
+        $(".alert").fadeTo(500, 0).slideUp(500, function() {
+            $(this).remove();
+        });
+    }, 2000);
+
     $(function() {
         //bootstrap WYSIHTML5 - text editor
         $('.textarea').wysihtml5()
     })
-</script>
-<script>
-    //for iCheck
-    $('input[type="checkbox"].square-blue, input[type="radio"].square-blue').iCheck({
-        checkboxClass: 'icheckbox_square-blue',
-        radioClass: 'iradio_square-blue'
-    });
-
-    $(document).ready(function() {
-        $('.js-example-basic-single').select2({
-            placeholder: 'Select an option',
-        });;
-    });
 </script>
 
 </body>
