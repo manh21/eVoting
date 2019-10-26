@@ -1,0 +1,29 @@
+/*!
+ * Start Bootstrap - Heroic Features (https://startbootstrap.com/template-overviews/heroic-features)
+ * Copyright 2013-2019 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-heroic-features/blob/master/LICENSE)
+ */
+body {
+  padding-top: 56px;
+}
+.footer {
+  position: fixed !important;
+  left: 0 !important;
+  bottom: 0 !important;
+  width: 100% !important;
+}
+
+.login-box {
+  padding-bottom: 120px;
+}
+
+a {
+  color: #007bff;
+  text-decoration: none !important;
+  background-color: transparent;
+}
+
+.login-logo a,
+.register-logo a {
+  color: #495057;
+}

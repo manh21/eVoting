@@ -40,12 +40,14 @@ class userAuth extends CI_Controller
                 'id' => 'username',
                 'type' => 'text',
                 'class' => 'form-control',
+                'placeholder' => 'Username',
             ];
             $data['password'] = [
                 'name' => 'password',
                 'id' => 'password',
                 'type' => 'password',
                 'class' => 'form-control',
+                'placeholder' => 'Password',
             ];
             $data['action'] = site_url('user/userAuth/login');
             $this->load->view('front/login', $data);

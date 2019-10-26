@@ -7,14 +7,12 @@
     <title>E-Voting | Log in</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
-    <!-- Bootstrap 3.3.7 -->
-    <link rel="stylesheet" href="<?php echo base_url('assets/template/backend/') ?>bower_components/bootstrap/dist/css/bootstrap.min.css" />
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="<?php echo base_url('assets/template/backend/') ?>bower_components/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="<?php echo base_url('assets/template/frontend/') ?>plugins/fontawesome-free/css/all.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="<?php echo base_url('assets/template/backend/') ?>bower_components/Ionicons/css/ionicons.min.css" />
     <!-- Theme style -->
-    <link rel="stylesheet" href="<?php echo base_url('assets/template/backend/') ?>dist/css/AdminLTE.min.css" />
+    <link rel="stylesheet" href="<?php echo base_url('assets/template/frontend/') ?>css/adminlte.min.css" />
     <!-- iCheck -->
     <link rel="stylesheet" href="<?php echo base_url('assets/template/backend/') ?>plugins/iCheck/square/blue.css" />
 
@@ -27,56 +25,94 @@
 
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic" />
+    <!-- Bootstrap core CSS -->
+    <link href="<?php echo base_url('assets/template/frontend/') ?>vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="<?php echo base_url('assets/template/frontend/') ?>css/heroic-features.css" rel="stylesheet">
+
 </head>
 
 <body class="hold-transition login-page">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="<?php echo base_url('welcome') ?>"><b>E-Voting</b></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End Navigation -->
+
     <div class="login-box">
         <div class="login-logo">
-            <a href="<?php echo base_url('admin/dashboard') ?>"><b>E-Voting</b></a>
+            <a href="<?php echo base_url('welcome') ?>"><b>E-Voting</b></a>
         </div>
         <!-- /.login-logo -->
-        <div class="login-box-body">
-            <p class="login-box-msg">Sign in to vote</p>
-            <div id="infoMessage"><?php echo $this->session->userdata('message') <> '' ? $this->session->userdata('message') : ''; ?></div>
-            <?php echo form_open($action); ?>
-            <div class="form-group has-feedback">
-                <?php echo form_input($identity); ?>
-                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-            </div>
-            <div class="form-group has-feedback">
-                <?php echo form_input($password); ?>
-                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-            </div>
-            <div class="row">
-                <div class="col-xs-8">
+        <div class="card">
+            <div class="card-body login-card-body">
+                <p class="login-box-msg">Sign in to vote</p>
+                <div id="infoMessage"><?php echo $this->session->userdata('message') <> '' ? $this->session->userdata('message') : ''; ?></div>
+
+                <?php echo form_open($action); ?>
+                <div class="input-group mb-3 has-feedback">
+                    <?php echo form_input($identity); ?>
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-envelope"></span>
+                        </div>
+                    </div>
                 </div>
-                <!-- /.col -->
-                <div class="col-xs-4">
-                    <button type="submit" class="btn btn-primary btn-block btn-flat">
-                        Sign In
-                    </button>
+                <div class="input-group mb-3 has-feedback">
+                    <?php echo form_input($password); ?>
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-lock"></span>
+                        </div>
+                    </div>
                 </div>
-                <!-- /.col -->
+                <div class="row">
+                    <div class="col-8">
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-4">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <?php echo form_close(); ?>
             </div>
-            <?php echo form_close(); ?>
+            <!-- /.login-card-body -->
         </div>
-        <!-- /.login-box-body -->
     </div>
     <!-- /.login-box -->
 
-    <footer class="main-footer">
-        <div class="pull-right hidden-xs">
-            <b>Version</b> 1.0.0 alpha
+    <!-- Footer -->
+    <div class="footer mt-auto py-1 bg-dark">
+        <div class="container">
+            <!-- Copyright -->
+            <div class="footer-copyright text-center py-1">
+                <p style="margin: 1rem 0 1rem 0" class="text-center text-white">Copyright &copy; <a style="text-decoration: none  !important" class="text-white" target="_blank" href="https://naufalhakim.my.id">Naufal Hakim</a>
+                    <script>
+                        document.write(new Date().getFullYear());
+                    </script>
+                </p>
+            </div>
         </div>
-        <strong>Copyright &copy; 2019 <a href="http://naufalhakim.my.id">Naufal Hakim</a> & <a href="http://adminlte.io">AdminLTE.io</a>.</strong>
-        All rights reserved.
-    </footer>
+    </div>
 
     <!-- JavaScript -->
+
     <!-- jQuery 3 -->
-    <script src="<?php echo base_url('assets/template/backend/') ?>bower_components/jquery/dist/jquery.min.js"></script>
-    <!-- Bootstrap 3.3.7 -->
-    <script src="<?php echo base_url('assets/template/backend/') ?>bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="<?php echo base_url('assets/template/frontend/') ?>vendor/jquery/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="<?php echo base_url('assets/template/frontend/') ?>vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- iCheck -->
     <script src="<?php echo base_url('assets/template/backend/') ?>plugins/iCheck/icheck.min.js"></script>
     <script>
