@@ -32,7 +32,7 @@ class userAuth extends CI_Controller
     {
         // Security check if the user is admin
         if (cek_login_bol()) {
-            redirect('welcome');
+            redirect('home');
         } else {
             $data['title'] = 'E-Voting';
             $data['identity'] = [
@@ -82,31 +82,47 @@ class userAuth extends CI_Controller
             // Apakah user ada atau tidak
             if ($j_data === 1) {
 
-                // data pada user
-                $data_login = $q_data->row_array();
-                $ses_nama_user = $a_data->nama;
+                // Cek user apakah sudah aktif
+                if ($a_data->aktif == 1) {
 
-                // Session data
-                $userdata             = array(
-                    "logged"               => true,
-                    "userid"               => $data_login['id'],
-                    "username"             => $data_login['username'],
-                    "nama"                 => $data_login['nama'],
-                    "level"                => 'pemilih',
-                    "status"               => $data_login['status'],
-                    "aktif"                => $data_login['aktif'],
-                );
+                    // data pada user
+                    $data_login = $q_data->row_array();
+                    $ses_nama_user = $a_data->nama;
 
-                // set session user data
-                $this->session->set_userdata($userdata);
-                $this->session->set_flashdata(
-                    'message',
-                    '<div class="alert alert-success alert-dismissible">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                    Login Berhasil </div>'
-                );
+                    // Session data
+                    $userdata             = array(
+                        "logged"               => true,
+                        "userid"               => $data_login['id'],
+                        "username"             => $data_login['username'],
+                        "nama"                 => $data_login['nama'],
+                        "level"                => 'pemilih',
+                        "status"               => $data_login['status'],
+                        "aktif"                => $data_login['aktif'],
+                    );
 
-                redirect('welcome', 'refresh');
+                    // set session user data
+                    $this->session->set_userdata($userdata);
+                    $this->session->set_flashdata(
+                        'message',
+                        '<div class="alert alert-success alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        Login Berhasil </div>'
+                    );
+
+                    redirect('home', 'refresh');
+                } else {
+
+                    // Username dan password tidak ditemukan
+                    $this->session->set_flashdata(
+                        'message',
+                        '<div class="alert alert-warning alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        User belum aktif </div>',
+                    );
+
+                    // Directed to login page
+                    redirect('user/userAuth', 'refresh');
+                }
             } else {
 
                 // Username dan password tidak ditemukan

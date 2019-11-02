@@ -13,8 +13,9 @@ class userAuth_model extends CI_Model
         //password menggunakan md5 hash
         $password2 = md5($password);
 
-        $_data = $this->db->query("SELECT * FROM data_pemilih WHERE username = '$username' AND password = '$password' LIMIT 1 ");
-        return $_data;
+        $this->db->where('username', $username);
+        $this->db->where('password', $password);
+        return $this->db->get('data_pemilih');
     }
 }
 

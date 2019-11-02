@@ -49,7 +49,7 @@
                                     </tr>
                                     <tr>
                                         <td><strong>Aktif</strong></td>
-                                        <td><?php ($aktif) ? print_r('<a class="label label-info disabled">Active</a>') : print_r('<a class="label label-info disabled">Inactive</a>') ?></td>
+                                        <td><?php ($aktif) ? print_r('<a class="label label-info disabled">Active</a>') : print_r('<a class="label label-danger disabled">Inactive</a>') ?></td>
                                     </tr>
                                 </tbody>
                             </table>

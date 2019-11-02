@@ -6,7 +6,8 @@
     <!-- ChartJS -->
     <script src="<?php echo base_url('assets/template/frontend/') ?>plugins/chart.js/Chart.min.js"></script>
     <!-- ChartJS Plugins-->
-    <script src="<?php echo base_url('assets/template/frontend/') ?>plugins/chartjs-plugin-labels.min.js"></script>
+    <script src="<?php echo base_url('assets/template/frontend/') ?>plugins/chartjs-plugin-labels.min.js
+"></script>
 </head>
 
 <body>
@@ -27,7 +28,6 @@
     <!-- Javascript -->
     <?php $this->load->view('front/js'); ?>
 
-    <!-- page script -->
     <script>
         new Chart(document.getElementById("chartjs-4"), {
             "type": "pie",
@@ -41,6 +41,8 @@
             },
         });
     </script>
+
+    <!-- page script -->
     <script>
         let myChart = document.getElementById('myChart').getContext('2d');
 
@@ -72,9 +74,9 @@
                         'rgba(255, 159, 64, 1)'
                     ],
                     borderWidth: 1,
-                    borderColor: '#fff',
-                    hoverBorderWidth: 2,
-                    hoverBorderColor: '#fff'
+                    borderColor: '#777',
+                    hoverBorderWidth: 3,
+                    hoverBorderColor: '#000'
                 }]
             },
             options: {
@@ -84,14 +86,13 @@
                 title: {
                     display: true,
                     text: 'Hasil Suara Sementara',
-                    fontSize: 25,
-                    fontColor: '#000'
+                    fontSize: 25
                 },
                 legend: {
                     display: false,
                     position: 'top',
                     labels: {
-                        fontColor: '# 000 '
+                        fontColor: '#000'
                     }
                 },
                 layout: {
@@ -99,7 +100,7 @@
                         left: 0,
                         right: 0,
                         bottom: 0,
-                        top: 40
+                        top: 0
                     }
                 },
                 tooltips: {
