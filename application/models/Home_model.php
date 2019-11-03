@@ -7,9 +7,9 @@ class Home_model extends CI_Model
     public $order = 'DESC';
 
     // Get All
-    public function get_all($q, $table)
+    public function get_all($q, $table, $order)
     {
-        $this->db->order_by($q, $this->order);
+        $this->db->order_by($q, $order);
         return $this->db->get($table)->result();
     }
 
@@ -25,6 +25,19 @@ class Home_model extends CI_Model
     {
         $this->db->from($table);
         return $this->db->count_all_results();
+    }
+
+    // insert data
+    function insert($table, $data)
+    {
+        $this->db->insert($table, $data);
+    }
+
+    // Update data
+    function update($q, $id, $table, $data)
+    {
+        $this->db->where($q, $id);
+        $this->db->update($table, $data);
     }
 }
 

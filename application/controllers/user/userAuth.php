@@ -95,7 +95,7 @@ class userAuth extends CI_Controller
                         "userid"               => $data_login['id'],
                         "username"             => $data_login['username'],
                         "nama"                 => $data_login['nama'],
-                        "level"                => 'pemilih',
+                        "level"                => 'siswa',
                         "status"               => $data_login['status'],
                         "aktif"                => $data_login['aktif'],
                     );
@@ -109,7 +109,7 @@ class userAuth extends CI_Controller
                         Login Berhasil </div>'
                     );
 
-                    redirect('home', 'refresh');
+                    redirect('vote', 'refresh');
                 } else {
 
                     // Username dan password tidak ditemukan
@@ -153,7 +153,7 @@ class userAuth extends CI_Controller
         $this->session->set_userdata($userdata);
 
         // Directed to login page
-        redirect('user/userAuth', 'refresh');
+        redirect(base_url(), 'refresh');
     }
 }
 

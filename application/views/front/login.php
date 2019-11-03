@@ -32,23 +32,7 @@
 
 </head>
 
-<body class="hold-transition login-page">
-
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="<?php echo base_url('welcome') ?>"><b>E-Voting</b></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ml-auto">
-
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <!-- End Navigation -->
+<body style="margin-bottom: 0px;" class="hold-transition login-page">
 
     <div class="login-box">
         <div class="login-logo">
@@ -92,20 +76,6 @@
         </div>
     </div>
     <!-- /.login-box -->
-
-    <!-- Footer -->
-    <div class="footer mt-auto py-1 bg-dark">
-        <div class="container">
-            <!-- Copyright -->
-            <div class="footer-copyright text-center py-1">
-                <p style="margin: 1rem 0 1rem 0" class="text-center text-white">Copyright &copy; <a style="text-decoration: none  !important" class="text-white" target="_blank" href="https://naufalhakim.my.id">Naufal Hakim</a>
-                    <script>
-                        document.write(new Date().getFullYear());
-                    </script>
-                </p>
-            </div>
-        </div>
-    </div>
 
     <!-- JavaScript -->
 
