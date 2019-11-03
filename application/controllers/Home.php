@@ -33,17 +33,15 @@ class Home extends CI_Controller
 
     public function index()
     {
-        // Security check if the user logged in
-        if (!cek_login_bol()) {
-            // redirect them to the login page
-            redirect('user/userAuth', 'refresh');
+        // Security check if the user is authorize
+        if (cek_login_bol()) {
+            redirect('vote', 'refresh');
         }
 
-        $data = array(
-            'title' => 'E-Voting',
-        );
+        $data['title'] = 'E-Voting';
+        $data['action'] = site_url('user/userAuth/login');
 
-        $this->load->view('front/home', $data);
+        $this->load->view('front/main', $data);
     }
 
     public function vote()

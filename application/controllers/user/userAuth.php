@@ -32,7 +32,7 @@ class userAuth extends CI_Controller
     {
         // Security check if the user is admin
         if (cek_login_bol()) {
-            redirect('home');
+            redirect(base_url());
         } else {
             $data['title'] = 'E-Voting';
             $data['identity'] = [

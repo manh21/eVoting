@@ -36,12 +36,12 @@
 
     <div class="login-box">
         <div class="login-logo">
-            <a href="<?php echo base_url('welcome') ?>"><b>E-Voting</b></a>
+            <a href="<?php echo base_url() ?>"><b>E-Voting</b></a>
         </div>
         <!-- /.login-logo -->
         <div class="card">
             <div class="card-body login-card-body">
-                <p class="login-box-msg">Sign in to vote</p>
+                <p class="login-box-msg">Login to vote</p>
                 <div id="infoMessage"><?php echo $this->session->userdata('message') <> '' ? $this->session->userdata('message') : ''; ?></div>
 
                 <?php echo form_open($action); ?>
@@ -66,7 +66,7 @@
                     </div>
                     <!-- /.col -->
                     <div class="col-4">
-                        <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+                        <button type="submit" class="btn btn-primary btn-block btn-flat">Login</button>
                     </div>
                     <!-- /.col -->
                 </div>
