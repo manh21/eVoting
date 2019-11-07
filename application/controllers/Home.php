@@ -52,7 +52,7 @@ class Home extends CI_Controller
         }
 
         // Get All Kandidat
-        $kandidat_data = $this->Home_model->get_all('nourut', 'kandidat', 'ASEC');
+        $kandidat_data = $this->Home_model->get_all('nourut', 'kandidat', 'ASC');
 
         $data = array(
 

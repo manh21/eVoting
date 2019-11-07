@@ -22,7 +22,7 @@
             <?php foreach ($kandidat_data as $kandidat) : ?>
                 <div class="col-md-<?php echo $bootstrapColWidth; ?>">
                     <div style="margin-top: 60px" class="card bg-light text-center">
-                        <img class="card-img-top" height="245px" src="<?php echo base_url('assets/uploads/kandidat/') . $kandidat->foto ?>" alt="Card image cap">
+                        <img class="card-img-top" style="object-fit:cover" height="245px" src="<?php echo base_url('assets/uploads/kandidat/') . $kandidat->foto ?>" alt="Card image cap">
                         <div class="card-body">
                             <h5 class="card-title "><?php echo $kandidat->nourut ?></h5>
                             <p class="card-text"><?php echo $kandidat->nama ?></p>

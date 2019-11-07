@@ -8,15 +8,15 @@ class Dashboard extends CI_Controller
      * Index Page for this controller.
      *
      * Maps to the following URL
-     * 		http://example.com/index.php/welcome
+     * 		http://example.com/index.php/dashboard
      *	- or -
-     * 		http://example.com/index.php/welcome/index
+     * 		http://example.com/index.php/dashboard/index
      *	- or -
      * Since this controller is set as the default controller in
      * config/routes.php, it's displayed at http://example.com/
      *
      * So any other public methods not prefixed with an underscore will
-     * map to /index.php/welcome/<method_name>
+     * map to /index.php/dashboard/<method_name>
      * @see https://codeigniter.com/user_guide/general/urls.html
      */
     public function __construct()
@@ -57,10 +57,26 @@ class Dashboard extends CI_Controller
         // Jumlah Suara Masuk
         $jumlahSuara = $this->Dashboard_model->total_rows('kandidat');
 
+        $kandidatData = $this->Dashboard_model->get_all('nourut', 'kandidat');
+
+        $arrayJS = array();
+
+        foreach($kandidatData as $q){
+            
+            $jumlahSuara = $this->Dashboard_model->tampil_data('idkandidat', $q->idkandidat ,'data_pemilihan');
+            
+            $arrayJS[] = $jumlahSuara;
+
+        };
+
+        $jumlahKandidat = $this->Dashboard_model->tampil_data('idkandidat', '1', 'data_pemilihan');
+
         $data = array(
             'jumlahKelas' => $jumlahKelas,
             'jumlahDataPemilih' => $jumlahDataPemilih,
             'jumlahKandidat' => $jumlahKandidat,
+            'kandidatData' => $kandidatData,
+            'jumlahSuara' =>$arrayJS,
         );
 
         // load default view

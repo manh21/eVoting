@@ -54,15 +54,15 @@
                                 <table id="example2" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th>No</th>
-                                            <th>NIS</th>
-                                            <th>Username</th>
-                                            <th>Nama</th>
-                                            <th>Kelas</th>
-                                            <th>L/P</th>
-                                            <th>Status</th>
-                                            <th>Aktif</th>
-                                            <th>Action</th>
+                                            <th class="text-center">No</th>
+                                            <th class="text-center">NIS</th>
+                                            <th class="text-center">Username</th>
+                                            <th class="text-center">Nama</th>
+                                            <th class="text-center">Kelas</th>
+                                            <th class="text-center">L/P</th>
+                                            <th class="text-center">Status</th>
+                                            <th class="text-center">Aktif</th>
+                                            <th class="text-center">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>

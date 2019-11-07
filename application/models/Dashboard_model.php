@@ -4,7 +4,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Dashboard_model extends CI_Model
 {
     public $id = 'id';
-    public $order = 'DESC';
+    public $order = 'ASC';
 
     // Get All
     public function get_all($q, $table)
@@ -18,6 +18,11 @@ class Dashboard_model extends CI_Model
     {
         $this->db->where($q, $id);
         return $this->db->get($table)->row();
+    }
+
+    public function tampil_data($q, $idkandidat, $table){
+        $this->db->where($q, $idkandidat);
+        return $this->db->count_all_results($table);
     }
 
     // get total rows
