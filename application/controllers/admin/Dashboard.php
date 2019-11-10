@@ -42,11 +42,11 @@ class Dashboard extends CI_Controller
         $user = $this->ion_auth->user()->row();
         $firstName = $user->first_name;
         $lastName = $user->last_name;
-
-        $array = array(
+        // Set session untuk nama user yang terlogin
+        $username = array(
             'userName' => $firstName . ' ' . $lastName,
         );
-        $this->session->set_userdata($array);
+        $this->session->set_userdata($username);
 
         // Jumlah Kelas
         $jumlahKelas = $this->Dashboard_model->total_rows('kelas');
@@ -54,32 +54,46 @@ class Dashboard extends CI_Controller
         $jumlahDataPemilih = $this->Dashboard_model->total_rows('data_Pemilih');
         // Jumlah Kandidat
         $jumlahKandidat = $this->Dashboard_model->total_rows('kandidat');
-        // Jumlah Suara Masuk
-        $jumlahSuara = $this->Dashboard_model->total_rows('kandidat');
-
+        // Menghitung jumlah suara yang sudah masuk ke dalam database
+        $jumlahSuaraMasuk = $this->Dashboard_model->total_rows('data_pemilihan');
+        // Mengambil semua kandidat data
         $kandidatData = $this->Dashboard_model->get_all('nourut', 'kandidat');
 
+        // Declare arrayJS sebelum foreach
         $arrayJS = array();
-
-        foreach($kandidatData as $q){
-            
-            $jumlahSuara = $this->Dashboard_model->tampil_data('idkandidat', $q->idkandidat ,'data_pemilihan');
-            
-            $arrayJS[] = $jumlahSuara;
-
-        };
-
-        $jumlahKandidat = $this->Dashboard_model->tampil_data('idkandidat', '1', 'data_pemilihan');
+        // Cek apakah terdapat data?
+        if ($jumlahKandidat > 0) {
+            foreach ($kandidatData as $row) {
+                // Menghitung perolehan suara dari database
+                // Berdasarkan idkandidat yang ada
+                $jumlahSuara = $this->Dashboard_model->tampil_data('idkandidat', $row->idkandidat, 'data_pemilihan');
+                $updateData = array(
+                    'jumlahsuara' => $jumlahSuara,
+                );
+                // Update jumlah suara counter ke database
+                $this->Dashboard_model->update('idkandidat', $row->idkandidat, 'kandidat', $updateData);
+                // Data ini digunakan untuk menunjukan hasil perolehan suara di dalam dashboard admin
+                $a = array(
+                    'idKandidat' => $row->idkandidat,
+                    'noUrut' => $row->nourut,
+                    'organisasi' => $row->organisasi,
+                    'nama' => $row->nama,
+                    'jumlahSuara' => $jumlahSuara,
+                );
+                // Menyimpan semua data dalam bentuk array
+                $arrayJS[] = $a;
+            };
+        }
 
         $data = array(
             'jumlahKelas' => $jumlahKelas,
             'jumlahDataPemilih' => $jumlahDataPemilih,
             'jumlahKandidat' => $jumlahKandidat,
-            'kandidatData' => $kandidatData,
-            'jumlahSuara' =>$arrayJS,
+            'jumlahSuaraMasuk' => $jumlahSuaraMasuk,
+            'kandidatData' => $arrayJS,
         );
 
-        // load default view
+        // load dashboard view
         $this->load->view('back/dashboard', $data);
     }
 }

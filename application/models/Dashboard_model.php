@@ -20,7 +20,9 @@ class Dashboard_model extends CI_Model
         return $this->db->get($table)->row();
     }
 
-    public function tampil_data($q, $idkandidat, $table){
+    // Menghitung jumlah suara
+    public function tampil_data($q, $idkandidat, $table)
+    {
         $this->db->where($q, $idkandidat);
         return $this->db->count_all_results($table);
     }
@@ -30,6 +32,13 @@ class Dashboard_model extends CI_Model
     {
         $this->db->from($table);
         return $this->db->count_all_results();
+    }
+
+    // update data
+    function update($q, $id, $table, $data)
+    {
+        $this->db->where($q, $id);
+        $this->db->update($table, $data);
     }
 }
 
