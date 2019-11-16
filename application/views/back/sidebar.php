@@ -55,8 +55,6 @@
           </li>
         </ul>
       </li>
-      <li class="header">Dev</li>
-      <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
   </section>
   <!-- /.sidebar -->
 </aside>

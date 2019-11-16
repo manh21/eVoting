@@ -107,11 +107,23 @@ class Home extends CI_Controller
             );
             $this->session->set_userdata($userData);
 
-            // Updare Database data
+            // Update Database data
             $updateData = array(
                 'status' => 'Sudah Memilih'
             );
             $this->Home_model->update('id', $idpemilih, 'data_pemilih', $updateData);
+
+            // Menghitung jumlah perolehan suara
+            $kandidatData = $this->Home_model->get_all('nourut', 'kandidat');
+            foreach ($kandidatData as $row) {
+                // Berdasarkan idkandidat yang ada
+                $jumlahSuara = $this->Home_model->tampil_data('idkandidat', $row->idkandidat, 'data_pemilihan');
+                $suaraData = array(
+                    'jumlahsuara' => $jumlahSuara,
+                );
+                // Update jumlah suara counter ke database
+                $this->Home_model->update('idkandidat', $row->idkandidat, 'kandidat', $suaraData);
+            };
 
             redirect('vote', 'refresh');
         } else {

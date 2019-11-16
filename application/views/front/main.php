@@ -1,71 +1,43 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>E-Voting | SMANSA</title>
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="<?php echo base_url('assets/template/frontend/') ?>plugins/fontawesome-free/css/all.min.css">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet" />
+    <link rel="stylesheet" href="<?php echo base_url('assets/css/') ?>bootstrap.min.css" />
+    <link rel="stylesheet" href="<?php echo base_url('assets/css/') ?>aos.css" />
 
-    <!-- Google Font -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic" />
-    <!-- Bootstrap core CSS -->
-    <link href="<?php echo base_url('assets/template/frontend/') ?>vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom styles for this template -->
-    <link href="<?php echo base_url('assets/template/frontend/') ?>css/main.css" rel="stylesheet">
-
-    <style type="text/css">
-        @media (pointer: coarse) and (hover: none) {
-            body {
-                background: url("<?php echo base_url('assets/template/frontend/') ?>img/bg-mobile-fallback.jpg") #002e66 no-repeat center center scroll;
-                background-position: cover;
-            }
-
-            body video {
-                display: none;
-            }
-        }
-    </style>
-
+    <link rel="stylesheet" href="<?php echo base_url('assets/css/') ?>style.css" />
 </head>
 
 <body>
-    <div class="overlay"></div>
-    <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
-        <source src="mp4/bg.mp4" type="video/mp4">
-    </video>
-
-    <div class="masthead">
-        <div class="masthead-bg"></div>
-        <div class="container h-100">
-            <div class="row h-100">
-                <div class="col-12 my-auto">
-                    <div class="masthead-content text-white py-5 py-md-0">
-                        <h1 class="mb-3">Selamat Datang!</h1>
-                        <p class="mb-5">
-                            <strong>Silahkan Login!</strong> Untuk dapat memilih anda harus login terlebih dahulu!
-                        </p>
-                        <div>
-                            <a href="<?php echo base_url('user') ?>" class="btn btn-lg btn-secondary btn-block btn-login text-uppercase font-weight-bold mb-2">Login</a>
-                        </div>
+    <div class="site-wrap">
+        <div class="site-hero">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-10">
+                        <span class="d-block mb-3 caption" data-aos="fade-up" data-aos-delay="100">Welcome!</span>
+                        <h1 class="d-block mb-4" data-aos="fade-up" data-aos-delay="200">
+                            E-Voting <br />
+                            SMANSA
+                        </h1>
+                        <span class="d-block mb-5 caption" data-aos="fade-up" data-aos-delay="300">Silahkan Login untuk melanjutkan</span>
+                        <a href="<?php echo base_url('user') ?>" class="btn-custom" data-aos="fade-up" data-aos-delay="400"><span>Login</span></a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Javascript -->
-    <?php $this->load->view('front/js'); ?>
+    <script src="<?php echo base_url('assets/js/') ?>jquery-3.3.1.min.js"></script>
+    <script src="<?php echo base_url('assets/js/') ?>popper.min.js"></script>
+    <script src="<?php echo base_url('assets/js/') ?>bootstrap.min.js"></script>
+    <script src="<?php echo base_url('assets/js/') ?>aos.js"></script>
+
+    <script src="<?php echo base_url('assets/js/') ?>main.js"></script>
 </body>
 
 </html>

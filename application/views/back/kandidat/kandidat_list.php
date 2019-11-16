@@ -55,6 +55,7 @@
                                             <th>No</th>
                                             <th>Nama</th>
                                             <th>Nourut</th>
+                                            <th>Suara</th>
                                             <th>Organisasi</th>
                                             <th>Visi</th>
                                             <th>Misi</th>
@@ -69,6 +70,7 @@
                                                 <td width="10px"><?php echo htmlspecialchars(++$start, ENT_QUOTES, 'UTF-8'); ?></td>
                                                 <td><?php echo htmlspecialchars($kandidat->nama, ENT_QUOTES, 'UTF-8'); ?></td>
                                                 <td><?php echo htmlspecialchars($kandidat->nourut, ENT_QUOTES, 'UTF-8'); ?></td>
+                                                <td><?php echo htmlspecialchars($kandidat->jumlahsuara, ENT_QUOTES, 'UTF-8'); ?></td>
                                                 <td><?php echo htmlspecialchars($kandidat->organisasi, ENT_QUOTES, 'UTF-8'); ?></td>
                                                 <td><?php echo $kandidat->visi ?></td>
                                                 <td><?php echo $kandidat->misi ?></td>

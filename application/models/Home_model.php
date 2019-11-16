@@ -39,6 +39,13 @@ class Home_model extends CI_Model
         $this->db->where($q, $id);
         $this->db->update($table, $data);
     }
+
+    // Menghitung jumlah suara
+    public function tampil_data($q, $idkandidat, $table)
+    {
+        $this->db->where($q, $idkandidat);
+        return $this->db->count_all_results($table);
+    }
 }
 
 /* End of file Home_modal.php */

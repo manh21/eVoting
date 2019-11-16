@@ -32,11 +32,11 @@
 
 </head>
 
-<body style="margin-bottom: 0px;" class="hold-transition login-page">
+<body style="margin-bottom: 0px; background: #232531;" class="hold-transition login-page">
 
     <div class="login-box">
         <div class="login-logo">
-            <a href="<?php echo base_url() ?>"><b>E-Voting</b></a>
+            <a href="<?php echo base_url() ?>" class="login-titleHeader"><b>E-Voting</b></a>
         </div>
         <!-- /.login-logo -->
         <div class="card">

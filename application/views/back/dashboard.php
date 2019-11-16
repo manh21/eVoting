@@ -98,13 +98,7 @@
           </div>
         </div>
       </div>
-
-      <!-- Test -->
-      <?php print_r($kandidatData) ?>
-
-      <hr>
-
-
+      <!-- /.row -->
 
     </section>
     <!-- /.content -->

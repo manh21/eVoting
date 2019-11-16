@@ -29,25 +29,17 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `data_pemilih` (
-  `id` int(32) NOT NULL,
-  `nis` varchar(32) NOT NULL,
+  `id` int(9) NOT NULL,
+  `nis` varchar(9) NOT NULL,
   `username` varchar(100) NOT NULL,
   `password` varchar(248) NOT NULL,
   `nama` varchar(100) NOT NULL,
   `kelas` varchar(32) NOT NULL,
-  `idkelas` varchar(32) NOT NULL,
-  `jk` varchar(32) NOT NULL,
-  `status` varchar(32) NOT NULL,
-  `aktif` varchar(32) NOT NULL
+  `idkelas` varchar(9) NOT NULL,
+  `jk` varchar(1) NOT NULL,
+  `status` varchar(100) NOT NULL,
+  `aktif` varchar(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `data_pemilih`
---
-
-INSERT INTO `data_pemilih` (`id`, `nis`, `username`, `password`, `nama`, `kelas`, `idkelas`, `jk`, `status`, `aktif`) VALUES
-(1, '17854', '17854', '17854', 'Muh Aqila Naufal Hakim', 'XI MIPA 5', '5', 'L', 'Sudah Memilih', '1'),
-(2, '17834', '17834', '17834', 'Agas Arsy', 'XI MIPA 5', '5', 'L', 'Sudah Memilih', '1');
 
 -- --------------------------------------------------------
 
@@ -56,20 +48,12 @@ INSERT INTO `data_pemilih` (`id`, `nis`, `username`, `password`, `nama`, `kelas`
 --
 
 CREATE TABLE `data_pemilihan` (
-  `idpemilihan` int(2) NOT NULL,
-  `tipe` varchar(32) NOT NULL,
-  `idpemilih` int(32) NOT NULL,
-  `idkandidat` int(32) NOT NULL,
-  `waktu` int(11) NOT NULL DEFAULT current_timestamp()
+  `idpemilihan` int(9) NOT NULL,
+  `tipe` varchar(9) NOT NULL,
+  `idpemilih` int(9) NOT NULL,
+  `idkandidat` int(9) NOT NULL,
+  `waktu` int(32) NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `data_pemilihan`
---
-
-INSERT INTO `data_pemilihan` (`idpemilihan`, `tipe`, `idpemilih`, `idkandidat`, `waktu`) VALUES
-(1, 'siswa', 1, 1, 2147483647),
-(2, 'siswa', 2, 1, 2147483647);
 
 -- --------------------------------------------------------
 
@@ -98,24 +82,16 @@ INSERT INTO `groups` (`id`, `name`, `description`) VALUES
 --
 
 CREATE TABLE `kandidat` (
-  `idkandidat` int(32) NOT NULL,
-  `nama` varchar(32) NOT NULL,
-  `nourut` varchar(32) NOT NULL,
-  `organisasi` varchar(32) NOT NULL,
+  `idkandidat` int(9) NOT NULL,
+  `nama` varchar(100) NOT NULL,
+  `nourut` varchar(2) NOT NULL,
+  `organisasi` varchar(50) NOT NULL,
   `visi` text NOT NULL,
   `misi` text NOT NULL,
-  `foto` varchar(32) NOT NULL,
+  `foto` varchar(99) NOT NULL,
   `status` varchar(32) NOT NULL,
-  `jumlahsuara` varchar(32) NOT NULL
+  `jumlahsuara` varchar(9) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `kandidat`
---
-
-INSERT INTO `kandidat` (`idkandidat`, `nama`, `nourut`, `organisasi`, `visi`, `misi`, `foto`, `status`, `jumlahsuara`) VALUES
-(1, 'Androw F', '01', 'MPK', '<p>Menjadikan MPK sebagai Majelis Perwakilan Kelas yang lebih mandiri, terbuka, dan cepat tanggap.<br></p>', '<p>1.Menetapkan sikap toleransi dalam beragama dan kedisiplinan dalam beribadah.<br><br>2.Memprioritaskan kemandirian dalam kepemimpinan berorganisasi.</p><p>3.Sebagai wadah aspirasi bagi warga SMA Negeri 1 Sukoharjo yang bertanggung jawab dan dapat dipercaya.<br><br>4.Meningkatkan Fungsi Pengawasan terhadap Organisasi Siswa Intra Sekolah.<br><br>5.Membangun Hubungan Baik, Koordinasi, Sinkronisasi Informasi antara Guru dan Siswa SMA Negeri 1 Sukoharjo.<br></p>', '012.jpg', '1', ''),
-(2, 'Naufal', '02', 'MPK', '<p>visi</p>', '<p>misi</p>', '013.jpg', '1', '');
 
 -- --------------------------------------------------------
 
@@ -124,21 +100,10 @@ INSERT INTO `kandidat` (`idkandidat`, `nama`, `nourut`, `organisasi`, `visi`, `m
 --
 
 CREATE TABLE `kelas` (
-  `idkelas` int(32) NOT NULL,
-  `kelas` varchar(32) NOT NULL,
-  `jumlah` varchar(32) NOT NULL
+  `idkelas` int(9) NOT NULL,
+  `kelas` varchar(50) NOT NULL,
+  `jumlah` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `kelas`
---
-
-INSERT INTO `kelas` (`idkelas`, `kelas`, `jumlah`) VALUES
-(1, 'XI MIPA 1', '36'),
-(2, 'XI MIPA 2', '36'),
-(3, 'XI MIPA 3', '36'),
-(4, 'XI MIPA 4', '36'),
-(5, 'XI MIPA 5', '36');
 
 -- --------------------------------------------------------
 
@@ -186,7 +151,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `email`, `activation_selector`, `activation_code`, `forgotten_password_selector`, `forgotten_password_code`, `forgotten_password_time`, `remember_selector`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`) VALUES
-(1, '127.0.0.1', 'administrator', '$2y$12$c6pbvIxI5aBAXaB9WRD4zusKzEF3gZBNdg3AZi7eaO5Q6B6exf1iS', 'admin@admin.com', NULL, '', NULL, NULL, NULL, NULL, NULL, 1268889823, 1573094205, 1, 'Admin', 'istrator', 'ADMIN', '0');
+(1, '127.0.0.1', 'administrator', '$2y$12$0DvxU/dX0lpQql9D0c5EY.lu/mUWXYfwOz8tkpSBThzNGcP0NbPh.', 'admin@admin.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1268889823, 1573359559, 1, 'Administrator', 'Utama', 'ADMIN', '0'),
 
 -- --------------------------------------------------------
 
@@ -275,13 +240,13 @@ ALTER TABLE `users_groups`
 -- AUTO_INCREMENT for table `data_pemilih`
 --
 ALTER TABLE `data_pemilih`
-  MODIFY `id` int(32) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `data_pemilihan`
 --
 ALTER TABLE `data_pemilihan`
-  MODIFY `idpemilihan` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idpemilihan` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `groups`
@@ -293,13 +258,13 @@ ALTER TABLE `groups`
 -- AUTO_INCREMENT for table `kandidat`
 --
 ALTER TABLE `kandidat`
-  MODIFY `idkandidat` int(32) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idkandidat` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `kelas`
 --
 ALTER TABLE `kelas`
-  MODIFY `idkelas` int(32) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idkelas` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `login_attempts`

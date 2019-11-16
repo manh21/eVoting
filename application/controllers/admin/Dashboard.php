@@ -79,6 +79,7 @@ class Dashboard extends CI_Controller
                     'organisasi' => $row->organisasi,
                     'nama' => $row->nama,
                     'jumlahSuara' => $jumlahSuara,
+                    'foto' => $row->foto,
                 );
                 // Menyimpan semua data dalam bentuk array
                 $arrayJS[] = $a;
