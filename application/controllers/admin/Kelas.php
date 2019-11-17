@@ -80,7 +80,7 @@ class Kelas extends CI_Controller
                 'message',
                 '<div class="alert alert-danger alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                Record Not Found </div>',
+                Record Not Found </div>'
             );
             redirect('admin/kelas', 'refresh');
         }
@@ -125,7 +125,7 @@ class Kelas extends CI_Controller
                 'message',
                 '<div class="alert alert-success alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                Create Record Success </div>',
+                Create Record Success </div>'
             );
             redirect('admin/kelas', 'refresh');
         }
@@ -154,7 +154,7 @@ class Kelas extends CI_Controller
                 'message',
                 '<div class="alert alert-danger alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                Record Not Found </div>',
+                Record Not Found </div>'
             );
             redirect('admin/kelas', 'refresh');
         }
@@ -182,7 +182,7 @@ class Kelas extends CI_Controller
                 'message',
                 '<div class="alert alert-success alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                Update Record Success </div>',
+                Update Record Success </div>'
             );
             redirect('admin/kelas', 'refresh');
         }
@@ -203,7 +203,7 @@ class Kelas extends CI_Controller
                 'message',
                 '<div class="alert alert-success alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                Delete Record Success </div>',
+                Delete Record Success </div>'
             );
             redirect('admin/kelas', 'refresh');
         } else {
@@ -211,7 +211,7 @@ class Kelas extends CI_Controller
                 'message',
                 '<div class="alert alert-danger alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                Record Not Found </div>',
+                Record Not Found </div>'
             );
             redirect('admin/kelas', 'refresh');
         }

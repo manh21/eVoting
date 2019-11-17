@@ -132,7 +132,7 @@ class Home extends CI_Controller
                 'message',
                 '<div class="alert alert-warning alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                Anda sudah memilih </div>',
+                Anda sudah memilih </div>'
             );
         }
     }

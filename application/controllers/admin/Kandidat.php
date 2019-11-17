@@ -71,6 +71,7 @@ class Kandidat extends CI_Controller
                 'misi' => $row->misi,
                 'foto' => $row->foto,
                 'status' => $row->status,
+                'jumlahsuara' => $row->jumlahsuara
             );
             $this->load->view('back/kandidat/kandidat_read', $data);
         } else {

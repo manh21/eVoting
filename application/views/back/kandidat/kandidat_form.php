@@ -8,7 +8,7 @@
         <!-- Content Header (Page header) -->
         <div class="content-header">
             <h1>Kandidat Form</h1>
-        </div><!-- /.col -->
+        </div>
         <section class="content">
             <div class="row">
                 <div class="col-md-6">

@@ -117,7 +117,7 @@ class userAuth extends CI_Controller
                         'message',
                         '<div class="alert alert-warning alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                        User belum aktif </div>',
+                        User belum aktif </div>'
                     );
 
                     // Directed to login page
@@ -130,7 +130,7 @@ class userAuth extends CI_Controller
                     'message',
                     '<div class="alert alert-warning alert-dismissible">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                    Username Atau Password Salah </div>',
+                    Username Atau Password Salah </div>'
                 );
 
                 // Directed to login page
