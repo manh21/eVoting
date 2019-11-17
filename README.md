@@ -6,8 +6,12 @@ Aplikasi ini dibuat untuk meningkatkan kesadaran akan pentingnya menggunakan hak
  - import file **evoting.sql** ke database evoting
 
 # User
-**Administrator**
+**Administrator**'
+
+>localhost/admin
+
 E-mail: admin@admin.com
+
 Password: password
  
 Jika ada masukan untuk project ini silahkan gunakan fitur issues di github
