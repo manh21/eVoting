@@ -114,7 +114,7 @@ class Home extends CI_Controller
             $this->Home_model->update('id', $idpemilih, 'data_pemilih', $updateData);
 
             // Menghitung jumlah perolehan suara
-            $kandidatData = $this->Home_model->get_all('nourut', 'kandidat');
+            $kandidatData = $this->Home_model->get_all('nourut', 'kandidat', 'DESC');
             foreach ($kandidatData as $row) {
                 // Berdasarkan idkandidat yang ada
                 $jumlahSuara = $this->Home_model->tampil_data('idkandidat', $row->idkandidat, 'data_pemilihan');
