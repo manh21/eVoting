@@ -42,11 +42,9 @@
                                             <td><?php echo htmlspecialchars($group->id, ENT_QUOTES, 'UTF-8');  ?></td>
                                             <td><?php echo htmlspecialchars($group->name, ENT_QUOTES, 'UTF-8');  ?></td>
                                             <td><?php echo htmlspecialchars($group->description, ENT_QUOTES, 'UTF-8');  ?></td>
-                                            <td>
-                                                <div class="btn-group">
-                                                    <a href="<?php echo base_url('admin/auth/edit_group/' . $group->id) ?>" class="btn btn-sm btn-flat bg-orange"><i class="fa fa-edit"></i></a>
-                                                    <button type="button" class="btn btn-sm btn-flat btn-danger" data-whatever="<?php echo base_url('admin/auth/delete_group/' . $group->id) ?>" data-toggle="modal" data-target="#modal-danger"><i class="fa fa-trash"></i></button>
-                                                </div>
+                                            <td class="text-center">
+                                                <a href="<?php echo base_url('admin/auth/edit_group/' . $group->id) ?>" class="btn btn-sm btn-flat bg-orange"><i class="fa fa-edit"></i></a>
+                                                <button type="button" class="btn btn-sm btn-flat btn-danger" data-whatever="<?php echo base_url('admin/auth/delete_group/' . $group->id) ?>" data-toggle="modal" data-target="#modal-danger"><i class="fa fa-trash"></i></button>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>

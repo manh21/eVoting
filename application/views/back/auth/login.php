@@ -38,7 +38,6 @@
     <div class="login-box-body">
       <p class="login-box-msg">Sign in to start your session</p>
       <div id="infoMessage"><?php echo $message; ?></div>
-
       <?php echo form_open("admin/auth/login"); ?>
       <div class="form-group has-feedback">
         <?php echo form_input($identity); ?>
@@ -80,6 +79,7 @@
   <!-- iCheck -->
   <script src="<?php echo base_url('assets/template/backend/') ?>plugins/iCheck/icheck.min.js"></script>
   <script>
+    // iCheck
     $(function() {
       $("input").iCheck({
         checkboxClass: "icheckbox_square-blue",
@@ -87,6 +87,12 @@
         increaseArea: "20%" /* optional */
       });
     });
+    // infoMassages Timer
+    window.setTimeout(function() {
+      $(".alert").fadeTo(500, 0).slideUp(500, function() {
+        $(this).remove();
+      });
+    }, 2000);
   </script>
 </body>
 

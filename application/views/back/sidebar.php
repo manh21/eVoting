@@ -19,6 +19,21 @@
           <i class="fa fa-dashboard"></i> <span>Dashboard</span>
         </a>
       </li>
+      <li>
+        <a href="<?php echo base_url('admin/kelas') ?>">
+          <i class="glyphicon glyphicon-blackboard"></i> <span>Kelas</span>
+        </a>
+      </li>
+      <li>
+        <a href="<?php echo base_url('admin/pemilih') ?>">
+          <i class="fa fa-user"></i> <span>Data Pemilih</span>
+        </a>
+      </li>
+      <li>
+        <a href="<?php echo base_url('admin/kandidat') ?>">
+          <i class="fa fa-user-secret"></i> <span>Kandidat</span>
+        </a>
+      </li>
       <li class="treeview">
         <a href="#">
           <i class="fa fa-users"></i>
@@ -40,8 +55,6 @@
           </li>
         </ul>
       </li>
-      <li class="header">Dev</li>
-      <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
   </section>
   <!-- /.sidebar -->
 </aside>

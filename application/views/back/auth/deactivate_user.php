@@ -19,7 +19,7 @@
         <div class="col-md-6">
           <div class="box box-primary">
             <div class="box-header">
-              <h3 class="box-title">Edit Group</h3>
+              <h3 class="box-title">Deactivate User</h3>
             </div>
             <?php echo form_open("admin/auth/deactivate/" . $user->id); ?>
             <div class="box-body">
