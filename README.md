@@ -5,6 +5,7 @@ Aplikasi ini dibuat untuk meningkatkan kesadaran akan pentingnya menggunakan hak
 # Server Requierment
 
 PHP version 7.3 or newer
+
 Database mySQL PHPMYADMIN
 
 # Instalation
