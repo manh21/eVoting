@@ -74,11 +74,11 @@
                                                 <td><?php echo htmlspecialchars($data_pemilih->nama, ENT_QUOTES, 'UTF-8'); ?></td>
                                                 <td><?php echo htmlspecialchars($data_pemilih->kelas, ENT_QUOTES, 'UTF-8'); ?></td>
                                                 <td width="10px" class="text-center"><?php echo htmlspecialchars($data_pemilih->jk, ENT_QUOTES, 'UTF-8'); ?></td>
-                                                <td class="text-center"><a class="label label-success"><?php echo htmlspecialchars($data_pemilih->status, ENT_QUOTES, 'UTF-8'); ?></a></td>
+                                                <td class="text-center"><?php echo ($data_pemilih->status === 'Belum Memilih') ? anchor("admin/pemilih", 'Belum Memilih', 'class="label label-danger"') : anchor("admin/data_pemilih/reset_status/" . $data_pemilih->id, 'Sudah Memilih', 'class="label label-success"'); ?></td>
                                                 <td class="text-center"><?php echo ($data_pemilih->aktif) ? anchor("admin/data_pemilih/deactivate/" . $data_pemilih->id, 'Active', 'class="label label-info"') : anchor("admin/data_pemilih/activate/" . $data_pemilih->id, 'Inactive', 'class="label label-danger"'); ?></td>
                                                 <td class="text-center">
                                                     <a href="<?php echo base_url('admin/data_pemilih/read/' . $data_pemilih->id) ?>" class="btn btn-sm btn-flat btn-info"><i class="fa fa-search"></i></a>
-                                                    <a href="<?php echo base_url('admin/data_pemilih/edit/' . $data_pemilih->id) ?>" class="btn btn-sm btn-flat bg-orange"><i class="fa fa-edit"></i></a>
+                                                    <a href="<?php echo base_url('admin/data_pemilih/update/' . $data_pemilih->id) ?>" class="btn btn-sm btn-flat bg-orange"><i class="fa fa-edit"></i></a>
                                                     <button type="button" class="btn btn-sm btn-flat btn-danger" data-whatever="<?php echo base_url('admin/data_pemilih/delete/' . $data_pemilih->id) ?>" data-toggle="modal" data-target="#modal-danger"><i class="fa fa-trash"></i></button>
                                                 </td>
                                             </tr>

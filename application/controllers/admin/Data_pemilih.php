@@ -171,7 +171,12 @@ class Data_pemilih extends CI_Controller
         }
     }
 
-    public function edit($id)
+    /**
+     *
+     *  Update data pemilih
+     * 
+     */
+    public function update($id)
     {
         // Security check if the user is admin
         if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
@@ -261,6 +266,34 @@ class Data_pemilih extends CI_Controller
             '<div class="alert alert-success alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
             Berhasil mengaktfikan pemilih. </div>'
+        );
+        redirect('admin/pemilih', 'refresh');
+    }
+
+    /**
+     * Activate the user
+     *
+     * @param int|string|null $id The user ID
+     */
+    public function reset_status($id)
+    {
+        // Security check if the user is admin
+        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
+            redirect('admin/auth', 'refresh');
+        }
+
+        $id = (int) $id;
+
+        $data = array(
+            'status' => 'Belum Memilih',
+        );
+
+        $this->Data_pemilih_model->update($id, $data);
+        $this->session->set_flashdata(
+            'message',
+            '<div class="alert alert-success alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            Berhasil mereset status pemilih. </div>'
         );
         redirect('admin/pemilih', 'refresh');
     }

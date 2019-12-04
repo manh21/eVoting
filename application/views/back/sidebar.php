@@ -55,6 +55,12 @@
           </li>
         </ul>
       </li>
+      <li>
+        <a href="<?php echo base_url('admin/settings') ?>">
+          <i class="fa fa-gear"></i> <span>Settings</span>
+        </a>
+      </li>
+    </ul>
   </section>
   <!-- /.sidebar -->
 </aside>

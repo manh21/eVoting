@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 17 Nov 2019 pada 06.03
+-- Waktu pembuatan: 04 Des 2019 pada 15.45
 -- Versi server: 10.4.6-MariaDB
 -- Versi PHP: 7.3.9
 
@@ -59,7 +59,7 @@ INSERT INTO `data_pemilih` (`id`, `nis`, `username`, `password`, `nama`, `kelas`
 (14, '676799', '676799', '676799', 'Anasa', '11 IPA 1', '5', 'P', 'Sudah Memilih', 1),
 (15, '90809', '90809', '90809', 'Burhan', '11 IPA 1', '5', 'L', 'Belum Memilih', 1),
 (16, '58213', '58213', '58213', 'Doni', '11 BB', '6', 'L', 'Sudah Memilih', 1),
-(21, '123', '123', '123', 'Jola', '11 IPA 1', '5', 'L', 'Belum Memilih', 1),
+(21, '123', '123', '123', 'Jola', '11 IPA 1', '5', 'L', 'Sudah Memilih', 1),
 (22, '333', '333', '333', 'Halim', '10 IPA 1', '1', 'L', 'Sudah Memilih', 1),
 (23, '1247', '1247', '1247', 'Raihan', '11 IPA 5', '7', 'L', 'Sudah Memilih', 1);
 
@@ -82,15 +82,7 @@ CREATE TABLE `data_pemilihan` (
 --
 
 INSERT INTO `data_pemilihan` (`idpemilihan`, `tipe`, `idpemilih`, `idkandidat`, `waktu`) VALUES
-(1, 'siswa', '16', '6', '2019-11-03 03:51:04.552347'),
-(2, 'siswa', '16', '7', '2019-11-03 03:51:49.531571'),
-(3, 'siswa', '16', '7', '2019-11-03 03:56:18.518054'),
-(4, 'siswa', '16', '7', '2019-11-03 04:02:13.135030'),
-(5, 'siswa', '3', '6', '2019-11-03 06:48:13.439061'),
-(6, 'siswa', '5', '7', '2019-11-03 12:52:34.013495'),
-(7, 'siswa', '14', '6', '2019-11-14 23:56:10.826824'),
-(8, 'siswa', '23', '6', '2019-11-15 00:01:08.051030'),
-(9, 'siswa', '22', '7', '2019-11-15 00:04:35.024002');
+(1, 'siswa', '21', '6', '2019-11-17 11:07:22.528254');
 
 -- --------------------------------------------------------
 
@@ -150,8 +142,8 @@ CREATE TABLE `kandidat` (
 --
 
 INSERT INTO `kandidat` (`idkandidat`, `organisasi`, `nama`, `nourut`, `jumlahsuara`, `visi`, `misi`, `foto`, `status`) VALUES
-(6, 'OSIS', 'OSMANSA', '01', '4', '<p>OSMANSA</p>', '<p>OSMANSA</p>', 'OSMASA.jpg', '1'),
-(7, 'MPK', 'MPK', '02', '5', '<p>MPK</p>', '<p>MPK</p>', 'MPK_VEC.png', '1');
+(6, 'OSIS', 'OSMANSA', '01', '1', '<p>OSMANSA</p>', '<p>OSMANSA</p>', 'OSMASA.jpg', '1'),
+(7, 'MPK', 'MPK', '02', '0', '<p>MPK</p>', '<p>MPK</p>', 'MPK_VEC.png', '1');
 
 -- --------------------------------------------------------
 
@@ -197,7 +189,35 @@ INSERT INTO `kelas` (`idkelas`, `kelas`, `jumlah`) VALUES
 (26, '12 IPS 2', 36),
 (27, '12 IPS 3', 36),
 (28, '12 IPS 4', 36),
-(29, '12 BB', 36);
+(29, '12 BB', 36),
+(30, '12 IPS 4', 36),
+(31, '12 IPS 3', 36),
+(32, '12 IPS 2', 36),
+(33, '12 IPS 1', 36),
+(34, '12 IPA 7', 36),
+(35, '12 IPA 6', 36),
+(36, '12 IPA 5', 36),
+(37, '12 IPA 4', 36),
+(38, '12 IPA 3', 36),
+(39, '12 IPA 2', 36),
+(40, '12 IPA 1', 36),
+(41, '12 BB', 36),
+(42, '11 IPS 4', 36),
+(43, '11 IPS 3', 36),
+(44, '11 IPS 2', 36),
+(45, '11 IPS 1', 36),
+(46, '11 IPA 7', 36),
+(47, '11 IPA 6', 36),
+(48, '11 IPA 5', 36),
+(49, '11 IPA 4', 36),
+(50, '11 IPA 3', 36),
+(51, '11 IPA 2', 36),
+(52, '11 IPA 1', 36),
+(53, '11 BB', 36),
+(54, '10 IPA 3', 36),
+(55, '10 IPA 2', 36),
+(56, '10 IPA 1', 36),
+(57, '10 BB', 36);
 
 -- --------------------------------------------------------
 
@@ -211,6 +231,25 @@ CREATE TABLE `login_attempts` (
   `login` varchar(100) NOT NULL,
   `time` int(11) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `settings`
+--
+
+CREATE TABLE `settings` (
+  `id` int(32) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT current_timestamp(),
+  `penyelenggara` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `settings`
+--
+
+INSERT INTO `settings` (`id`, `timestamp`, `penyelenggara`) VALUES
+(1, '2019-12-03 19:35:11', 'E-Voting SMANSA');
 
 -- --------------------------------------------------------
 
@@ -245,8 +284,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `email`, `activation_selector`, `activation_code`, `forgotten_password_selector`, `forgotten_password_code`, `forgotten_password_time`, `remember_selector`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`) VALUES
-(1, '127.0.0.1', 'administrator', '$2y$12$d88xj0WgEOmJTcoe34Vao.aSEsdFWzk4c8HauQN3ZzFUHR5AnwlrC', 'admin@admin.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1268889823, 1573966978, 1, 'Administrator', 'Utama', 'ADMIN', '0'),
-(2, '127.0.0.1', 'muhaqilanaufalhakim@gmail.com', '$2y$10$p8CgsbLyDxWgSbnzrxaR4uHgDOzfRTS8BqHyXDMOuUDVaG.sD7xyO', 'muhaqilanaufalhakim@gmail.com', NULL, NULL, '4468c1b04ef756ab2fac', '$2y$10$tR7JfkLl0vh7llHpz/5Xue3VQLCezovyCoYJcD1pSgB.Js2.QCT9i', 1569615610, NULL, NULL, 1569066245, NULL, 1, 'Administrator', 'Utama', 'Bagus21', '.');
+(1, '127.0.0.1', 'administrator', '$2y$12$d88xj0WgEOmJTcoe34Vao.aSEsdFWzk4c8HauQN3ZzFUHR5AnwlrC', 'admin@admin.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1268889823, 1575468104, 1, 'Administrator', 'Utama', 'ADMIN', '0');
 
 -- --------------------------------------------------------
 
@@ -266,9 +304,7 @@ CREATE TABLE `users_groups` (
 
 INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
 (8, 1, 1),
-(9, 1, 2),
-(6, 2, 1),
-(7, 2, 2);
+(9, 1, 2);
 
 --
 -- Indexes for dumped tables
@@ -317,6 +353,12 @@ ALTER TABLE `login_attempts`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indeks untuk tabel `settings`
+--
+ALTER TABLE `settings`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indeks untuk tabel `users`
 --
 ALTER TABLE `users`
@@ -349,7 +391,7 @@ ALTER TABLE `data_pemilih`
 -- AUTO_INCREMENT untuk tabel `data_pemilihan`
 --
 ALTER TABLE `data_pemilihan`
-  MODIFY `idpemilihan` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `idpemilihan` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `groups`
@@ -373,13 +415,19 @@ ALTER TABLE `kandidat`
 -- AUTO_INCREMENT untuk tabel `kelas`
 --
 ALTER TABLE `kelas`
-  MODIFY `idkelas` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `idkelas` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT untuk tabel `login_attempts`
 --
 ALTER TABLE `login_attempts`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT untuk tabel `settings`
+--
+ALTER TABLE `settings`
+  MODIFY `id` int(32) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`

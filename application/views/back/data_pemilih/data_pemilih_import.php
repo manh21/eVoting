@@ -21,9 +21,9 @@
                         <?php } ?>
                         <div id="infoMessage"><?php echo $this->session->userdata('message') <> '' ? $this->session->userdata('message') : ''; ?></div>
                         <div class="box-header">
-                            <a href="<?php print site_url(); ?>assets/sample/pemilih/sample-xlsx.xlsx" class="btn btn-flat btn-info btn-sm"><i class="fa fa-file-excel"></i> Sample .XLSX</a>
-                            <a href="<?php print site_url(); ?>assets/sample/pemilih/sample-xls.xls" class="btn btn-flat btn-info btn-sm"><i class="fa fa-file-excel"></i> Sample .XLS</a>
-                            <a href="<?php print site_url(); ?>assets/sample/pemilih/sample-csv.csv" class="btn btn-flat btn-info btn-sm" target="_blank"><i class="fa fa-file-csv"></i> Sample .CSV</a>
+                            <a href="<?php print site_url(); ?>assets/sample/pemilih/sample-xlsx.xlsx" class="btn btn-flat btn-info btn-sm"><i class="fa fa-file-excel"></i> Template .XLSX</a>
+                            <a href="<?php print site_url(); ?>assets/sample/pemilih/sample-xls.xls" class="btn btn-flat btn-info btn-sm"><i class="fa fa-file-excel"></i> Template .XLS</a>
+                            <a href="<?php print site_url(); ?>assets/sample/pemilih/sample-csv.csv" class="btn btn-flat btn-info btn-sm" target="_blank"><i class="fa fa-file-csv"></i> Template .CSV</a>
                         </div>
                         <?php echo form_open_multipart($action); ?>
                         <div class="box-body">

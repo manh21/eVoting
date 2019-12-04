@@ -121,6 +121,7 @@ class Kandidat extends CI_Controller
 
         $this->load->helper('file');
         $this->load->library('upload', $config);
+        $this->upload->initialize($config);
         $this->form_validation->set_rules('image', 'Upload File', 'callback_checkFileValidation');
         $this->_rules();
 

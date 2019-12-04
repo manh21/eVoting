@@ -126,10 +126,10 @@ foreach ($kandidatData as $data) {
   var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
-      labels: <?php echo json_encode($label); ?>,
+      labels: [<?php echo json_encode($label); ?>],
       datasets: [{
         label: 'Suara',
-        data: <?php echo json_encode($suara); ?>,
+        data: [<?php echo json_encode($suara); ?>],
         backgroundColor: [
           'rgba(221, 72, 57, 0.5)',
           'rgba(0, 192, 239, 0.5)',

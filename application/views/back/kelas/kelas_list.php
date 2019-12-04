@@ -67,7 +67,7 @@
                                                 <td><?php echo htmlspecialchars($kelas->jumlah, ENT_QUOTES, 'UTF-8'); ?></td>
                                                 <td class="text-center">
                                                     <a href="<?php echo base_url('admin/kelas/read/' . $kelas->idkelas) ?>" class="btn btn-sm btn-flat btn-info"><i class="fa fa-search"></i></a>
-                                                    <a href="<?php echo base_url('admin/kelas/edit/' . $kelas->idkelas) ?>" class="btn btn-sm btn-flat bg-orange"><i class="fa fa-edit"></i></a>
+                                                    <a href="<?php echo base_url('admin/kelas/update/' . $kelas->idkelas) ?>" class="btn btn-sm btn-flat bg-orange"><i class="fa fa-edit"></i></a>
                                                     <button type="button" class="btn btn-sm btn-flat btn-danger" data-whatever="<?php echo base_url('admin/kelas/delete/' . $kelas->idkelas) ?>" data-toggle="modal" data-target="#modal-danger"><i class="fa fa-trash"></i></button>
                                                 </td>
                                             </tr>

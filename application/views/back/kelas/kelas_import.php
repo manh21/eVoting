@@ -7,7 +7,7 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <div class="content-header">
-            <h1>Data Pemilih</h1>
+            <h1>Kelas</h1>
         </div><!-- /.col -->
         <section class="content">
             <div class="row">
@@ -21,9 +21,9 @@
                         <?php } ?>
                         <div id="infoMessage"><?php echo $this->session->userdata('message') <> '' ? $this->session->userdata('message') : ''; ?></div>
                         <div class="box-header">
-                            <a href="<?php print site_url(); ?>assets/sample/kelas/sample-xlsx.xlsx" class="btn btn-flat btn-info btn-sm"><i class="fa fa-file-excel"></i> Sample .XLSX</a>
-                            <a href="<?php print site_url(); ?>assets/sample/kelas/sample-xls.xls" class="btn btn-flat btn-info btn-sm"><i class="fa fa-file-excel"></i> Sample .XLS</a>
-                            <a href="<?php print site_url(); ?>assets/sample/kelas/sample-csv.csv" class="btn btn-flat btn-info btn-sm" target="_blank"><i class="fa fa-file-csv"></i> Sample .CSV</a>
+                            <a href="<?php print site_url(); ?>assets/sample/kelas/sample-xlsx.xlsx" class="btn btn-flat btn-info btn-sm"><i class="fa fa-file-excel"></i> Template .XLSX</a>
+                            <a href="<?php print site_url(); ?>assets/sample/kelas/sample-xls.xls" class="btn btn-flat btn-info btn-sm"><i class="fa fa-file-excel"></i> Template .XLS</a>
+                            <a href="<?php print site_url(); ?>assets/sample/kelas/sample-csv.csv" class="btn btn-flat btn-info btn-sm" target="_blank"><i class="fa fa-file-csv"></i> Template .CSV</a>
                         </div>
                         <?php echo form_open_multipart($action); ?>
                         <div class="box-body">

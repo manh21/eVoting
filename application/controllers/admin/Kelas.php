@@ -131,7 +131,7 @@ class Kelas extends CI_Controller
         }
     }
 
-    public function edit($id)
+    public function update($id)
     {
         // Security check if the user is admin
         if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
