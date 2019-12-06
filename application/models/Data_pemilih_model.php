@@ -144,6 +144,20 @@ class Data_pemilih_model extends CI_Model
         $data = $this->_batchImport;
         $this->db->insert_batch($this->table, $data);
     }
+
+    // Get settings data all
+    public function settings_data_all()
+    {
+        $this->db->order_by('id', 'ASC');
+        return $this->db->get('settings')->result();
+    }
+
+    // Get settings data by id
+    public function settings_data_by_id($id)
+    {
+        $this->db->where('id', $id);
+        return $this->db->get('settings')->row();
+    }
 }
 
 /* End of file Data_pemilih_model.php */

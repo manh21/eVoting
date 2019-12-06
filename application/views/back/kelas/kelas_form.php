@@ -19,17 +19,17 @@
                         <form action="<?php echo $action; ?>" method="post">
                             <div class="box-body">
                                 <div class="form-group">
-                                    <label for="varchar">Kelas <?php echo form_error('kelas') ?></label>
+                                    <label for="varchar">Kelas <?php echo form_error('kelas'); ?></label>
                                     <input type="text" class="form-control" name="kelas" id="kelas" placeholder="Kelas" value="<?php echo $kelas; ?>" />
                                 </div>
                                 <div class="form-group">
-                                    <label for="int">Jumlah <?php echo form_error('jumlah') ?></label>
+                                    <label for="int">Jumlah <?php echo form_error('jumlah'); ?></label>
                                     <input type="text" class="form-control" name="jumlah" id="jumlah" placeholder="Jumlah" value="<?php echo $jumlah; ?>" />
                                 </div>
                                 <input type="hidden" name="idkelas" value="<?php echo $idkelas; ?>" />
                             </div>
                             <div class="box-footer">
-                                <button type="submit" class="btn btn-success"><?php echo $button ?></button>
+                                <button type="submit" class="btn btn-success"><?php echo $button; ?></button>
                                 <a href="<?php echo base_url('admin/kelas') ?>" class="btn btn-default">Cancel</a>
                             </div>
                         </form>

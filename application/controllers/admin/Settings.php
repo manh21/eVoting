@@ -31,13 +31,19 @@ class Settings extends CI_Controller
     }
 
     $q = $this->Setting_model->get_all('id', 'settings', 'ASC');
-    $row = $this->Setting_model->get_by_id('id', $q[0]->id, 'settings');
+    $row = $q[0];
 
     $data = array(
       'action' => base_url('admin/settings/update_action'),
       'button' => 'Save Changes',
       'id' => set_value('id', $row->id),
-      'penyelenggara' => set_value('penyelenggara', $row->penyelenggara)
+      'penyelenggara' => set_value('penyelenggara', $row->penyelenggara),
+      'tps' => set_value('tps', $row->tps),
+      'provinsi' => set_value('provinsi', $row->provinsi),
+      'kota' => set_value('kota', $row->kota),
+      'kecamatan' => set_value('kecamatan', $row->kecamatan),
+      'kelurahan' => set_value('kelurahan', $row->kelurahan),
+      'alamat' => set_value('alamat', $row->alamat),
     );
 
     // Load View
@@ -58,7 +64,13 @@ class Settings extends CI_Controller
     } else {
       $data = array(
         'id' => $this->input->post('id', TRUE),
-        'penyelenggara' => $this->input->post('penyelenggara', TRUE)
+        'penyelenggara' => $this->input->post('penyelenggara', TRUE),
+        'tps' => $this->input->post('tps', TRUE),
+        'provinsi' => $this->input->post('provinsi', TRUE),
+        'kota' => $this->input->post('kota', TRUE),
+        'kecamatan' => $this->input->post('kecamatan', TRUE),
+        'kelurahan' => $this->input->post('kelurahan', TRUE),
+        'alamat' => $this->input->post('alamat', TRUE),
       );
 
       $this->Setting_model->update('id', $this->input->post('id', TRUE), 'settings', $data);
@@ -70,6 +82,14 @@ class Settings extends CI_Controller
         Update Record Success </div>'
       );
       redirect('admin/settings', 'refresh');
+    }
+  }
+
+  public function kpps_update($id)
+  {
+    // Security check if the user is admin
+    if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
+      redirect('admin/auth', 'refresh');
     }
   }
 
@@ -162,6 +182,12 @@ class Settings extends CI_Controller
   public function _rules()
   {
     $this->form_validation->set_rules('penyelenggara', 'penyelenggara', 'trim|required');
+    $this->form_validation->set_rules('tps', 'tps', 'trim|required');
+    $this->form_validation->set_rules('provinsi', 'provinsi', 'trim|required');
+    $this->form_validation->set_rules('kota', 'kota', 'trim|required');
+    $this->form_validation->set_rules('kecamatan', 'kecamatan', 'trim|required');
+    $this->form_validation->set_rules('kelurahan', 'kelurahan', 'trim|required');
+    $this->form_validation->set_rules('alamat', 'alamat', 'trim|required');
 
     $this->form_validation->set_rules('id', 'id', 'trim');
     $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
@@ -170,4 +196,4 @@ class Settings extends CI_Controller
 
 
 /* End of file Settings.php */
-/* Location: ./application/controllers/Settings.php */
+/* Location: ./application/controllers/admin/ Settings.php */
