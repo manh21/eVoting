@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 04 Des 2019 pada 15.45
+-- Waktu pembuatan: 07 Des 2019 pada 01.31
 -- Versi server: 10.4.6-MariaDB
 -- Versi PHP: 7.3.9
 
@@ -54,7 +54,7 @@ INSERT INTO `data_pemilih` (`id`, `nis`, `username`, `password`, `nama`, `kelas`
 (9, '34344', '22222', '22222', 'Hun', '11 BB', '6', 'L', 'Belum Memilih', 0),
 (10, '50505', '50505', '50505', 'ad', '10 IPA 3', '3', 'L', 'Belum Memilih', 1),
 (11, '1234', '1234', '1234', 'Hun', '11 BB', '6', 'L', 'Belum Memilih', 0),
-(12, '18693', '18693', '18693', 'asdsad', '11 BB', '6', 'P', 'Belum Memilih', 1),
+(12, '18693', '18693', '18693', 'asdsad', '11 BB', '6', 'P', 'Sudah Memilih', 1),
 (13, '123123', '333333', '123123', 'Muji', '11 IPS 2', '14', 'L', 'Belum Memilih', 1),
 (14, '676799', '676799', '676799', 'Anasa', '11 IPA 1', '5', 'P', 'Sudah Memilih', 1),
 (15, '90809', '90809', '90809', 'Burhan', '11 IPA 1', '5', 'L', 'Belum Memilih', 1),
@@ -82,7 +82,8 @@ CREATE TABLE `data_pemilihan` (
 --
 
 INSERT INTO `data_pemilihan` (`idpemilihan`, `tipe`, `idpemilih`, `idkandidat`, `waktu`) VALUES
-(1, 'siswa', '21', '6', '2019-11-17 11:07:22.528254');
+(1, 'siswa', '21', '6', '2019-11-17 11:07:22.528254'),
+(2, 'siswa', '12', '6', '2019-12-04 22:20:23.912025');
 
 -- --------------------------------------------------------
 
@@ -142,7 +143,7 @@ CREATE TABLE `kandidat` (
 --
 
 INSERT INTO `kandidat` (`idkandidat`, `organisasi`, `nama`, `nourut`, `jumlahsuara`, `visi`, `misi`, `foto`, `status`) VALUES
-(6, 'OSIS', 'OSMANSA', '01', '1', '<p>OSMANSA</p>', '<p>OSMANSA</p>', 'OSMASA.jpg', '1'),
+(6, 'OSIS', 'OSMANSA', '01', '2', '<p>OSMANSA</p>', '<p>OSMANSA</p>', 'OSMASA.jpg', '1'),
 (7, 'MPK', 'MPK', '02', '0', '<p>MPK</p>', '<p>MPK</p>', 'MPK_VEC.png', '1');
 
 -- --------------------------------------------------------
@@ -241,15 +242,21 @@ CREATE TABLE `login_attempts` (
 CREATE TABLE `settings` (
   `id` int(32) NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT current_timestamp(),
-  `penyelenggara` text NOT NULL
+  `penyelenggara` text NOT NULL,
+  `tps` text NOT NULL,
+  `provinsi` text NOT NULL,
+  `kota` text NOT NULL,
+  `kecamatan` text NOT NULL,
+  `kelurahan` text NOT NULL,
+  `alamat` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `settings`
 --
 
-INSERT INTO `settings` (`id`, `timestamp`, `penyelenggara`) VALUES
-(1, '2019-12-03 19:35:11', 'E-Voting SMANSA');
+INSERT INTO `settings` (`id`, `timestamp`, `penyelenggara`, `tps`, `provinsi`, `kota`, `kecamatan`, `kelurahan`, `alamat`) VALUES
+(1, '2019-12-03 19:35:11', 'E-Voting SMANSA', '01', 'Jawa Tengah', 'Surakarta', 'Kartasura', 'Pabelan', 'UMS Secretariat, Main Building Siti Walidah UMS, Jl. A. Yani No.284, Pabelan, Kartasura, Kota Surakarta, Jawa Tengah 57162');
 
 -- --------------------------------------------------------
 
@@ -284,7 +291,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `email`, `activation_selector`, `activation_code`, `forgotten_password_selector`, `forgotten_password_code`, `forgotten_password_time`, `remember_selector`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`) VALUES
-(1, '127.0.0.1', 'administrator', '$2y$12$d88xj0WgEOmJTcoe34Vao.aSEsdFWzk4c8HauQN3ZzFUHR5AnwlrC', 'admin@admin.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1268889823, 1575468104, 1, 'Administrator', 'Utama', 'ADMIN', '0');
+(1, '127.0.0.1', 'administrator', '$2y$12$d88xj0WgEOmJTcoe34Vao.aSEsdFWzk4c8HauQN3ZzFUHR5AnwlrC', 'admin@admin.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1268889823, 1575670561, 1, 'Administrator', 'Utama', 'ADMIN', '0');
 
 -- --------------------------------------------------------
 
@@ -391,7 +398,7 @@ ALTER TABLE `data_pemilih`
 -- AUTO_INCREMENT untuk tabel `data_pemilihan`
 --
 ALTER TABLE `data_pemilihan`
-  MODIFY `idpemilihan` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idpemilihan` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `groups`
