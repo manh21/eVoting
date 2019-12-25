@@ -37,14 +37,14 @@
                                     <div class="col-sm-6 text-right">
                                         <form action="<?php echo base_url('admin/data_pemilih/index'); ?>" class="form-inline" method="get">
                                             <div class="input-group">
-                                                <input type="text" class="form-control" name="q" value="<?php echo $q; ?>">
+                                                <input type="text" class="form-control" name="q">
                                                 <span class="input-group-btn">
                                                     <?php
-                                                    if ($q <> '') {
-                                                        ?>
+                                                        if ($q <> '') {
+                                                    ?>
                                                         <a href="<?php echo base_url('admin/pemilih'); ?>" class="btn btn-default">Reset</a>
                                                     <?php
-                                                    }
+                                                                }
                                                     ?>
                                                     <button class="btn btn-flat btn-primary" type="submit">Search</button>
                                                 </span>

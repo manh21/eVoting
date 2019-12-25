@@ -19,21 +19,53 @@
           <i class="fa fa-dashboard"></i> <span>Dashboard</span>
         </a>
       </li>
+      <!-- ./Dashboard -->
+      <li>
+        <a href="<?php echo base_url('admin/filemanager') ?>">
+          <i class="fa fa-folder"></i> <span>Filemanager</span>
+        </a>
+      </li>
+      <!-- ./Filemanager -->
       <li>
         <a href="<?php echo base_url('admin/kelas') ?>">
           <i class="glyphicon glyphicon-blackboard"></i> <span>Kelas</span>
         </a>
       </li>
+      <!-- ./Kelas -->
       <li>
         <a href="<?php echo base_url('admin/pemilih') ?>">
           <i class="fa fa-user"></i> <span>Data Pemilih</span>
         </a>
       </li>
+      <!-- ./Data Pemilih -->
       <li>
         <a href="<?php echo base_url('admin/kandidat') ?>">
           <i class="fa fa-user-secret"></i> <span>Kandidat</span>
         </a>
       </li>
+      <!-- ./Kandidat -->
+      <!-- <li class="treeview">
+        <a href="#">
+          <i class="glyphicon glyphicon-stats"></i>
+          <span>Laporan</span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
+        </a>
+        <ul class="treeview-menu">
+          <li>
+            <a href="<?php echo base_url('admin/laporan') ?>" target="_blank">
+              <i class="fa fa-circle-o"></i> Berita Acara
+            </a>
+          </li>
+          <li>
+            <a href="<?php echo base_url('admin/laporan/model_c1') ?>" target="_blank">
+              <i class="fa fa-circle-o"></i> Model C1
+            </a>
+          </li>
+        </ul>
+      </li> -->
+      <!-- ./Laporan -->
       <li class="treeview">
         <a href="#">
           <i class="fa fa-users"></i>
@@ -60,6 +92,7 @@
           <i class="fa fa-gear"></i> <span>Settings</span>
         </a>
       </li>
+      <!-- ./Settings -->
     </ul>
   </section>
   <!-- /.sidebar -->

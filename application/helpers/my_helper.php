@@ -1,6 +1,26 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
+function initialize_elfinder($value = '')
+{
+    $CI = &get_instance();
+    $CI->load->helper('path');
+    $opts = array(
+        //'debug' => true, 
+        'roots' => array(
+            array(
+                'driver' => 'LocalFileSystem',
+                'path'   => './assets/uploads/',
+                'URL'    => base_url('assets/uploads') . '/'
+                // more elFinder options here
+            )
+        )
+    );
+
+    return $opts;
+}
+
+
 function j($data)
 {
     header('Content-Type: application/json');
@@ -110,7 +130,7 @@ function tjs($tgl)
  *
  */
 
-function Terbilang($nilai)
+function terbilang($nilai)
 {
     $huruf = array("", "Satu", "Dua", "Tiga", "Empat", "Lima", "Enam", "Tujuh", "Delapan", "Sembilan", "Sepuluh", "Sebelas");
     if ($nilai == 0) {
@@ -118,23 +138,23 @@ function Terbilang($nilai)
     } elseif ($nilai < 12 & $nilai != 0) {
         return "" . $huruf[$nilai];
     } elseif ($nilai < 20) {
-        return Terbilang($nilai - 10) . " Belas ";
+        return terbilang($nilai - 10) . " Belas ";
     } elseif ($nilai < 100) {
-        return Terbilang($nilai / 10) . " Puluh " . Terbilang($nilai % 10);
+        return terbilang($nilai / 10) . " Puluh " . terbilang($nilai % 10);
     } elseif ($nilai < 200) {
-        return " Seratus " . Terbilang($nilai - 100);
+        return " Seratus " . terbilang($nilai - 100);
     } elseif ($nilai < 1000) {
-        return Terbilang($nilai / 100) . " Ratus " . Terbilang($nilai % 100);
+        return terbilang($nilai / 100) . " Ratus " . terbilang($nilai % 100);
     } elseif ($nilai < 2000) {
-        return " Seribu " . Terbilang($nilai - 1000);
+        return " Seribu " . terbilang($nilai - 1000);
     } elseif ($nilai < 1000000) {
-        return Terbilang($nilai / 1000) . " Ribu " . Terbilang($nilai % 1000);
+        return terbilang($nilai / 1000) . " Ribu " . terbilang($nilai % 1000);
     } elseif ($nilai < 1000000000) {
-        return Terbilang($nilai / 1000000) . " Juta " . Terbilang($nilai % 1000000);
+        return terbilang($nilai / 1000000) . " Juta " . terbilang($nilai % 1000000);
     } elseif ($nilai < 1000000000000) {
-        return Terbilang($nilai / 1000000000) . " Milyar " . Terbilang($nilai % 1000000000);
+        return terbilang($nilai / 1000000000) . " Milyar " . terbilang($nilai % 1000000000);
     } elseif ($nilai < 100000000000000) {
-        return Terbilang($nilai / 1000000000000) . " Trilyun " . Terbilang($nilai % 1000000000000);
+        return terbilang($nilai / 1000000000000) . " Trilyun " . terbilang($nilai % 1000000000000);
     } elseif ($nilai <= 100000000000000) {
         return "Maaf Tidak Dapat di Prose Karena Jumlah nilai Terlalu Besar ";
     }
