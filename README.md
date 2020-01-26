@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/manh21/eVoting.svg?branch=master)](https://travis-ci.com/manh21/eVoting)
+
 # eVoting
 
 Aplikasi ini dibuat untuk meningkatkan kesadaran akan pentingnya menggunakan hak pilih kita dalam demokrasi di dunia yang modern ini.
