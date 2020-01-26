@@ -110,7 +110,12 @@ class Data_pemilih_model extends CI_Model
         $q = $this->db->select('*')
             ->where(['kelas.idkelas' => $id])
             ->get('kelas');
-        return ($q->num_rows() > 0) ? $q->row() : row();
+        // return ($q->num_rows() > 0) ? $q->row() : row();
+        if ($q->num_rows() > 0) {
+            return $q->row();
+        } else {
+            return false;
+        }
     }
 
     // getKelas data by idkelas
@@ -120,7 +125,12 @@ class Data_pemilih_model extends CI_Model
             ->join('kelas', 'data_pemilih.idkelas = kelas.idkelas')
             ->where(['data_pemilih.id' => $id])
             ->get('data_pemilih');
-        return ($q->num_rows() > 0) ? $q->row() : row();
+        // return ($q->num_rows() > 0) ? $q->row() : row();
+        if ($q->num_rows() > 0) {
+            return $q->row();
+        } else {
+            return false;
+        }
     }
 
     // get_idKelas
@@ -129,10 +139,15 @@ class Data_pemilih_model extends CI_Model
         $q = $this->db->select('*')
             ->where(['kelas.kelas' => $kelas])
             ->get('kelas');
-        return ($q->num_rows() > 0) ? $q->row() : row();
+        // return ($q->num_rows() > 0) ? $q->row() : row();       
+        if ($q->num_rows() > 0) {
+            return $q->row();
+        } else {
+            return false;
+        }
     }
 
-    // Import_data
+    // Batch Import
     public function setBatchImport($batchImport)
     {
         $this->_batchImport = $batchImport;

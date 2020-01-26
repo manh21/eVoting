@@ -104,7 +104,7 @@ class Data_pemilih extends CI_Controller
 
         $data = array(
             'button' => 'Create',
-            'action' => site_url('admin/data_pemilih/create_action'),
+            'action' => base_url('admin/data_pemilih/create_action'),
             'id' => set_value('id'),
             'nis' => set_value('nis'),
             'username' => set_value('username'),
@@ -188,7 +188,7 @@ class Data_pemilih extends CI_Controller
         if ($row) {
             $data = array(
                 'button' => 'Update',
-                'action' => site_url('admin/data_pemilih/update_action'),
+                'action' => base_url('admin/data_pemilih/update_action'),
                 'id' => set_value('id', $row->id),
                 'nis' => set_value('nis', $row->nis),
                 'username' => set_value('username', $row->username),
@@ -300,7 +300,7 @@ class Data_pemilih extends CI_Controller
 
     /**
      *
-     *  Upload data pemilih
+     *  Upload data sheet for data pemilih
      * 
      */
     public function do_upload()
@@ -340,15 +340,13 @@ class Data_pemilih extends CI_Controller
 
                 // Loading a Spreadsheet File
                 $spreadsheet = $reader->load($inputFileName);
-                $sheetData = $spreadsheet->getActiveSheet()->toArray(null, true, true, true);
+                $sheetData = $spreadsheet->getActiveSheet()->toArray();
 
                 // menghitung jumlah baris data yang ada
-                $jumlah_baris = count($sheetData);
+                $arrayCount = count($sheetData);
+                $flag = 0;
 
-                // jumlah default data yang berhasil di import
-                $berhasil = 0;
 
-                // array Count
                 $createArray = array('nis', 'username', 'password', 'nama', 'kelas', 'jk');
                 $makeArray = array('nis' => 'nis', 'username' => 'username', 'password' => 'password', 'nama' => 'nama', 'kelas' => 'kelas', 'jk' => 'jk');
                 $SheetDataKey = array();
@@ -360,15 +358,14 @@ class Data_pemilih extends CI_Controller
                         }
                     }
                 }
+
                 $dataDiff = array_diff_key($makeArray, $SheetDataKey);
                 if (empty($dataDiff)) {
-                    $berhasil = 1;
+                    $flag = 1;
                 }
-
                 // match excel sheet column
-                if ($berhasil == 1) {
-                    for ($i = 2; $i <= $jumlah_baris; $i++) {
-                        $addresses = array();
+                if ($flag == 1) {
+                    for ($i = 1; $i <= $arrayCount; $i++) {
                         $nis = $SheetDataKey['nis'];
                         $userName = $SheetDataKey['username'];
                         $password = $SheetDataKey['password'];
@@ -378,14 +375,18 @@ class Data_pemilih extends CI_Controller
 
                         $nis = filter_var(trim($sheetData[$i][$nis]), FILTER_SANITIZE_STRING);
                         $userName = filter_var(trim($sheetData[$i][$userName]), FILTER_SANITIZE_STRING);
-                        $password = filter_var(trim($sheetData[$i][$password]), FILTER_SANITIZE_EMAIL);
-                        $nama = filter_var(trim($sheetData[$i][$nama]), FILTER_SANITIZE_EMAIL);
+                        $password = filter_var(trim($sheetData[$i][$password]), FILTER_SANITIZE_STRING);
+                        $nama = filter_var(trim($sheetData[$i][$nama]), FILTER_SANITIZE_STRING);
                         $kelas = filter_var(trim($sheetData[$i][$kelas]), FILTER_SANITIZE_STRING);
                         $jk = filter_var(trim($sheetData[$i][$jk]), FILTER_SANITIZE_STRING);
 
                         // Get idkelas
                         $idKelas = $this->Data_pemilih_model->get_idKelas($kelas);
-
+                        if ($idKelas == false) {
+                            $idKelas = '';
+                        } else {
+                            $idKelas = $idKelas->idkelas;
+                        }
                         $fetchData[] = array(
                             'nis' => $nis,
                             'username' => $userName,
@@ -395,12 +396,12 @@ class Data_pemilih extends CI_Controller
                             'jk' => $jk,
                             'status' => 'Belum Memilih',
                             'aktif' => '1',
-                            'idkelas' => $idKelas->idkelas
+                            'idkelas' => $idKelas,
                         );
                     }
+                    $data['dataInfo'] = $fetchData;
                     $this->Data_pemilih_model->setBatchImport($fetchData);
                     $this->Data_pemilih_model->importData();
-                    // $this->Data_pemilih_model->upload_data($fileName);
                 } else {
                     $this->session->set_flashdata(
                         'message',
@@ -408,6 +409,7 @@ class Data_pemilih extends CI_Controller
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                         Please import correct file, did not match excel sheet column </div>'
                     );
+                    unlink('./assets/uploads/' . $fileName);
                 }
                 unlink('./assets/uploads/' . $fileName);
                 $this->session->set_flashdata(
@@ -423,7 +425,9 @@ class Data_pemilih extends CI_Controller
 
     /**
      *
-     *  Export data pemilih
+     *  Export data pemilih 
+     * 
+     *  @output Excel data sheet .xlsx
      * 
      */
     public function exportData()
@@ -508,7 +512,7 @@ class Data_pemilih extends CI_Controller
         }
 
         $data = array(
-            'action' => site_url('admin/data_pemilih/do_upload'),
+            'action' => base_url('admin/data_pemilih/do_upload'),
             'button' => 'Import',
         );
         $this->load->view('back/data_pemilih/data_pemilih_import', $data);
@@ -662,10 +666,21 @@ class Data_pemilih extends CI_Controller
         $setting_data = $q[0];
 
         $data = array(
+            "dataku" => array(
+                "nama" => "Data Pemilih",
+                "url" => site_url(),
+            ),
             'data_pemilih_data' => $data_pemilih,
             'start' => 0,
             'setting_data' => $setting_data
         );
+
+        $this->load->library('pdf');
+
+        $this->pdf->setPaper('A4', 'potrait');
+        $this->pdf->filename = "data_pemilih.pdf";
+        // $this->pdf->load_view('back/data_pemilih/data_pemilih_cetak', $data);
+        // $this->pdf->load_view('back/laporan/daftar_hadir', $data);
         $this->load->view('back/data_pemilih/data_pemilih_cetak', $data);
     }
 }
