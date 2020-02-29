@@ -2,7 +2,7 @@
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class userAuth_model extends CI_Model
+class Userauth_model extends CI_Model
 {
     public $table = 'data_pemilih';
     public $id = 'id';

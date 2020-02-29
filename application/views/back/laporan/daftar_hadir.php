@@ -4,19 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-
-    <!-- Bootstrap 3.3.7 -->
-    <link rel="stylesheet" href="<?php echo base_url('assets/template/backend/') ?>bower_components/bootstrap/dist/css/bootstrap.min.css">
-    <!-- DataTables -->
-    <link rel="stylesheet" href="<?php echo base_url('assets/template/backend/') ?>bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
-
+    <title>DAFTAR HADIR</title>
     <style>
-        .page-header,
+        /* .page-header,
         .page-header-space {
-            height: 125px;
-        }
+            height: 100px;
+        } */
 
         .page-footer,
         .page-footer-space {
@@ -41,7 +34,7 @@
             width: 100%;
             border: 0px;
             /* for demo */
-            background: #fff;
+            background: rgba(0, 0, 0, 0);
             /* for demo */
             z-index: 100000;
         }
@@ -96,7 +89,7 @@
             white-space: pre;
         }
 
-        /* .table {
+        .table {
             border-collapse: collapse;
             width: 100%;
         }
@@ -105,7 +98,7 @@
         .table th,
         .table td {
             border: 1px solid black;
-        } */
+        }
 
         @media print {
             thead {
@@ -125,26 +118,19 @@
             }
         }
     </style>
-
 </head>
 
-<body>
-
-
+<body onload="window.print()">
     <div class="page-header" style="text-align: center">
-        <h4 style="font-weight: bolder;">BERITA ACARA</h4>
-        <h4 style="font-weight: bolder;">PEMUNGUTAN DAN PENGHITUNGAN SUARA</h4>
-        <h4 style="font-weight: bolder;">PEMILIHAN UMUM TAHUN <?php echo date('Y'); ?></h4>
-        <br />
+        <!-- <h4 style="font-weight: bolder;">DAFTAR HADIR</h4>
+        <h4 style="font-weight: bolder;">PESERTA PEMUNGUTAN DAN PENGHITUNGAN SUARA</h4> -->
         <button type="button" onClick="window.print()" style="background: pink">
             PRINT ME!
         </button>
     </div>
 
     <div class="page-footer">
-        Waktu Server <?php date_default_timezone_set('Asia/Jakarta');
-                        echo date('d/m/Y H:i:s'); ?>
-        <div class="pull-right">*)Coret yang tidak perlu</div>
+        Waktu Server <?php echo date('d/m/Y H:i:s'); ?>
     </div>
 
     <table>
@@ -153,7 +139,8 @@
             <tr>
                 <td>
                     <!--place holder for the fixed-position header-->
-                    <div class="page-header-space"></div>
+                    <div class="page-header-space">
+                    </div>
                 </td>
             </tr>
         </thead>
@@ -163,42 +150,34 @@
                 <td>
                     <!--*** CONTENT GOES HERE ***-->
                     <div class="page text-justify">
-                        <p>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pada hari ini <span id="hari" class="font-weight-bold "></span>&nbsp;tanggal <span id="tanggal" class="font-weight-bold "></span> bulan <span id="bulan" class="font-weight-bold "></span>
-                            tahun <span id="tahun" class="font-weight-bold "></span>,Kelompok Penyelenggara Pemungutan Suara (KPPS) mengadakan Rapat Pemungutan dan Penghitungan
-                            Suara di TPS dalam Pemilihan Umum Ketua OSIS*) Tahun <span><?php echo date('Y'); ?></span> ,bertempat di:
-                        </p>
-                        <table class="innerDOC">
-                            <tr>
-                                <td width="200px">Nomor TPS</td>
-                                <td>:</td>
-                                <td><?php echo $setting_data->tps; ?></td>
-                            </tr>
-                            <tr>
-                                <td width="200px">Desa / Kelurahan *)</td>
-                                <td>:</td>
-                                <td><?php echo $setting_data->kelurahan; ?></td>
-                            </tr>
-                            <tr>
-                                <td width="200px">Kecamatan / Distrik *)</td>
-                                <td>:</td>
-                                <td><?php echo $setting_data->kecamatan; ?></td>
-                            </tr>
-                            <tr>
-                                <td width="200px">Kabupaten / Kota *)</td>
-                                <td>:</td>
-                                <td><?php echo $setting_data->kota; ?></td>
-                            </tr>
-                            <tr>
-                                <td width="200px">Provinsi</td>
-                                <td>:</td>
-                                <td><?php echo $setting_data->provinsi; ?></td>
-                            </tr>
+                        <div style="text-align: center">
+                            <h4 style="font-weight: bolder;">DAFTAR HADIR</h4>
+                            <h4 style="font-weight: bolder;">PESERTA PEMUNGUTAN DAN PENGHITUNGAN SUARA</h4>
+                            <h4 style="font-weight: bolder;"><?php echo $penyelenggara; ?> </h4>
+                        </div>
+                        </br>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th width="10px">No</th>
+                                    <th width="100px">NISN</th>
+                                    <th>Nama</th>
+                                    <th>Kelas</th>
+                                    <th>Keterangan</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($data_pemilih as $data) : ?>
+                                    <tr>
+                                        <td style="text-align: center"><?php echo htmlspecialchars(++$start, ENT_QUOTES, 'UTF-8'); ?></td>
+                                        <td style="text-align: center"><?php echo htmlspecialchars($data->nis, ENT_QUOTES, 'UTF-8'); ?></td>
+                                        <td><?php echo htmlspecialchars($data->nama, ENT_QUOTES, 'UTF-8'); ?></td>
+                                        <td style="text-align: center"><?php echo htmlspecialchars($data->kelas, ENT_QUOTES, 'UTF-8'); ?></td>
+                                        <td style="text-align: center"><?php echo ($data->status === 'Belum Memilih') ? "Tidak Hadir" : "Hadir"; ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
                         </table>
-                        <p>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pemungutan dan Penghitungan Suara Pemilihan Umum Ketua OSIS Tahun <span><?php echo date('Y'); ?></span>
-                            dihadiri oleh Saksi Peserta Pemilu dan/atau Pengawas TPS *) dengan kegiatan sebagai berikut:
-                        </p>
                     </div>
                 </td>
             </tr>
@@ -216,17 +195,17 @@
     </table>
 
     <!-- jQuery 3 -->
-    <script src="<?php echo base_url('assets/template/backend/') ?>bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- <script src="<?php echo base_url('assets/template/backend/') ?>bower_components/jquery/dist/jquery.min.js"></script> -->
     <!-- Bootstrap 3.3.7 -->
-    <script src="<?php echo base_url('assets/template/backend/') ?>bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- <script src="<?php echo base_url('assets/template/backend/') ?>bower_components/bootstrap/dist/js/bootstrap.min.js"></script> -->
     <!-- DataTables -->
-    <script src="<?php echo base_url('assets/template/backend/') ?>bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="<?php echo base_url('assets/template/backend/') ?>bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <!-- <script src="<?php echo base_url('assets/template/backend/') ?>bower_components/datatables.net/js/jquery.dataTables.min.js"></script> -->
+    <!-- <script src="<?php echo base_url('assets/template/backend/') ?>bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script> -->
     <!-- Momentjs -->
-    <script type="text/javascript" src="<?php echo base_url('assets/js/') ?>momentjs.min.js"></script>
+    <!-- <script type="text/javascript" src="<?php echo base_url('assets/js/') ?>momentjs.min.js"></script> -->
     <!-- Momentjs Timezone -->
-    <script type="text/javascript" src="<?php echo base_url('assets/js/') ?>moment-timezone.js"></script>
-    <script>
+    <!-- <script type="text/javascript" src="<?php echo base_url('assets/js/') ?>moment-timezone.js"></script> -->
+    <!-- <script>
         // MomentJS
         var now = moment().format('HH:mm:ss');
         var hari = moment().locale('id').format('dddd')
@@ -331,8 +310,7 @@
         $(document).ready(function() {
             window.print();
         });
-    </script>
-
+    </script> -->
 </body>
 
 </html>

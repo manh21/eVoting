@@ -51,7 +51,7 @@ class Dashboard extends CI_Controller
         // Jumlah Kelas
         $jumlahKelas = $this->Dashboard_model->total_rows('kelas');
         // Jumlah Data Pemilih
-        $jumlahDataPemilih = $this->Dashboard_model->total_rows('data_Pemilih');
+        $jumlahDataPemilih = $this->Dashboard_model->total_rows('data_pemilih');
         // Jumlah Kandidat
         $jumlahKandidat = $this->Dashboard_model->total_rows('kandidat');
         // Menghitung jumlah suara yang sudah masuk ke dalam database

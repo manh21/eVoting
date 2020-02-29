@@ -13,10 +13,10 @@
     <link rel="stylesheet" href="<?php echo base_url('assets/template/backend/') ?>bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
 
     <style>
-        .page-header,
+        /* .page-header,
         .page-header-space {
-            height: 150px;
-        }
+            height: 100px;
+        } */
 
         .page-footer,
         .page-footer-space {
@@ -41,9 +41,17 @@
             width: 100%;
             border: 0px;
             /* for demo */
-            background: #fff;
+            background: rgba(0, 0, 0, 0);
             /* for demo */
             z-index: 100000;
+        }
+
+        .font-weight-bold {
+            font-weight: bolder;
+        }
+
+        .text-italic {
+            font-style: italic;
         }
 
         .page {
@@ -54,12 +62,41 @@
             width: 100%;
         }
 
+        p {
+            font-size: 16px;
+        }
+
         @page {
-            margin: 10mm;
+            margin: 10mm 20mm 10mm 20mm;
             size: A4;
         }
 
-        /* .table {
+        h4 {
+            margin: 0;
+            font-weight: bolder;
+        }
+
+        .innerDOC {
+            margin-bottom: 10px;
+        }
+
+        .innerDOC td {
+            font-size: 16px;
+        }
+
+        pre {
+            display: block;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            padding: 0;
+            margin: 0;
+            font-size: 16px;
+            background-color: rgba(0, 0, 0, 0);
+            border: none;
+            border-radius: 0;
+            white-space: pre;
+        }
+
+        .table {
             border-collapse: collapse;
             width: 100%;
         }
@@ -68,7 +105,7 @@
         .table th,
         .table td {
             border: 1px solid black;
-        } */
+        }
 
         @media print {
             thead {
@@ -91,21 +128,17 @@
 
 </head>
 
-<body>
+<body onload="window.print()">
 
 
     <div class="page-header" style="text-align: center">
-        <h3>Data Kelas</h3>
-        <p><?php echo $setting_data->penyelenggara; ?></p>
-        <br />
         <button type="button" onClick="window.print()" style="background: pink">
             PRINT ME!
         </button>
     </div>
 
     <div class="page-footer">
-        Waktu Server <?php date_default_timezone_set('Asia/Jakarta');
-                        echo date('d/m/Y H:i:s'); ?>
+        Waktu Server <?php echo date('d/m/Y H:i:s'); ?>
     </div>
 
     <table>
@@ -123,11 +156,15 @@
             <tr>
                 <td>
                     <!--*** CONTENT GOES HERE ***-->
-                    <div class="page">
-                        <table id="example2" class="table table-bordered table-striped">
+                    <div class="page text-justify">
+                        <div style="text-align: center">
+                            <h4 style="font-weight: bolder;">DATA KELAS</h4>
+                        </div>
+                        </br>
+                        <table class="table">
                             <thead>
                                 <tr>
-                                    <th>No</th>
+                                    <th width="10px">No</th>
                                     <th>Kelas</th>
                                     <th>Jumlah</th>
                                 </tr>
@@ -135,7 +172,7 @@
                             <tbody>
                                 <?php foreach ($kelas_data as $kelas) : ?>
                                     <tr>
-                                        <td width="10px" class="text-center"><?php echo htmlspecialchars(++$start, ENT_QUOTES, 'UTF-8'); ?></td>
+                                        <td style="text-align: center"><?php echo htmlspecialchars(++$start, ENT_QUOTES, 'UTF-8'); ?></td>
                                         <td><?php echo htmlspecialchars($kelas->kelas, ENT_QUOTES, 'UTF-8'); ?></td>
                                         <td><?php echo htmlspecialchars($kelas->jumlah, ENT_QUOTES, 'UTF-8'); ?></td>
                                     </tr>
@@ -157,31 +194,6 @@
         </tfoot>
 
     </table>
-
-    <!-- jQuery 3 -->
-    <script src="<?php echo base_url('assets/template/backend/') ?>bower_components/jquery/dist/jquery.min.js"></script>
-
-    <!-- DataTables -->
-    <script src="<?php echo base_url('assets/template/backend/') ?>bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="<?php echo base_url('assets/template/backend/') ?>bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-    <script>
-        // DataTables Script
-        $(function() {
-            $('#example1').DataTable()
-            $('#example2').DataTable({
-                'paging': false,
-                'lengthChange': true,
-                'searching': false,
-                'ordering': false,
-                'info': false,
-                'autoWidth': true
-            })
-        })
-        $(document).ready(function() {
-            window.print();
-        });
-    </script>
-
 
 </body>
 

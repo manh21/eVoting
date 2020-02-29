@@ -272,9 +272,7 @@ class Kelas extends CI_Controller
 
                 // menghitung jumlah baris data yang ada
                 $jumlah_baris = count($sheetData);
-
-                // jumlah default data yang berhasil di import
-                $berhasil = 0;
+                $flag = 0;
 
                 // array Count
                 $createArray = array('kelas', 'jumlah');
@@ -288,15 +286,15 @@ class Kelas extends CI_Controller
                         }
                     }
                 }
+
                 $dataDiff = array_diff_key($makeArray, $SheetDataKey);
                 if (empty($dataDiff)) {
-                    $berhasil = 1;
+                    $flag = 1;
                 }
 
                 // match excel sheet column
-                if ($berhasil == 1) {
-                    for ($i = 2; $i <= $jumlah_baris; $i++) {
-                        $addresses = array();
+                if ($flag == 1) {
+                    for ($i = 2; $i < $jumlah_baris; $i++) {
                         $kelas = $SheetDataKey['kelas'];
                         $jumlah = $SheetDataKey['jumlah'];
 
@@ -317,6 +315,7 @@ class Kelas extends CI_Controller
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                         Please import correct file, did not match excel sheet column </div>'
                     );
+                    unlink('./assets/uploads/' . $fileName);
                 }
                 unlink('./assets/uploads/' . $fileName);
                 $this->session->set_flashdata(
@@ -405,7 +404,6 @@ class Kelas extends CI_Controller
         }
 
         $dataKelas = $this->Kelas_model->get_all();
-        $nourut = 1;
         // Create new Spreadsheet object
         $spreadsheet = new Spreadsheet();
 
@@ -418,20 +416,17 @@ class Kelas extends CI_Controller
 
         // Add some data
         $spreadsheet->setActiveSheetIndex(0)
-            ->setCellValue('A1', 'No')
-            ->setCellValue('B1', 'Kelas')
-            ->setCellValue('C1', 'Jumlah');
+            ->setCellValue('A1', 'kelas')
+            ->setCellValue('B1', 'jumlah');
 
         // Miscellaneous glyphs, UTF-8
         $i = 2;
         foreach ($dataKelas as $kelas) {
 
             $spreadsheet->setActiveSheetIndex(0)
-                ->setCellValue('A' . $i, $nourut)
-                ->setCellValue('B' . $i, $kelas->kelas)
-                ->setCellValue('C' . $i, $kelas->jumlah);
+                ->setCellValue('A' . $i, $kelas->kelas)
+                ->setCellValue('B' . $i, $kelas->jumlah);
             $i++;
-            $nourut++;
         }
 
         // Rename worksheet
@@ -465,6 +460,11 @@ class Kelas extends CI_Controller
      */
     public function cetak()
     {
+        // Security check if the user is admin
+        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
+            redirect('admin/auth', 'refresh');
+        }
+
         // Setting Data
         $q = $this->Kelas_model->settings_data_all();
         $setting_data = $q[0];

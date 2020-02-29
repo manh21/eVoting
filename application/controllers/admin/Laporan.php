@@ -33,21 +33,9 @@ class Laporan extends CI_Controller
     {   // redirect them to the home page because they must be an administrator to view this
       show_error('You must be an administrator to view this page.');
     }
-
-    // Settings Data
-    $q = $this->Home_model->get_all('id', 'settings', 'ASC');
-    $setting_data = $q[0];
-
-    $data = array(
-      'setting_data' => $setting_data,
-      'start' => 0,
-    );
-
-    // Load View
-    $this->load->view('back/laporan/model_c', $data);
   }
 
-  public function model_c1()
+  public function daftar_hadir()
   {
     // Security check if the user is admin
     if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
@@ -58,13 +46,18 @@ class Laporan extends CI_Controller
     $q = $this->Home_model->get_all('id', 'settings', 'ASC');
     $setting_data = $q[0];
 
+    $data_pemilih = $this->Home_model->get_all('id', 'data_pemilih', 'ASC');
+
     $data = array(
-      'setting_data' => $setting_data,
-      'start' => 0,
+      "penyelenggara" => $setting_data->penyelenggara,
+      "data_pemilih" => $data_pemilih,
+      "start" => 0,
+      "dataku" => array(
+        "url" => site_url(),
+      )
     );
 
-    // Load View
-    $this->load->view('back/laporan/model_c1', $data);
+    $this->load->view('back/laporan/daftar_hadir', $data);
   }
 }
 

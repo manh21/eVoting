@@ -77,34 +77,17 @@ class Xlsx extends BaseReader
     {
         File::assertFile($pFilename);
 
-        $xl = false;
-        // Load file
+        $result = false;
         $zip = new ZipArchive();
-        if ($zip->open($pFilename) === true) {
-            // check if it is an OOXML archive
-            $rels = simplexml_load_string(
-                $this->securityScanner->scan(
-                    $this->getFromZipArchive($zip, '_rels/.rels')
-                ),
-                'SimpleXMLElement',
-                Settings::getLibXmlLoaderOptions()
-            );
-            if ($rels !== false) {
-                foreach ($rels->Relationship as $rel) {
-                    switch ($rel['Type']) {
-                        case 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument':
-                            if (basename($rel['Target']) == 'workbook.xml') {
-                                $xl = true;
-                            }
 
-                            break;
-                    }
-                }
-            }
+        if ($zip->open($pFilename) === true) {
+            $workbookBasename = $this->getWorkbookBaseName($zip);
+            $result = !empty($workbookBasename);
+
             $zip->close();
         }
 
-        return $xl;
+        return $result;
     }
 
     /**
@@ -357,8 +340,9 @@ class Xlsx extends BaseReader
 
         //    Read the theme first, because we need the colour scheme when reading the styles
         //~ http://schemas.openxmlformats.org/package/2006/relationships"
+        $workbookBasename = $this->getWorkbookBaseName($zip);
         $wbRels = simplexml_load_string(
-            $this->securityScanner->scan($this->getFromZipArchive($zip, 'xl/_rels/workbook.xml.rels')),
+            $this->securityScanner->scan($this->getFromZipArchive($zip, "xl/_rels/${workbookBasename}.rels")),
             'SimpleXMLElement',
             Settings::getLibXmlLoaderOptions()
         );
@@ -445,18 +429,20 @@ class Xlsx extends BaseReader
 
                     $sharedStrings = [];
                     $xpath = self::getArrayItem($relsWorkbook->xpath("rel:Relationship[@Type='http://schemas.openxmlformats.org/officeDocument/2006/relationships/sharedStrings']"));
-                    //~ http://schemas.openxmlformats.org/spreadsheetml/2006/main"
-                    $xmlStrings = simplexml_load_string(
-                        $this->securityScanner->scan($this->getFromZipArchive($zip, "$dir/$xpath[Target]")),
-                        'SimpleXMLElement',
-                        Settings::getLibXmlLoaderOptions()
-                    );
-                    if (isset($xmlStrings, $xmlStrings->si)) {
-                        foreach ($xmlStrings->si as $val) {
-                            if (isset($val->t)) {
-                                $sharedStrings[] = StringHelper::controlCharacterOOXML2PHP((string) $val->t);
-                            } elseif (isset($val->r)) {
-                                $sharedStrings[] = $this->parseRichText($val);
+                    if ($xpath) {
+                        //~ http://schemas.openxmlformats.org/spreadsheetml/2006/main"
+                        $xmlStrings = simplexml_load_string(
+                            $this->securityScanner->scan($this->getFromZipArchive($zip, "$dir/$xpath[Target]")),
+                            'SimpleXMLElement',
+                            Settings::getLibXmlLoaderOptions()
+                        );
+                        if (isset($xmlStrings, $xmlStrings->si)) {
+                            foreach ($xmlStrings->si as $val) {
+                                if (isset($val->t)) {
+                                    $sharedStrings[] = StringHelper::controlCharacterOOXML2PHP((string) $val->t);
+                                } elseif (isset($val->r)) {
+                                    $sharedStrings[] = $this->parseRichText($val);
+                                }
                             }
                         }
                     }
@@ -743,15 +729,6 @@ class Xlsx extends BaseReader
 
                                         // read empty cells or the cells are not empty
                                         if ($this->readEmptyCells || ($value !== null && $value !== '')) {
-                                            // Check for numeric values
-                                            if (is_numeric($value) && $cellDataType != 's') {
-                                                if ($value == (int) $value) {
-                                                    $value = (int) $value;
-                                                } elseif ($value == (float) $value) {
-                                                    $value = (float) $value;
-                                                }
-                                            }
-
                                             // Rich text?
                                             if ($value instanceof RichText && $this->readDataOnly) {
                                                 $value = $value->getPlainText();
@@ -1437,7 +1414,7 @@ class Xlsx extends BaseReader
                         }
                     }
 
-                    if ((!$this->readDataOnly) || (!empty($this->loadSheetsOnly))) {
+                    if ((!$this->readDataOnly || !empty($this->loadSheetsOnly)) && isset($xmlWorkbook->bookViews->workbookView)) {
                         $workbookView = $xmlWorkbook->bookViews->workbookView;
 
                         // active sheet index
@@ -2025,5 +2002,39 @@ class Xlsx extends BaseReader
         }
 
         return (bool) $xsdBoolean;
+    }
+
+    /**
+     * @param ZipArchive $zip Opened zip archive
+     *
+     * @return string basename of the used excel workbook
+     */
+    private function getWorkbookBaseName(ZipArchive $zip)
+    {
+        $workbookBasename = '';
+
+        // check if it is an OOXML archive
+        $rels = simplexml_load_string(
+            $this->securityScanner->scan(
+                $this->getFromZipArchive($zip, '_rels/.rels')
+            ),
+            'SimpleXMLElement',
+            Settings::getLibXmlLoaderOptions()
+        );
+        if ($rels !== false) {
+            foreach ($rels->Relationship as $rel) {
+                switch ($rel['Type']) {
+                    case 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument':
+                        $basename = basename($rel['Target']);
+                        if (preg_match('/workbook.*\.xml/', $basename)) {
+                            $workbookBasename = $basename;
+                        }
+
+                        break;
+                }
+            }
+        }
+
+        return $workbookBasename;
     }
 }

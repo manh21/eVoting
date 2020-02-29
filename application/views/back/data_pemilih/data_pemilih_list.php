@@ -40,11 +40,11 @@
                                                 <input type="text" class="form-control" name="q">
                                                 <span class="input-group-btn">
                                                     <?php
-                                                        if ($q <> '') {
+                                                    if ($q <> '') {
                                                     ?>
                                                         <a href="<?php echo base_url('admin/pemilih'); ?>" class="btn btn-default">Reset</a>
                                                     <?php
-                                                                }
+                                                    }
                                                     ?>
                                                     <button class="btn btn-flat btn-primary" type="submit">Search</button>
                                                 </span>

@@ -365,7 +365,7 @@ class Data_pemilih extends CI_Controller
                 }
                 // match excel sheet column
                 if ($flag == 1) {
-                    for ($i = 1; $i <= $arrayCount; $i++) {
+                    for ($i = 1; $i < $arrayCount; $i++) {
                         $nis = $SheetDataKey['nis'];
                         $userName = $SheetDataKey['username'];
                         $password = $SheetDataKey['password'];
@@ -438,7 +438,6 @@ class Data_pemilih extends CI_Controller
         }
 
         $dataPemilih = $this->Data_pemilih_model->get_all();
-        $nourut = 1;
         // Create new Spreadsheet object
         $spreadsheet = new Spreadsheet();
 
@@ -451,28 +450,25 @@ class Data_pemilih extends CI_Controller
 
         // Add some data
         $spreadsheet->setActiveSheetIndex(0)
-            ->setCellValue('A1', 'No')
-            ->setCellValue('B1', 'NIS')
-            ->setCellValue('C1', 'Username')
-            ->setCellValue('D1', 'Password')
-            ->setCellValue('E1', 'Nama')
-            ->setCellValue('F1', 'Kelas')
-            ->setCellValue('G1', 'L/P');
+            ->setCellValue('A1', 'nis')
+            ->setCellValue('B1', 'username')
+            ->setCellValue('C1', 'password')
+            ->setCellValue('D1', 'nama')
+            ->setCellValue('E1', 'kelas')
+            ->setCellValue('F1', 'jk');
 
         // Miscellaneous glyphs, UTF-8
         $i = 2;
         foreach ($dataPemilih as $dataPemilih) {
 
             $spreadsheet->setActiveSheetIndex(0)
-                ->setCellValue('A' . $i, $nourut)
-                ->setCellValue('B' . $i, $dataPemilih->nis)
-                ->setCellValue('C' . $i, $dataPemilih->username)
-                ->setCellValue('D' . $i, $dataPemilih->password)
-                ->setCellValue('E' . $i, $dataPemilih->nama)
-                ->setCellValue('F' . $i, $dataPemilih->kelas)
-                ->setCellValue('G' . $i, $dataPemilih->jk);
+                ->setCellValue('A' . $i, $dataPemilih->nis)
+                ->setCellValue('B' . $i, $dataPemilih->username)
+                ->setCellValue('C' . $i, $dataPemilih->password)
+                ->setCellValue('D' . $i, $dataPemilih->nama)
+                ->setCellValue('E' . $i, $dataPemilih->kelas)
+                ->setCellValue('F' . $i, $dataPemilih->jk);
             $i++;
-            $nourut++;
         }
 
         // Rename worksheet
@@ -674,13 +670,6 @@ class Data_pemilih extends CI_Controller
             'start' => 0,
             'setting_data' => $setting_data
         );
-
-        $this->load->library('pdf');
-
-        $this->pdf->setPaper('A4', 'potrait');
-        $this->pdf->filename = "data_pemilih.pdf";
-        // $this->pdf->load_view('back/data_pemilih/data_pemilih_cetak', $data);
-        // $this->pdf->load_view('back/laporan/daftar_hadir', $data);
         $this->load->view('back/data_pemilih/data_pemilih_cetak', $data);
     }
 }

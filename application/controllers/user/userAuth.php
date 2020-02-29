@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class userAuth extends CI_Controller
+class Userauth extends CI_Controller
 {
 
     /**
@@ -13,7 +13,7 @@ class userAuth extends CI_Controller
         $this->load->database();
         $this->load->library('form_validation', 'session');
         $this->load->helper('url', 'language');
-        $this->load->model('userAuth_model');
+        $this->load->model('Userauth_model');
     }
 
     public function index()
@@ -37,7 +37,7 @@ class userAuth extends CI_Controller
                 'class' => 'form-control',
                 'placeholder' => 'Password',
             ];
-            $data['action'] = site_url('user/userAuth/login');
+            $data['action'] = site_url('user/Userauth/login');
             $this->load->view('front/login', $data);
         }
     }
@@ -55,7 +55,7 @@ class userAuth extends CI_Controller
                 'message',
                 '<div class="alert alert-danger alert-dismissible"> <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' . validation_errors() . '</div>'
             );
-            redirect('user/userAuth', 'refresh');
+            redirect('user/Userauth', 'refresh');
         } else {
 
             // Define var dari login.php
@@ -63,12 +63,11 @@ class userAuth extends CI_Controller
             $password = $this->input->post('password');
 
             // data dari models
-            $q_data = $this->userAuth_model->akses($username, $password);
-            $j_data = $q_data->num_rows();
+            $q_data = $this->Userauth_model->akses($username, $password);
             $a_data = $q_data->row();
 
             // Apakah user ada atau tidak
-            if ($j_data === 1) {
+            if ($q_data->num_rows() > 0) {
 
                 // Cek user apakah sudah aktif
                 if ($a_data->aktif == 1) {
@@ -109,7 +108,7 @@ class userAuth extends CI_Controller
                     );
 
                     // Directed to login page
-                    redirect('user/userAuth', 'refresh');
+                    redirect('user/Userauth', 'refresh');
                 }
             } else {
 
@@ -122,7 +121,7 @@ class userAuth extends CI_Controller
                 );
 
                 // Directed to login page
-                redirect('user/userAuth', 'refresh');
+                redirect('user/Userauth', 'refresh');
             }
         }
     }
@@ -145,4 +144,4 @@ class userAuth extends CI_Controller
     }
 }
 
-/* End of file userAuth.php */
+/* End of file Userauth.php */

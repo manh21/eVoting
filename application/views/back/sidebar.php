@@ -44,7 +44,7 @@
         </a>
       </li>
       <!-- ./Kandidat -->
-      <!-- <li class="treeview">
+      <li class="treeview">
         <a href="#">
           <i class="glyphicon glyphicon-stats"></i>
           <span>Laporan</span>
@@ -54,17 +54,12 @@
         </a>
         <ul class="treeview-menu">
           <li>
-            <a href="<?php echo base_url('admin/laporan') ?>" target="_blank">
-              <i class="fa fa-circle-o"></i> Berita Acara
-            </a>
-          </li>
-          <li>
-            <a href="<?php echo base_url('admin/laporan/model_c1') ?>" target="_blank">
-              <i class="fa fa-circle-o"></i> Model C1
+            <a href="<?php echo base_url('admin/laporan/daftar_hadir') ?>" target="_blank">
+              <i class="fa fa-circle-o"></i> Daftar Hadir
             </a>
           </li>
         </ul>
-      </li> -->
+      </li>
       <!-- ./Laporan -->
       <li class="treeview">
         <a href="#">

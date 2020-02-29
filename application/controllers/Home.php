@@ -39,7 +39,7 @@ class Home extends CI_Controller
         }
 
         $data['title'] = 'E-Voting';
-        $data['action'] = site_url('user/userAuth/login');
+        $data['action'] = site_url('user/Userauth/login');
 
         $this->load->view('front/main', $data);
     }
@@ -48,7 +48,7 @@ class Home extends CI_Controller
     {
         // Security check if the user is authorize
         if (!cek_login_bol()) {
-            redirect('user/userAuth', 'refresh');
+            redirect('user/Userauth', 'refresh');
         }
 
         // Get All Kandidat
@@ -79,7 +79,7 @@ class Home extends CI_Controller
     {
         // Security check if the user is authorize
         if (!cek_login_bol()) {
-            redirect('user/userAuth', 'refresh');
+            redirect('user/Userauth', 'refresh');
         }
 
         // menetapkan idpemilih

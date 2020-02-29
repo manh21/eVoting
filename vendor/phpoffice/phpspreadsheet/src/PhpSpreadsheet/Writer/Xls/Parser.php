@@ -1077,7 +1077,7 @@ class Parser
     public function parse($formula)
     {
         $this->currentCharacter = 0;
-        $this->formula = $formula;
+        $this->formula = (string) $formula;
         $this->lookAhead = $formula[1] ?? '';
         $this->advance();
         $this->parseTree = $this->condition();
@@ -1161,17 +1161,15 @@ class Parser
             // catch "-" Term
             $this->advance();
             $result2 = $this->expression();
-            $result = $this->createTree('ptgUminus', $result2, '');
 
-            return $result;
+            return $this->createTree('ptgUminus', $result2, '');
         // If it's a positive value
         } elseif ($this->currentToken == '+') {
             // catch "+" Term
             $this->advance();
             $result2 = $this->expression();
-            $result = $this->createTree('ptgUplus', $result2, '');
 
-            return $result;
+            return $this->createTree('ptgUplus', $result2, '');
         }
         $result = $this->term();
         while (($this->currentToken == '+') or
@@ -1205,9 +1203,7 @@ class Parser
      */
     private function parenthesizedExpression()
     {
-        $result = $this->createTree('ptgParen', $this->expression(), '');
-
-        return $result;
+        return $this->createTree('ptgParen', $this->expression(), '');
     }
 
     /**
@@ -1309,9 +1305,7 @@ class Parser
             return $result;
         } elseif (preg_match("/^[A-Z0-9\xc0-\xdc\\.]+$/i", $this->currentToken)) {
             // if it's a function call
-            $result = $this->func();
-
-            return $result;
+            return $this->func();
         }
 
         throw new WriterException('Syntax error: ' . $this->currentToken . ', lookahead: ' . $this->lookAhead . ', current char: ' . $this->currentCharacter);
@@ -1439,8 +1433,6 @@ class Parser
         }
         $converted_tree = $this->convert($tree['value']);
 
-        $polish .= $converted_tree;
-
-        return $polish;
+        return $polish . $converted_tree;
     }
 }

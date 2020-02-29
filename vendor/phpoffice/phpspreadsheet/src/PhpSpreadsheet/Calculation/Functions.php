@@ -270,15 +270,17 @@ class Functions
     public static function ifCondition($condition)
     {
         $condition = self::flattenSingleValue($condition);
-        if (!isset($condition[0]) && !is_numeric($condition)) {
+
+        if ($condition === '') {
             $condition = '=""';
         }
-        if (!in_array($condition[0], ['>', '<', '='])) {
+
+        if (!is_string($condition) || !in_array($condition[0], ['>', '<', '='])) {
             if (!is_numeric($condition)) {
                 $condition = Calculation::wrapResult(strtoupper($condition));
             }
 
-            return '=' . $condition;
+            return str_replace('""""', '""', '=' . $condition);
         }
         preg_match('/(=|<[>=]?|>=?)(.*)/', $condition, $matches);
         [, $operator, $operand] = $matches;
@@ -290,7 +292,7 @@ class Functions
             $operand = Calculation::wrapResult(strtoupper($operand));
         }
 
-        return $operator . $operand;
+        return str_replace('""""', '""', $operator . $operand);
     }
 
     /**

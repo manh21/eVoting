@@ -1,5 +1,19 @@
 {
+    "name": "manh21/evoting",
+    "description": "Aplikasi Pemiliham Umum Ketua OSIS",
+    "type": "project",
     "require": {
-        "phpoffice/phpspreadsheet": "^1.9"
-    }
+        "phpoffice/phpspreadsheet": "^1.10"
+    },
+    "require-dev": {
+        "phpoffice/phpspreadsheet": "^1.10"
+    },
+    "license": "BSD 3-Clause License",
+    "authors": [
+        {
+            "name": "Naufal Hakim",
+            "email": "muhaqilanaufalhakim@gmail.com"
+        }
+    ],
+    "minimum-stability": "beta"
 }
