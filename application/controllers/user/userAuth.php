@@ -18,7 +18,7 @@ class Userauth extends CI_Controller
 
     public function index()
     {
-        // Security check if the user is admin
+        // Security check if the user is alreadey logged in
         if (cek_login_bol()) {
             redirect(base_url());
         } else {

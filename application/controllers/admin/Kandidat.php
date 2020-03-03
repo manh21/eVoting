@@ -225,7 +225,10 @@ class Kandidat extends CI_Controller
                 $fileType = $upload_data['file_ext']; //Extension File
 
                 // File Stored Path
-                $inputFileName = $upload_data['full_path'];
+                $filePath = $upload_data['full_path'];
+                $type = pathinfo($filePath, PATHINFO_EXTENSION);
+                $data = file_get_contents($filePath);
+                $encodedGambar = 'data:image/' . $type . ';base64,' . base64_encode($data);
 
                 $data = array(
                     'organisasi' => $this->input->post('organisasi', TRUE),
@@ -235,6 +238,7 @@ class Kandidat extends CI_Controller
                     'visi' => $this->input->post('visi', TRUE),
                     'misi' => $this->input->post('misi', TRUE),
                     'foto' => $fileName,
+                    'filefoto' => base_url() + $filePath
                 );
 
                 $this->Kandidat_model->update($this->input->post('idkandidat', TRUE), $data);
