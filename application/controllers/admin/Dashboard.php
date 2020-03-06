@@ -26,10 +26,8 @@ class Dashboard extends CI_Controller
         $this->load->library('ion_auth', 'form_validation', 'session');
         $this->load->helper('url', 'language');
         $this->load->model('Dashboard_model');
-    }
 
-    public function index()
-    {
+        // Security check if the user is admin
         if (!$this->ion_auth->logged_in()) {
             // redirect them to the login page
             redirect('admin/auth/login', 'refresh');
@@ -37,7 +35,10 @@ class Dashboard extends CI_Controller
         {   // redirect them to the home page because they must be an administrator to view this
             show_error('You must be an administrator to view this page.');
         }
+    }
 
+    public function index()
+    {
         // get user data
         $user = $this->ion_auth->user()->row();
         $firstName = $user->first_name;

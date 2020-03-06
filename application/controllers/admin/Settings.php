@@ -17,11 +17,8 @@ class Settings extends CI_Controller
     $this->load->library('ion_auth', 'form_validation', 'session', 'form_helper');
     $this->load->model('Setting_model');
     $this->load->helper('url', 'language', 'form', 'file');
-  }
 
-  public function index()
-  {
-    // Security Check
+    // Security check if the user is admin
     if (!$this->ion_auth->logged_in()) {
       // redirect them to the login page
       redirect('admin/auth/login', 'refresh');
@@ -29,7 +26,10 @@ class Settings extends CI_Controller
     {   // redirect them to the home page because they must be an administrator to view this
       show_error('You must be an administrator to view this page.');
     }
+  }
 
+  public function index()
+  {
     $q = $this->Setting_model->get_all('id', 'settings', 'ASC');
     $row = $q[0];
 
@@ -52,11 +52,6 @@ class Settings extends CI_Controller
 
   public function update_action()
   {
-    // Security check if the user is admin
-    if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
-      redirect('admin/auth', 'refresh');
-    }
-
     $this->_rules();
 
     if ($this->form_validation->run() == FALSE) {
@@ -85,22 +80,9 @@ class Settings extends CI_Controller
     }
   }
 
-  public function kpps_update($id)
-  {
-    // Security check if the user is admin
-    if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
-      redirect('admin/auth', 'refresh');
-    }
-  }
-
   public function reset_data_pemilih()
   {
-    // Security check if the user is admin
-    if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
-      redirect('admin/auth', 'refresh');
-    }
-
-    $this->Setting_model->emtpy_table('data_pemilih');
+    $this->Setting_model->empty_table('data_pemilih');
     $this->session->set_flashdata(
       'message',
       '<div class="alert alert-info alert-dismissible">
@@ -113,12 +95,7 @@ class Settings extends CI_Controller
 
   public function reset_data_kandidat()
   {
-    // Security check if the user is admin
-    if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
-      redirect('admin/auth', 'refresh');
-    }
-
-    $this->Setting_model->emtpy_table('kandidat');
+    $this->Setting_model->empty_table('kandidat');
     $this->session->set_flashdata(
       'message',
       '<div class="alert alert-info alert-dismissible">
@@ -131,12 +108,7 @@ class Settings extends CI_Controller
 
   public function reset_data_kelas()
   {
-    // Security check if the user is admin
-    if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
-      redirect('admin/auth', 'refresh');
-    }
-
-    $this->Setting_model->emtpy_table('kelas');
+    $this->Setting_model->empty_table('kelas');
     $this->session->set_flashdata(
       'message',
       '<div class="alert alert-info alert-dismissible">
@@ -149,12 +121,7 @@ class Settings extends CI_Controller
 
   public function reset_pemilihan()
   {
-    // Security check if the user is admin
-    if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
-      redirect('admin/auth', 'refresh');
-    }
-
-    $this->Setting_model->emtpy_table('data_pemilihan');
+    $this->Setting_model->empty_table('data_pemilihan');
     $pemilihData = $this->Setting_model->get_all('id', 'data_pemilih', 'ASC');
 
     if (!empty($pemilihData)) {

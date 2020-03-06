@@ -22,10 +22,8 @@ class Laporan extends CI_Controller
     $this->load->library('ion_auth', 'form_validation', 'session');
     $this->load->helper('url', 'language');
     $this->load->model('Home_model');
-  }
 
-  public function index()
-  {
+    // Security check if the user is admin
     if (!$this->ion_auth->logged_in()) {
       // redirect them to the login page
       redirect('admin/auth/login', 'refresh');
@@ -35,13 +33,12 @@ class Laporan extends CI_Controller
     }
   }
 
+  public function index()
+  {
+  }
+
   public function daftar_hadir()
   {
-    // Security check if the user is admin
-    if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
-      redirect('admin/auth', 'refresh');
-    }
-
     // Settings Data
     $q = $this->Home_model->get_all('id', 'settings', 'ASC');
     $setting_data = $q[0];

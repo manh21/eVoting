@@ -42,9 +42,26 @@ Password: 123123
 
 API hanya untuk User Pemilih
 
-**Configuration**
-application/config/jwt.php
+API Default Settings:
 
+```
+/**
+* Request Header Name
+*/
+protected $token_header = ['authorization', 'Authorization'];
+
+/**
+* Token Expire Time
+* ----------------------
+* ( 1 Day ) : 60 * 60 * 24 = 86400
+* ( 1 Hour ) : 60 * 60 = 3600
+*/
+protected $token_expire_time =  86400;
+```
+
+### Configuration
+
+application/config/jwt.php
 Rubah JWT Secure Key
 
 ```
@@ -73,7 +90,7 @@ Supported JWT Algorithm:
 2. HS384
 3. HS512
 
-**Login**
+### Login
 
 ```
 @param: username
@@ -100,7 +117,7 @@ Response:
 }
 ```
 
-**Data Kandidat**
+### Data Kandidat
 
 ```
 @method : GET
@@ -147,7 +164,7 @@ Response:
 }
 ```
 
-**Vote**
+### Vote
 
 ```
 @param: idkandidat

@@ -4,7 +4,6 @@ if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
 //PhpSpreadsheet
-use PhpOffice\PhpSpreadsheet\Helper\Sample;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 // End load library phpspreadsheet
@@ -18,11 +17,8 @@ class Kelas extends CI_Controller
         $this->load->library('ion_auth', 'form_validation', 'session');
         $this->load->helper('url', 'language');
         $this->load->model('Kelas_model');
-    }
 
-    public function index()
-    {
-
+        // Security check if the user is admin
         if (!$this->ion_auth->logged_in()) {
             // redirect them to the login page
             redirect('admin/auth/login', 'refresh');
@@ -30,7 +26,10 @@ class Kelas extends CI_Controller
         {   // redirect them to the home page because they must be an administrator to view this
             show_error('You must be an administrator to view this page.');
         }
+    }
 
+    public function index()
+    {
         $q = urldecode($this->input->get('q', TRUE));
         $start = intval($this->input->get('start'));
 
@@ -62,11 +61,6 @@ class Kelas extends CI_Controller
 
     public function read($id)
     {
-        // Security check if the user is admin
-        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
-            redirect('admin/auth', 'refresh');
-        }
-
         $row = $this->Kelas_model->get_by_id($id);
         if ($row) {
             $data = array(
@@ -88,11 +82,6 @@ class Kelas extends CI_Controller
 
     public function create()
     {
-        // Security check if the user is admin
-        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
-            redirect('admin/auth', 'refresh');
-        }
-
         $data = array(
             'button' => 'Create',
             'action' => base_url('admin/kelas/create_action'),
@@ -105,11 +94,6 @@ class Kelas extends CI_Controller
 
     public function create_action()
     {
-        // Security check if the user is admin
-        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
-            redirect('admin/auth', 'refresh');
-        }
-
         $this->_rules();
 
         if ($this->form_validation->run() == FALSE) {
@@ -133,11 +117,6 @@ class Kelas extends CI_Controller
 
     public function update($id)
     {
-        // Security check if the user is admin
-        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
-            redirect('admin/auth', 'refresh');
-        }
-
         $row = $this->Kelas_model->get_by_id($id);
 
         if ($row) {
@@ -162,11 +141,6 @@ class Kelas extends CI_Controller
 
     public function update_action()
     {
-        // Security check if the user is admin
-        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
-            redirect('admin/auth', 'refresh');
-        }
-
         $this->_rules();
 
         if ($this->form_validation->run() == FALSE) {
@@ -190,11 +164,6 @@ class Kelas extends CI_Controller
 
     public function delete($id)
     {
-        // Security check if the user is admin
-        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
-            redirect('admin/auth', 'refresh');
-        }
-
         $row = $this->Kelas_model->get_by_id($id);
 
         if ($row) {
@@ -233,11 +202,6 @@ class Kelas extends CI_Controller
      */
     public function do_upload()
     {
-        // Security check if the user is admin
-        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
-            redirect('admin/auth', 'refresh');
-        }
-
         $config['upload_path'] = './assets/uploads/';
         $config['allowed_types'] = 'xlsx|xls|csv';
         $config['remove_spaces'] = TRUE;
@@ -336,11 +300,6 @@ class Kelas extends CI_Controller
      */
     public function import()
     {
-        // Security check if the user is admin
-        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
-            redirect('admin/auth', 'refresh');
-        }
-
         $data = array(
             'action' => site_url('admin/kelas/do_upload'),
             'button' => 'Import',
@@ -355,12 +314,6 @@ class Kelas extends CI_Controller
      */
     public function checkFileValidation($string)
     {
-
-        // Security check if the user is admin
-        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
-            redirect('admin/auth', 'refresh');
-        }
-
         $file_mimes = array(
             'text/x-comma-separated-values',
             'text/comma-separated-values',
@@ -398,11 +351,6 @@ class Kelas extends CI_Controller
      */
     public function exportData()
     {
-        // Security check if the user is admin
-        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
-            redirect('admin/auth', 'refresh');
-        }
-
         $dataKelas = $this->Kelas_model->get_all();
         // Create new Spreadsheet object
         $spreadsheet = new Spreadsheet();
@@ -460,11 +408,6 @@ class Kelas extends CI_Controller
      */
     public function cetak()
     {
-        // Security check if the user is admin
-        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
-            redirect('admin/auth', 'refresh');
-        }
-
         // Setting Data
         $q = $this->Kelas_model->settings_data_all();
         $setting_data = $q[0];

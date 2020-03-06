@@ -48,7 +48,7 @@ class Setting_model extends CI_Model
   }
 
   // empty table
-  public function emtpy_table($table)
+  public function empty_table($table)
   {
     $this->db->empty_table($table);
   }

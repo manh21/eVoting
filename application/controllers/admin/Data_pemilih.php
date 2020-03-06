@@ -4,7 +4,6 @@ if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
 //PhpSpreadsheet
-use PhpOffice\PhpSpreadsheet\Helper\Sample;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 // End load library phpspreadsheet
@@ -17,10 +16,7 @@ class Data_pemilih extends CI_Controller
         $this->load->library('ion_auth', 'form_validation', 'session', 'form_helper');
         $this->load->helper('url', 'language', 'form', 'file');
         $this->load->model('Data_pemilih_model');
-    }
 
-    public function index()
-    {
         if (!$this->ion_auth->logged_in()) {
             // redirect them to the login page
             redirect('admin/auth/login', 'refresh');
@@ -28,7 +24,10 @@ class Data_pemilih extends CI_Controller
         {   // redirect them to the home page because they must be an administrator to view this
             show_error('You must be an administrator to view this page.');
         }
+    }
 
+    public function index()
+    {
         $q = urldecode($this->input->get('q', TRUE));
         $start = intval($this->input->get('start'));
 
@@ -60,11 +59,6 @@ class Data_pemilih extends CI_Controller
 
     public function read($id)
     {
-        // Security check if the user is admin
-        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
-            redirect('admin/auth', 'refresh');
-        }
-
         $row = $this->Data_pemilih_model->get_by_id($id);
         $getKelas = $this->Data_pemilih_model->getKelas_by_idkelas($id);
 
@@ -97,11 +91,6 @@ class Data_pemilih extends CI_Controller
     public function create()
     {
 
-        // Security check if the user is admin
-        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
-            redirect('admin/auth', 'refresh');
-        }
-
         $data = array(
             'button' => 'Create',
             'action' => base_url('admin/data_pemilih/create_action'),
@@ -123,11 +112,6 @@ class Data_pemilih extends CI_Controller
 
     public function create_action()
     {
-        // Security check if the user is admin
-        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
-            redirect('admin/auth', 'refresh');
-        }
-
         $this->_rules();
 
         if ($this->form_validation->run() == FALSE) {
@@ -178,11 +162,6 @@ class Data_pemilih extends CI_Controller
      */
     public function update($id)
     {
-        // Security check if the user is admin
-        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
-            redirect('admin/auth', 'refresh');
-        }
-
         $row = $this->Data_pemilih_model->get_by_id($id);
 
         if ($row) {
@@ -221,11 +200,6 @@ class Data_pemilih extends CI_Controller
      */
     public function deactivate($id)
     {
-        // Security check if the user is admin
-        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
-            redirect('admin/auth', 'refresh');
-        }
-
         $id = (int) $id;
 
         $data = array(
@@ -249,11 +223,6 @@ class Data_pemilih extends CI_Controller
      */
     public function Activate($id)
     {
-        // Security check if the user is admin
-        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
-            redirect('admin/auth', 'refresh');
-        }
-
         $id = (int) $id;
 
         $data = array(
@@ -277,11 +246,6 @@ class Data_pemilih extends CI_Controller
      */
     public function reset_status($id)
     {
-        // Security check if the user is admin
-        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
-            redirect('admin/auth', 'refresh');
-        }
-
         $id = (int) $id;
 
         $data = array(
@@ -305,11 +269,6 @@ class Data_pemilih extends CI_Controller
      */
     public function do_upload()
     {
-        // Security check if the user is admin
-        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
-            redirect('admin/auth', 'refresh');
-        }
-
         $config['upload_path'] = './assets/uploads/';
         $config['allowed_types'] = 'xlsx|xls|csv';
         $config['remove_spaces'] = TRUE;
@@ -432,11 +391,6 @@ class Data_pemilih extends CI_Controller
      */
     public function exportData()
     {
-        // Security check if the user is admin
-        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
-            redirect('admin/auth', 'refresh');
-        }
-
         $dataPemilih = $this->Data_pemilih_model->get_all();
         // Create new Spreadsheet object
         $spreadsheet = new Spreadsheet();
@@ -502,11 +456,6 @@ class Data_pemilih extends CI_Controller
      */
     public function import()
     {
-        // Security check if the user is admin
-        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
-            redirect('admin/auth', 'refresh');
-        }
-
         $data = array(
             'action' => base_url('admin/data_pemilih/do_upload'),
             'button' => 'Import',
@@ -521,12 +470,6 @@ class Data_pemilih extends CI_Controller
      */
     public function checkFileValidation($string)
     {
-
-        // Security check if the user is admin
-        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
-            redirect('admin/auth', 'refresh');
-        }
-
         $file_mimes = array(
             'text/x-comma-separated-values',
             'text/comma-separated-values',
@@ -564,11 +507,6 @@ class Data_pemilih extends CI_Controller
      */
     public function update_action()
     {
-        // Security check if the user is admin
-        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
-            redirect('admin/auth', 'refresh');
-        }
-
         $this->_rules();
 
         if ($this->form_validation->run() == FALSE) {
@@ -605,11 +543,6 @@ class Data_pemilih extends CI_Controller
      */
     public function delete($id)
     {
-        // Security check if the user is admin
-        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
-            redirect('admin/auth', 'refresh');
-        }
-
         $row = $this->Data_pemilih_model->get_by_id($id);
 
         if ($row) {
@@ -649,11 +582,6 @@ class Data_pemilih extends CI_Controller
      */
     public function cetak()
     {
-        // Security check if the user is admin
-        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
-            redirect('admin/auth', 'refresh');
-        }
-
         // Data Pemilih
         $data_pemilih = $this->Data_pemilih_model->get_all();
 

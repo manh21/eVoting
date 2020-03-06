@@ -10,9 +10,6 @@ class Userauth_model extends CI_Model
 
     public function akses($username, $password)
     {
-        //password menggunakan md5 hash
-        $password2 = md5($password);
-
         $this->db->where('username', $username);
         $this->db->where('password', $password);
         return $this->db->get('data_pemilih');

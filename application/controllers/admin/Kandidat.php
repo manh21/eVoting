@@ -11,10 +11,8 @@ class Kandidat extends CI_Controller
         $this->load->library('ion_auth', 'form_validation', 'session', 'form_helper');
         $this->load->model('Kandidat_model');
         $this->load->helper('url', 'language', 'form', 'file');
-    }
 
-    public function index()
-    {
+        // Security check if the user is admin
         if (!$this->ion_auth->logged_in()) {
             // redirect them to the login page
             redirect('admin/auth/login', 'refresh');
@@ -22,7 +20,10 @@ class Kandidat extends CI_Controller
         {   // redirect them to the home page because they must be an administrator to view this
             show_error('You must be an administrator to view this page.');
         }
+    }
 
+    public function index()
+    {
         $q = urldecode($this->input->get('q', TRUE));
         $start = intval($this->input->get('start'));
 
@@ -54,12 +55,6 @@ class Kandidat extends CI_Controller
 
     public function read($id)
     {
-
-        // Security check if the user is admin
-        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
-            redirect('admin/auth', 'refresh');
-        }
-
         $row = $this->Kandidat_model->get_by_id($id);
         if ($row) {
             $data = array(
@@ -87,12 +82,6 @@ class Kandidat extends CI_Controller
 
     public function create()
     {
-
-        // Security check if the user is admin
-        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
-            redirect('admin/auth', 'refresh');
-        }
-
         $data = array(
             'button' => 'Create',
             'action' => site_url('admin/kandidat/create_action'),
@@ -103,20 +92,15 @@ class Kandidat extends CI_Controller
             'visi' => set_value('visi'),
             'misi' => set_value('misi'),
             'foto' => set_value('foto'),
+            'filefoto' => set_value('filefoto')
         );
         $this->load->view('back/kandidat/kandidat_form', $data);
     }
 
     public function create_action()
     {
-
-        // Security check if the user is admin
-        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
-            redirect('admin/auth', 'refresh');
-        }
-
         $config['upload_path'] = './assets/uploads/kandidat';
-        $config['allowed_types'] = 'jpeg|jpg|png|gif';
+        $config['allowed_types'] = 'jpg|png|gif';
         $config['remove_spaces'] = TRUE;
 
         $this->load->helper('file');
@@ -146,6 +130,7 @@ class Kandidat extends CI_Controller
                     'misi' => $this->input->post('misi', TRUE),
                     'foto' => $fileName,
                     'status' => '1',
+                    'filefoto' => base_url() . $inputFileName
                 );
 
                 $this->Kandidat_model->insert($data);
@@ -165,12 +150,6 @@ class Kandidat extends CI_Controller
 
     public function edit($id)
     {
-
-        // Security check if the user is admin
-        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
-            redirect('admin/auth', 'refresh');
-        }
-
         $row = $this->Kandidat_model->get_by_id($id);
 
         if ($row) {
@@ -183,7 +162,7 @@ class Kandidat extends CI_Controller
                 'nourut' => set_value('nourut', $row->nourut),
                 'visi' => set_value('visi', $row->visi),
                 'misi' => set_value('misi', $row->misi),
-                'foto' => set_value('foto', $row->foto),
+                'foto' => set_value('foto', $row->foto)
             );
             $this->load->view('back/kandidat/kandidat_form', $data);
         } else {
@@ -199,14 +178,8 @@ class Kandidat extends CI_Controller
 
     public function update_action()
     {
-
-        // Security check if the user is admin
-        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
-            redirect('admin/auth', 'refresh');
-        }
-
         $config['upload_path'] = './assets/uploads/kandidat';
-        $config['allowed_types'] = 'jpeg|jpg|png|gif';
+        $config['allowed_types'] = 'jpg|png|gif';
         $config['remove_spaces'] = TRUE;
 
         $this->load->helper('file');
@@ -218,48 +191,76 @@ class Kandidat extends CI_Controller
             $this->edit($this->input->post('idkandidat', TRUE));
         } else {
 
-            if ($this->upload->do_upload('image')) {
+            // 0 => ‘There is no error, the file uploaded with success’,
+            // 1 => ‘The uploaded file exceeds the upload_max_filesize directive in php.ini’,
+            // 2 => ‘The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form’,
+            // 3 => ‘The uploaded file was only partially uploaded’,
+            // 4 => ‘No file was uploaded’,
+            // 6 => ‘Missing a temporary folder’,
+            // 7 => ‘Failed to write file to disk.’,
+            // 8 => ‘A PHP extension stopped the file upload.’,
 
-                $upload_data = $this->upload->data();
-                $fileName = $upload_data['file_name']; //Nama File
-                $fileType = $upload_data['file_ext']; //Extension File
+            // Cek kode error terlebih dahulu
+            if ($_FILES['image']['error'] != 4) {
+                // Jika file tidak kosong lakukan sesuatu disini
+                // Anda bisa update data dan gambar
+                // atau aksi lain
 
-                // File Stored Path
-                $filePath = $upload_data['full_path'];
-                $type = pathinfo($filePath, PATHINFO_EXTENSION);
-                $data = file_get_contents($filePath);
-                $encodedGambar = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                if ($this->upload->do_upload('image')) {
 
-                $data = array(
-                    'organisasi' => $this->input->post('organisasi', TRUE),
-                    'nama' => $this->input->post('nama', TRUE),
-                    'nourut' => $this->input->post('nourut', TRUE),
-                    'jumlahsuara' => $this->input->post('jumlahsuara', TRUE),
-                    'visi' => $this->input->post('visi', TRUE),
-                    'misi' => $this->input->post('misi', TRUE),
-                    'foto' => $fileName,
-                    'filefoto' => base_url() + $filePath
-                );
+                    $upload_data = $this->upload->data();
+                    $fileName = $upload_data['file_name']; //Nama File
+                    $fileType = $upload_data['file_ext']; //Extension File
 
-                $this->Kandidat_model->update($this->input->post('idkandidat', TRUE), $data);
-                $this->session->set_flashdata(
-                    'message',
-                    '<div class="alert alert-info alert-dismissible">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                    <h4><i class="icon fa fa-info"></i> Alert!</h4>
-                    Update Record Success </div>'
-                );
-                redirect('admin/kandidat', 'refresh');
+                    // File Stored Path
+                    $filePath = $upload_data['full_path'];
+
+                    // Get passData
+                    $passData = $this->Kandidat_model->get_by_id($this->input->post('idkandidat', true));
+                    // delete image sebelumnya
+                    unlink('./assets/uploads/kandidat/' . $passData->foto);
+
+                    $data = array(
+                        'organisasi' => $this->input->post('organisasi', TRUE),
+                        'nama' => $this->input->post('nama', TRUE),
+                        'nourut' => $this->input->post('nourut', TRUE),
+                        'jumlahsuara' => $this->input->post('jumlahsuara', TRUE),
+                        'visi' => $this->input->post('visi', TRUE),
+                        'misi' => $this->input->post('misi', TRUE),
+                        'foto' => $fileName,
+                        'filefoto' => base_url() . $filePath
+                    );
+
+                    // Update Database
+                    $this->Kandidat_model->update($this->input->post('idkandidat', TRUE), $data);
+                    $this->session->set_flashdata(
+                        'message',
+                        '<div class="alert alert-info alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        <h4><i class="icon fa fa-info"></i> Alert!</h4>
+                        Update Record Success </div>'
+                    );
+                    redirect('admin/kandidat', 'refresh');
+                } else {
+                    // Jika validasi file gagal. Kirim error ke flashdata massages dan redirect ke index
+                    $error = array('error' => $this->upload->display_errors());
+                    $this->edit($this->input->post('idkandidat', TRUE));
+                }
             } else {
+                // Jika file kosong lakukan sesuatu disini    
+                // Anda bisa mengupdate database tanpa mengupdate gambar
+                // atau melakukan sesuatu yang lain
+
                 $data = array(
                     'organisasi' => $this->input->post('organisasi', TRUE),
                     'nama' => $this->input->post('nama', TRUE),
                     'nourut' => $this->input->post('nourut', TRUE),
                     'jumlahsuara' => $this->input->post('jumlahsuara', TRUE),
                     'visi' => $this->input->post('visi', TRUE),
-                    'misi' => $this->input->post('misi', TRUE),
+                    'misi' => $this->input->post('misi', TRUE)
                 );
 
+                // Update Database
                 $this->Kandidat_model->update($this->input->post('idkandidat', TRUE), $data);
                 $this->session->set_flashdata(
                     'message',
@@ -275,12 +276,6 @@ class Kandidat extends CI_Controller
 
     public function delete($id)
     {
-
-        // Security check if the user is admin
-        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
-            redirect('admin/auth', 'refresh');
-        }
-
         $row = $this->Kandidat_model->get_by_id($id);
         $image = $row->foto;
 
@@ -312,11 +307,6 @@ class Kandidat extends CI_Controller
      */
     public function deactivate($id)
     {
-        // Security check if the user is admin
-        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
-            redirect('admin/auth', 'refresh');
-        }
-
         $id = (int) $id;
 
         $data = array(
@@ -340,11 +330,6 @@ class Kandidat extends CI_Controller
      */
     public function Activate($id)
     {
-        // Security check if the user is admin
-        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
-            redirect('admin/auth', 'refresh');
-        }
-
         $id = (int) $id;
 
         $data = array(
@@ -363,12 +348,6 @@ class Kandidat extends CI_Controller
 
     public function _rules()
     {
-
-        // Security check if the user is admin
-        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
-            redirect('admin/auth', 'refresh');
-        }
-
         $this->form_validation->set_rules('nama', 'nama', 'trim|required');
         $this->form_validation->set_rules('nourut', 'nourut', 'trim|required');
         $this->form_validation->set_rules('visi', 'visi', 'trim|required');
@@ -383,12 +362,6 @@ class Kandidat extends CI_Controller
      */
     public function checkFileValidation($str)
     {
-
-        // Security check if the user is admin
-        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
-            redirect('admin/auth', 'refresh');
-        }
-
         $allowed_mime_type_arr = array(
             'image/gif',
             'image/jpeg',
