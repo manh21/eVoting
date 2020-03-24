@@ -56,6 +56,7 @@
                             <div class="form-group">
                                 <label for="varchar">Foto <?php echo form_error('foto') ?></label>
                                 <input type="file" class="custom-file-input" id="validatedCustomFile" name="image">
+                                <p class="help-block">.jpg .png</p>
                             </div>
                             <input type="hidden" name="idkandidat" value="<?php echo $idkandidat; ?>" />
                         </div>
