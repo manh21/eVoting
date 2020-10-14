@@ -13,6 +13,11 @@
     </div>
     <!-- sidebar menu: : style can be found in sidebar.less -->
     <ul class="sidebar-menu" data-widget="tree">
+      <li>
+        <a href="<?php echo base_url()?>" target="_blank">
+          <i class="fa fa-globe"></i> <span>Show Website</span>
+        </a>
+      </li>
       <li class="header">MAIN NAVIGATION</li>
       <li>
         <a href="<?php echo base_url('admin') ?>">
