@@ -13,7 +13,7 @@
                     <a class="nav-link" href="<?php echo base_url('vote') ?>">Vote</a>
                 </li> -->
                 <?php if ($this->session->userdata('logged')) :
-                    $signOut = base_url('user/userAuth/logout');
+                    $signOut = base_url('user/userauth/logout');
                     echo '<li class="nav-item active"><a class="nav-link" style="" href="' . $signOut . '"><i class="fas fa-sign-out-alt"></i> Sign Out</a></li>'
                     ?>
                 <?php endif ?>

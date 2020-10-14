@@ -11,7 +11,7 @@
         <p class="lead"><strong>Anda sudah menggunkan hak pilih anda</strong><br>Auto redirect to Homepage in <span id="time"></span></p>
         <hr>
         <p class="lead">
-            <a class="btn btn-primary btn-sm" href="<?php echo base_url('user/userAuth/logout') ?>" role="button">Continue to homepage</a>
+            <a class="btn btn-primary btn-sm" href="<?php echo base_url('user/userauth/logout') ?>" role="button">Continue to homepage</a>
         </p>
     </div>
 
@@ -43,7 +43,7 @@
                     // add one second so that the count down starts at the full duration
                     // example 05:00 not 04:59
                     start = Date.now() + 1000;
-                    window.location.href = "<?php echo base_url('user/userAuth/logout') ?>";
+                    window.location.href = "<?php echo base_url('user/userauth/logout') ?>";
                 }
             };
             // we don't want to wait a full second before the timer starts

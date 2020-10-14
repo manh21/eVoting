@@ -7,6 +7,7 @@
     <script src="<?php echo base_url('assets/template/frontend/') ?>plugins/chart.js/Chart.min.js"></script>
     <!-- ChartJS Plugins-->
     <script src="<?php echo base_url('assets/template/frontend/') ?>plugins/chartjs-plugin-labels.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </head>
 
 <body>
