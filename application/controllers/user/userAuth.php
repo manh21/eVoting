@@ -37,7 +37,7 @@ class Userauth extends CI_Controller
                 'class' => 'form-control',
                 'placeholder' => 'Password',
             ];
-            $data['action'] = site_url('user/Userauth/login');
+            $data['action'] = site_url('user/userauth/login');
             $this->load->view('front/login', $data);
         }
     }
@@ -55,7 +55,7 @@ class Userauth extends CI_Controller
                 'message',
                 '<div class="alert alert-danger alert-dismissible"> <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' . validation_errors() . '</div>'
             );
-            redirect('user/Userauth', 'refresh');
+            redirect('user/userauth', 'refresh');
         } else {
 
             // Define var dari login.php
@@ -108,7 +108,7 @@ class Userauth extends CI_Controller
                     );
 
                     // Directed to login page
-                    redirect('user/Userauth', 'refresh');
+                    redirect('user/userauth', 'refresh');
                 }
             } else {
 
@@ -121,7 +121,7 @@ class Userauth extends CI_Controller
                 );
 
                 // Directed to login page
-                redirect('user/Userauth', 'refresh');
+                redirect('user/userauth', 'refresh');
             }
         }
     }
@@ -144,4 +144,4 @@ class Userauth extends CI_Controller
     }
 }
 
-/* End of file Userauth.php */
+/* End of file UserAuth.php */
