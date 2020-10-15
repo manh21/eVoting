@@ -103,10 +103,8 @@ class Kandidat extends CI_Controller
         $config['allowed_types'] = 'jpg|png|gif';
         $config['remove_spaces'] = TRUE;
 
-        $this->load->helper('file');
         $this->load->library('upload', $config);
         $this->upload->initialize($config);
-        $this->form_validation->set_rules('image', 'Upload File', 'callback_checkFileValidation');
         $this->_rules();
 
         if ($this->form_validation->run() == FALSE) {
@@ -130,7 +128,7 @@ class Kandidat extends CI_Controller
                     'misi' => $this->input->post('misi', TRUE),
                     'foto' => $fileName,
                     'status' => '1',
-                    'filefoto' => base_url() . $inputFileName
+                    'filefoto' => $inputFileName
                 );
 
                 $this->Kandidat_model->insert($data);
@@ -184,7 +182,7 @@ class Kandidat extends CI_Controller
 
         $this->load->helper('file');
         $this->load->library('upload', $config);
-        $this->form_validation->set_rules('image', 'Upload File', 'callback_checkFileValidation');
+        $this->upload->initialize($config);
         $this->_rules();
 
         if ($this->form_validation->run() == FALSE) {
@@ -228,7 +226,7 @@ class Kandidat extends CI_Controller
                         'visi' => $this->input->post('visi', TRUE),
                         'misi' => $this->input->post('misi', TRUE),
                         'foto' => $fileName,
-                        'filefoto' => base_url() . $filePath
+                        'filefoto' => $filePath
                     );
 
                     // Update Database

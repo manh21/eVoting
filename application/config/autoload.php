@@ -58,7 +58,7 @@ $autoload['packages'] = array();
 |
 |	$autoload['libraries'] = array('user_agent' => 'ua');
 */
-$autoload['libraries'] = array('database', 'session', 'form_validation', 'ion_auth');
+$autoload['libraries'] = array('database', 'session', 'form_validation', 'ion_auth', 'user_agent', 'pagination', 'upload');
 
 /*
 | -------------------------------------------------------------------
@@ -89,7 +89,7 @@ $autoload['drivers'] = array();
 |
 |	$autoload['helper'] = array('url', 'file');
 */
-$autoload['helper'] = array('url', 'my_helper');
+$autoload['helper'] = array('url', 'my_helper', 'form', 'cookie', 'file');
 
 /*
 | -------------------------------------------------------------------

@@ -207,6 +207,7 @@ class Kelas extends CI_Controller
         $config['remove_spaces'] = TRUE;
 
         $this->load->library('upload', $config);
+        $this->upload->initialize($config);
         $this->form_validation->set_rules('fileURL', 'Upload File', 'callback_checkFileValidation');
 
         if ($this->form_validation->run() == false) {
