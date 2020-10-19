@@ -63,6 +63,11 @@
               <i class="fa fa-circle-o"></i> Daftar Hadir
             </a>
           </li>
+          <li>
+            <a href="<?php echo base_url('admin/laporan/hasil') ?>" target="_blank">
+              <i class="fa fa-circle-o"></i> Export Hasil
+            </a>
+          </li>
         </ul>
       </li>
       <!-- ./Laporan -->
