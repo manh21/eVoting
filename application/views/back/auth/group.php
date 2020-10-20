@@ -12,7 +12,7 @@
                 <small>Data Table</small>
             </h1>
             <ol class="breadcrumb">
-                <!-- <li><a href="<?php echo base_url('admin/dashboard') ?>"><i class="fa fa-dashboard"></i>Home</a></li> -->
+                <!-- <li><a href="<?php echo site_url('admin/dashboard') ?>"><i class="fa fa-dashboard"></i>Home</a></li> -->
             </ol>
         </section>
 
@@ -43,14 +43,14 @@
                                             <td><?php echo htmlspecialchars($group->name, ENT_QUOTES, 'UTF-8');  ?></td>
                                             <td><?php echo htmlspecialchars($group->description, ENT_QUOTES, 'UTF-8');  ?></td>
                                             <td class="text-center">
-                                                <a href="<?php echo base_url('admin/auth/edit_group/' . $group->id) ?>" class="btn btn-sm btn-flat bg-orange"><i class="fa fa-edit"></i></a>
-                                                <button type="button" class="btn btn-sm btn-flat btn-danger" data-whatever="<?php echo base_url('admin/auth/delete_group/' . $group->id) ?>" data-toggle="modal" data-target="#modal-danger"><i class="fa fa-trash"></i></button>
+                                                <a href="<?php echo site_url('admin/auth/edit_group/' . $group->id) ?>" class="btn btn-sm btn-flat bg-orange"><i class="fa fa-edit"></i></a>
+                                                <button type="button" class="btn btn-sm btn-flat btn-danger" data-whatever="<?php echo site_url('admin/auth/delete_group/' . $group->id) ?>" data-toggle="modal" data-target="#modal-danger"><i class="fa fa-trash"></i></button>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
                                 </tbody>
                             </table>
-                            <div><a href="<?php echo base_url('admin/auth/create_group') ?>" class="btn btn-sm bg-blue btn-flat">Buat Group Baru</a></div>
+                            <div><a href="<?php echo site_url('admin/auth/create_group') ?>" class="btn btn-sm bg-blue btn-flat">Buat Group Baru</a></div>
                         </div>
                     </div>
                 </div>

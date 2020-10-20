@@ -14,37 +14,37 @@
     <!-- sidebar menu: : style can be found in sidebar.less -->
     <ul class="sidebar-menu" data-widget="tree">
       <li>
-        <a href="<?php echo base_url()?>" target="_blank">
+        <a href="<?php echo site_url()?>" target="_blank">
           <i class="fa fa-globe"></i> <span>Show Website</span>
         </a>
       </li>
       <li class="header">MAIN NAVIGATION</li>
       <li>
-        <a href="<?php echo base_url('admin') ?>">
+        <a href="<?php echo site_url('admin') ?>">
           <i class="fa fa-dashboard"></i> <span>Dashboard</span>
         </a>
       </li>
       <!-- ./Dashboard -->
       <li>
-        <a href="<?php echo base_url('admin/filemanager') ?>">
+        <a href="<?php echo site_url('admin/filemanager') ?>">
           <i class="fa fa-folder"></i> <span>Filemanager</span>
         </a>
       </li>
       <!-- ./Filemanager -->
       <li>
-        <a href="<?php echo base_url('admin/kelas') ?>">
+        <a href="<?php echo site_url('admin/kelas') ?>">
           <i class="glyphicon glyphicon-blackboard"></i> <span>Kelas</span>
         </a>
       </li>
       <!-- ./Kelas -->
       <li>
-        <a href="<?php echo base_url('admin/pemilih') ?>">
+        <a href="<?php echo site_url('admin/pemilih') ?>">
           <i class="fa fa-user"></i> <span>Data Pemilih</span>
         </a>
       </li>
       <!-- ./Data Pemilih -->
       <li>
-        <a href="<?php echo base_url('admin/kandidat') ?>">
+        <a href="<?php echo site_url('admin/kandidat') ?>">
           <i class="fa fa-user-secret"></i> <span>Kandidat</span>
         </a>
       </li>
@@ -59,12 +59,12 @@
         </a>
         <ul class="treeview-menu">
           <li>
-            <a href="<?php echo base_url('admin/laporan/daftar_hadir') ?>" target="_blank">
+            <a href="<?php echo site_url('admin/laporan/daftar_hadir') ?>" target="_blank">
               <i class="fa fa-circle-o"></i> Daftar Hadir
             </a>
           </li>
           <li>
-            <a href="<?php echo base_url('admin/laporan/hasil') ?>" target="_blank">
+            <a href="<?php echo site_url('admin/laporan/hasil') ?>" target="_blank">
               <i class="fa fa-circle-o"></i> Export Hasil
             </a>
           </li>
@@ -81,19 +81,19 @@
         </a>
         <ul class="treeview-menu">
           <li>
-            <a href="<?php echo base_url('admin/auth') ?>">
+            <a href="<?php echo site_url('admin/auth') ?>">
               <i class="fa fa-circle-o"></i> User List
             </a>
           </li>
           <li>
-            <a href="<?php echo base_url('admin/auth/group') ?>">
+            <a href="<?php echo site_url('admin/auth/group') ?>">
               <i class="fa fa-circle-o"></i> User Group
             </a>
           </li>
         </ul>
       </li>
       <li>
-        <a href="<?php echo base_url('admin/settings') ?>">
+        <a href="<?php echo site_url('admin/settings') ?>">
           <i class="fa fa-gear"></i> <span>Settings</span>
         </a>
       </li>

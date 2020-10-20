@@ -58,7 +58,7 @@
                             <div class="row">
                                 <div class="col-sm-6"></div>
                                 <div class="col-sm-6 text-right">
-                                    <a href="<?php echo base_url('admin/pemilih') ?>" class="btn btn-default">Cancel</a>
+                                    <a href="<?php echo site_url('admin/pemilih') ?>" class="btn btn-default">Cancel</a>
                                 </div>
                             </div>
                         </div>

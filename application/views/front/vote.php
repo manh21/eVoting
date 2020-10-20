@@ -28,7 +28,7 @@
                             <p class="card-text"><?php echo $kandidat->nama ?></p>
                         </div>
                         <div class="card-footer">
-                            <a href="<?php echo base_url('home/doVote/' . $kandidat->idkandidat) ?>" class="btn btn-flat btn-success">VOTE</a> 
+                            <a href="<?php echo site_url('home/doVote/' . $kandidat->idkandidat) ?>" class="btn btn-flat btn-success">VOTE</a> 
                             <button id="" type="button" class="btn btn-primary" data-visi="<?php echo $kandidat->visi ?>" data-misi="<?php echo $kandidat->misi ?>" data-toggle="modal" data-target="#modal-visimisi">VISI & MISI</button>
                         </div>
                     </div>

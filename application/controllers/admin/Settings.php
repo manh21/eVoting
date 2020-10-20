@@ -34,7 +34,7 @@ class Settings extends CI_Controller
     $row = $q[0];
 
     $data = array(
-      'action' => base_url('admin/settings/update_action'),
+      'action' => site_url('admin/settings/update_action'),
       'button' => 'Save Changes',
       'id' => set_value('id', $row->id),
       'penyelenggara' => set_value('penyelenggara', $row->penyelenggara),

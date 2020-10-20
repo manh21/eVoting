@@ -32,11 +32,11 @@ class Data_pemilih extends CI_Controller
         $start = intval($this->input->get('start'));
 
         if ($q <> '') {
-            $config['base_url'] = base_url() . 'admin/data_pemilih/index.html?q=' . urlencode($q);
-            $config['first_url'] = base_url() . 'admin/data_pemilih/index.html?q=' . urlencode($q);
+            $config['site_url'] = site_url() . 'admin/data_pemilih/index.html?q=' . urlencode($q);
+            $config['first_url'] = site_url() . 'admin/data_pemilih/index.html?q=' . urlencode($q);
         } else {
-            $config['base_url'] = base_url() . 'admin/data_pemilih/index.html';
-            $config['first_url'] = base_url() . 'admin/data_pemilih/index.html';
+            $config['site_url'] = site_url() . 'admin/data_pemilih/index.html';
+            $config['first_url'] = site_url() . 'admin/data_pemilih/index.html';
         }
 
         $config['per_page'] = 10;
@@ -93,7 +93,7 @@ class Data_pemilih extends CI_Controller
 
         $data = array(
             'button' => 'Create',
-            'action' => base_url('admin/data_pemilih/create_action'),
+            'action' => site_url('admin/data_pemilih/create_action'),
             'id' => set_value('id'),
             'nis' => set_value('nis'),
             'username' => set_value('username'),
@@ -167,7 +167,7 @@ class Data_pemilih extends CI_Controller
         if ($row) {
             $data = array(
                 'button' => 'Update',
-                'action' => base_url('admin/data_pemilih/update_action'),
+                'action' => site_url('admin/data_pemilih/update_action'),
                 'id' => set_value('id', $row->id),
                 'nis' => set_value('nis', $row->nis),
                 'username' => set_value('username', $row->username),
@@ -458,7 +458,7 @@ class Data_pemilih extends CI_Controller
     public function import()
     {
         $data = array(
-            'action' => base_url('admin/data_pemilih/do_upload'),
+            'action' => site_url('admin/data_pemilih/do_upload'),
             'button' => 'Import',
         );
         $this->load->view('back/data_pemilih/data_pemilih_import', $data);

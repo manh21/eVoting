@@ -29,17 +29,17 @@
                                 <div id="infoMessage"><?php echo $this->session->userdata('message') <> '' ? $this->session->userdata('message') : ''; ?></div>
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <a href="<?php echo base_url('admin/kandidat/create') ?>" class="btn btn-md bg-blue btn-flat"><i class="fa fa-plus"> Create</i></a>
+                                        <a href="<?php echo site_url('admin/kandidat/create') ?>" class="btn btn-md bg-blue btn-flat"><i class="fa fa-plus"> Create</i></a>
                                     </div>
                                     <div class="col-sm-6 text-right">
-                                        <form action="<?php echo base_url('admin/kandidat/index'); ?>" class="form-inline" method="get">
+                                        <form action="<?php echo site_url('admin/kandidat/index'); ?>" class="form-inline" method="get">
                                             <div class="input-group">
                                                 <input type="text" class="form-control" name="q" value="<?php echo $q; ?>">
                                                 <span class="input-group-btn">
                                                     <?php
                                                     if ($q <> '') {
                                                         ?>
-                                                        <a href="<?php echo base_url('admin/kandidat'); ?>" class="btn btn-default">Reset</a>
+                                                        <a href="<?php echo site_url('admin/kandidat'); ?>" class="btn btn-default">Reset</a>
                                                     <?php
                                                     }
                                                     ?>
@@ -77,9 +77,9 @@
                                                 <td><img height="50px" src="<?php echo base_url('assets/uploads/kandidat/' . $kandidat->foto) ?>"></td>
                                                 <td class="text-center"><?php echo ($kandidat->status) ? anchor("admin/kandidat/deactivate/" . $kandidat->idkandidat, 'Active', 'class="label label-info"') : anchor("admin/kandidat/activate/" . $kandidat->idkandidat, 'Inactive', 'class="label label-info"'); ?></td>
                                                 <td class="text-center">
-                                                    <a href="<?php echo base_url('admin/kandidat/read/' . $kandidat->idkandidat) ?>" class="btn btn-sm btn-flat btn-info"><i class="fa fa-search"></i></a>
-                                                    <a href="<?php echo base_url('admin/kandidat/edit/' . $kandidat->idkandidat) ?>" class="btn btn-sm btn-flat bg-orange"><i class="fa fa-edit"></i></a>
-                                                    <button type="button" class="btn btn-sm btn-flat btn-danger" data-whatever="<?php echo base_url('admin/kandidat/delete/' . $kandidat->idkandidat) ?>" data-toggle="modal" data-target="#modal-danger"><i class="fa fa-trash"></i></button>
+                                                    <a href="<?php echo site_url('admin/kandidat/read/' . $kandidat->idkandidat) ?>" class="btn btn-sm btn-flat btn-info"><i class="fa fa-search"></i></a>
+                                                    <a href="<?php echo site_url('admin/kandidat/edit/' . $kandidat->idkandidat) ?>" class="btn btn-sm btn-flat bg-orange"><i class="fa fa-edit"></i></a>
+                                                    <button type="button" class="btn btn-sm btn-flat btn-danger" data-whatever="<?php echo site_url('admin/kandidat/delete/' . $kandidat->idkandidat) ?>" data-toggle="modal" data-target="#modal-danger"><i class="fa fa-trash"></i></button>
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>

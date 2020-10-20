@@ -62,7 +62,7 @@
                         </div>
                         <div class="box-footer">
                             <div class="pull-right">
-                                <a href="<?php echo base_url('admin/kandidat') ?>" class="btn btn-default ">Cancel</a>
+                                <a href="<?php echo site_url('admin/kandidat') ?>" class="btn btn-default ">Cancel</a>
                                 <button type="submit" class="btn btn-success "><?php echo $button ?></button>
                             </div>
                         </div>

@@ -32,7 +32,7 @@
 <body class="hold-transition login-page">
 	<div class="login-box">
 		<div class="login-logo">
-			<a href="<?php echo base_url('admin/dashboard') ?>"><b>System</b>Panel</a>
+			<a href="<?php echo site_url('admin/dashboard') ?>"><b>System</b>Panel</a>
 		</div>
 		<!-- /.login-logo -->
 		<div class="login-box-body">

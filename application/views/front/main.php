@@ -26,7 +26,7 @@
                             SMANSA
                         </h1>
                         <span class="d-block mb-5 caption" data-aos="fade-up" data-aos-delay="300">Silahkan Login untuk melanjutkan</span>
-                        <a href="<?php echo base_url('user') ?>" class="btn-custom" data-aos="fade-up" data-aos-delay="400"><span>Login</span></a>
+                        <a href="<?php echo site_url('user') ?>" class="btn-custom" data-aos="fade-up" data-aos-delay="400"><span>Login</span></a>
                     </div>
                 </div>
             </div>

@@ -33,7 +33,7 @@
                             </div>
                         </div>
                         <div class="box-footer">
-                            <a href="<?php echo base_url('admin/pemilih') ?>" class="btn btn-default">Cancel</a>
+                            <a href="<?php echo site_url('admin/pemilih') ?>" class="btn btn-default">Cancel</a>
                             <button type="submit" class="btn btn-success" value="upload"><?php echo $button ?></button>
                         </div>
                         </form>

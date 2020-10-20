@@ -28,20 +28,20 @@
                                 <div id="infoMessage"><?php echo $this->session->userdata('message') <> '' ? $this->session->userdata('message') : ''; ?></div>
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <a href="<?php echo base_url('admin/kelas/create') ?>" class="btn btn-md bg-blue btn-flat"><i class="fa fa-plus"> Create</i></a>
-                                        <a href="<?php echo base_url('admin/kelas/import') ?>" class="btn btn-md bg-green btn-flat"><i class="fa fa-file-excel-o"> Import</i></a>
-                                        <a href="<?php echo base_url('admin/kelas/exportData') ?>" class="btn btn-md bg-yellow btn-flat"><i class="fa fa-download"> Export</i></a>
-                                        <a href="<?php echo base_url('admin/kelas/cetak') ?>" target="_blank" class="btn btn-md bg-purple btn-flat"><i class="fa fa-print"> Cetak</i></a>
+                                        <a href="<?php echo site_url('admin/kelas/create') ?>" class="btn btn-md bg-blue btn-flat"><i class="fa fa-plus"> Create</i></a>
+                                        <a href="<?php echo site_url('admin/kelas/import') ?>" class="btn btn-md bg-green btn-flat"><i class="fa fa-file-excel-o"> Import</i></a>
+                                        <a href="<?php echo site_url('admin/kelas/exportData') ?>" class="btn btn-md bg-yellow btn-flat"><i class="fa fa-download"> Export</i></a>
+                                        <a href="<?php echo site_url('admin/kelas/cetak') ?>" target="_blank" class="btn btn-md bg-purple btn-flat"><i class="fa fa-print"> Cetak</i></a>
                                     </div>
                                     <div class="col-sm-6 text-right">
-                                        <form action="<?php echo base_url('admin/kelas/index'); ?>" class="form-inline" method="get">
+                                        <form action="<?php echo site_url('admin/kelas/index'); ?>" class="form-inline" method="get">
                                             <div class="input-group">
                                                 <input type="text" class="form-control" name="q" value="<?php echo $q; ?>">
                                                 <span class="input-group-btn">
                                                     <?php
                                                     if ($q <> '') {
                                                         ?>
-                                                        <a href="<?php echo base_url('admin/kelas'); ?>" class="btn btn-default">Reset</a>
+                                                        <a href="<?php echo site_url('admin/kelas'); ?>" class="btn btn-default">Reset</a>
                                                     <?php
                                                     }
                                                     ?>
@@ -67,9 +67,9 @@
                                                 <td><?php echo htmlspecialchars($kelas->kelas, ENT_QUOTES, 'UTF-8'); ?></td>
                                                 <td><?php echo htmlspecialchars($kelas->jumlah, ENT_QUOTES, 'UTF-8'); ?></td>
                                                 <td class="text-center">
-                                                    <a href="<?php echo base_url('admin/kelas/read/' . $kelas->idkelas) ?>" class="btn btn-sm btn-flat btn-info"><i class="fa fa-search"></i></a>
-                                                    <a href="<?php echo base_url('admin/kelas/update/' . $kelas->idkelas) ?>" class="btn btn-sm btn-flat bg-orange"><i class="fa fa-edit"></i></a>
-                                                    <button type="button" class="btn btn-sm btn-flat btn-danger" data-whatever="<?php echo base_url('admin/kelas/delete/' . $kelas->idkelas) ?>" data-toggle="modal" data-target="#modal-danger"><i class="fa fa-trash"></i></button>
+                                                    <a href="<?php echo site_url('admin/kelas/read/' . $kelas->idkelas) ?>" class="btn btn-sm btn-flat btn-info"><i class="fa fa-search"></i></a>
+                                                    <a href="<?php echo site_url('admin/kelas/update/' . $kelas->idkelas) ?>" class="btn btn-sm btn-flat bg-orange"><i class="fa fa-edit"></i></a>
+                                                    <button type="button" class="btn btn-sm btn-flat btn-danger" data-whatever="<?php echo site_url('admin/kelas/delete/' . $kelas->idkelas) ?>" data-toggle="modal" data-target="#modal-danger"><i class="fa fa-trash"></i></button>
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>

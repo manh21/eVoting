@@ -29,20 +29,20 @@
                                 <div id="infoMessage"><?php echo $this->session->userdata('message') <> '' ? $this->session->userdata('message') : ''; ?></div>
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <a href="<?php echo base_url('admin/data_pemilih/create') ?>" class="btn btn-md bg-blue btn-flat"><i class="fa fa-plus"> Create</i></a>
-                                        <a href="<?php echo base_url('admin/data_pemilih/import') ?>" class="btn btn-md bg-green btn-flat"><i class="fa fa-file-excel-o"> Import</i></a>
-                                        <a href="<?php echo base_url('admin/data_pemilih/exportData') ?>" class="btn btn-md bg-yellow btn-flat"><i class="fa fa-download"> Export</i></a>
-                                        <a href="<?php echo base_url('admin/data_pemilih/cetak') ?>" target="_blank" class="btn btn-md bg-purple btn-flat"><i class="fa fa-print"> Cetak</i></a>
+                                        <a href="<?php echo site_url('admin/data_pemilih/create') ?>" class="btn btn-md bg-blue btn-flat"><i class="fa fa-plus"> Create</i></a>
+                                        <a href="<?php echo site_url('admin/data_pemilih/import') ?>" class="btn btn-md bg-green btn-flat"><i class="fa fa-file-excel-o"> Import</i></a>
+                                        <a href="<?php echo site_url('admin/data_pemilih/exportData') ?>" class="btn btn-md bg-yellow btn-flat"><i class="fa fa-download"> Export</i></a>
+                                        <a href="<?php echo site_url('admin/data_pemilih/cetak') ?>" target="_blank" class="btn btn-md bg-purple btn-flat"><i class="fa fa-print"> Cetak</i></a>
                                     </div>
                                     <div class="col-sm-6 text-right">
-                                        <form action="<?php echo base_url('admin/data_pemilih/index'); ?>" class="form-inline" method="get">
+                                        <form action="<?php echo site_url('admin/data_pemilih/index'); ?>" class="form-inline" method="get">
                                             <div class="input-group">
                                                 <input type="text" class="form-control" name="q">
                                                 <span class="input-group-btn">
                                                     <?php
                                                     if ($q <> '') {
                                                     ?>
-                                                        <a href="<?php echo base_url('admin/pemilih'); ?>" class="btn btn-default">Reset</a>
+                                                        <a href="<?php echo site_url('admin/pemilih'); ?>" class="btn btn-default">Reset</a>
                                                     <?php
                                                     }
                                                     ?>
@@ -78,9 +78,9 @@
                                                 <td class="text-center"><?php echo ($data_pemilih->status === 'Belum Memilih') ? anchor("admin/pemilih", 'Belum Memilih', 'class="label label-danger"') : anchor("admin/data_pemilih/reset_status/" . $data_pemilih->id, 'Sudah Memilih', 'class="label label-success"'); ?></td>
                                                 <td class="text-center"><?php echo ($data_pemilih->aktif) ? anchor("admin/data_pemilih/deactivate/" . $data_pemilih->id, 'Active', 'class="label label-info"') : anchor("admin/data_pemilih/activate/" . $data_pemilih->id, 'Inactive', 'class="label label-danger"'); ?></td>
                                                 <td class="text-center">
-                                                    <a href="<?php echo base_url('admin/data_pemilih/read/' . $data_pemilih->id) ?>" class="btn btn-sm btn-flat btn-info"><i class="fa fa-search"></i></a>
-                                                    <a href="<?php echo base_url('admin/data_pemilih/update/' . $data_pemilih->id) ?>" class="btn btn-sm btn-flat bg-orange"><i class="fa fa-edit"></i></a>
-                                                    <button type="button" class="btn btn-sm btn-flat btn-danger" data-whatever="<?php echo base_url('admin/data_pemilih/delete/' . $data_pemilih->id) ?>" data-toggle="modal" data-target="#modal-danger"><i class="fa fa-trash"></i></button>
+                                                    <a href="<?php echo site_url('admin/data_pemilih/read/' . $data_pemilih->id) ?>" class="btn btn-sm btn-flat btn-info"><i class="fa fa-search"></i></a>
+                                                    <a href="<?php echo site_url('admin/data_pemilih/update/' . $data_pemilih->id) ?>" class="btn btn-sm btn-flat bg-orange"><i class="fa fa-edit"></i></a>
+                                                    <button type="button" class="btn btn-sm btn-flat btn-danger" data-whatever="<?php echo site_url('admin/data_pemilih/delete/' . $data_pemilih->id) ?>" data-toggle="modal" data-target="#modal-danger"><i class="fa fa-trash"></i></button>
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>

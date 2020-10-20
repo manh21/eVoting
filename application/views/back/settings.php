@@ -73,7 +73,7 @@
                             <!-- ./box-body -->
                             <div class=" box-footer">
                                 <button type="submit" class="btn btn-success  pull-right"><?php echo $button ?></button>
-                                <a href="<?php echo base_url('admin') ?>" class="btn btn-default">Cancel</a>
+                                <a href="<?php echo site_url('admin') ?>" class="btn btn-default">Cancel</a>
                             </div>
                             <!-- ./box-footer -->
                         </form>
@@ -87,7 +87,7 @@
                 <div class="col-sm-3">
                     <div class="box box-solid">
                         <div class="box-body text-center">
-                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-danger" data-whatever="<?php echo base_url('admin/settings/reset_data_pemilih') ?>"><i class="fa fa-warning"></i> Reset Seluruh Data Pemilih <i class="fa fa-warning"></i></button>
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-danger" data-whatever="<?php echo site_url('admin/settings/reset_data_pemilih') ?>"><i class="fa fa-warning"></i> Reset Seluruh Data Pemilih <i class="fa fa-warning"></i></button>
                         </div>
                         <!-- ./box-body -->
                     </div>
@@ -97,7 +97,7 @@
                 <div class="col-sm-3">
                     <div class="box box-solid">
                         <div class="box-body text-center">
-                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-danger" data-whatever="<?php echo base_url('admin/settings/reset_data_kandidat') ?>"><i class="fa fa-warning"></i> Reset Seluruh Data Kandidat <i class="fa fa-warning"></i></button>
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-danger" data-whatever="<?php echo site_url('admin/settings/reset_data_kandidat') ?>"><i class="fa fa-warning"></i> Reset Seluruh Data Kandidat <i class="fa fa-warning"></i></button>
                         </div>
                         <!-- ./box-body -->
                     </div>
@@ -107,7 +107,7 @@
                 <div class="col-sm-3">
                     <div class="box box-solid">
                         <div class="box-body text-center">
-                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-danger" data-whatever="<?php echo base_url('admin/settings/reset_data_kelas') ?>"><i class="fa fa-warning"></i> Reset Seluruh Data Kelas <i class="fa fa-warning"></i></button>
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-danger" data-whatever="<?php echo site_url('admin/settings/reset_data_kelas') ?>"><i class="fa fa-warning"></i> Reset Seluruh Data Kelas <i class="fa fa-warning"></i></button>
                         </div>
                         <!-- ./box-body -->
                     </div>
@@ -117,7 +117,7 @@
                 <div class="col-sm-3">
                     <div class="box box-solid">
                         <div class="box-body text-center">
-                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-danger" data-whatever="<?php echo base_url('admin/settings/reset_pemilihan') ?>"><i class="fa fa-warning"></i> Reset Hasil Pemilihan <i class="fa fa-warning"></i></button>
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-danger" data-whatever="<?php echo site_url('admin/settings/reset_pemilihan') ?>"><i class="fa fa-warning"></i> Reset Hasil Pemilihan <i class="fa fa-warning"></i></button>
                         </div>
                         <!-- ./box-body -->
                     </div>

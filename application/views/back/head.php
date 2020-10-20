@@ -1,6 +1,6 @@
 <header class="main-header">
     <!-- Logo -->
-    <a href="<?php echo base_url('admin/dashboard') ?>" class="logo">
+    <a href="<?php echo site_url('admin/dashboard') ?>" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"><b>S</b>21</span>
         <!-- logo for regular state and mobile devices -->
@@ -33,10 +33,10 @@
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="<?php echo base_url('admin/auth/change_password') ?>" class="btn btn-default btn-flat">Change Password</a>
+                                <a href="<?php echo site_url('admin/auth/change_password') ?>" class="btn btn-default btn-flat">Change Password</a>
                             </div>
                             <div class="pull-right">
-                                <a href="<?php echo base_url('admin/auth/logout') ?>" class="btn btn-default btn-flat">Sign out</a>
+                                <a href="<?php echo site_url('admin/auth/logout') ?>" class="btn btn-default btn-flat">Sign out</a>
                             </div>
                         </li>
                     </ul>

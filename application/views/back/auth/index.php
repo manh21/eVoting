@@ -47,21 +47,21 @@
 												<td>
 													<div class="btn-group">
 														<?php foreach ($user->groups as $group) : ?>
-															<a href="<?php echo base_url('admin/auth/edit_group/' . $group->id) ?>" class="btn btn-flat btn-sm btn-default"><?php echo $group->name ?></a>
+															<a href="<?php echo site_url('admin/auth/edit_group/' . $group->id) ?>" class="btn btn-flat btn-sm btn-default"><?php echo $group->name ?></a>
 														<?php endforeach ?>
 													</div>
 												</td>
 												<td class="text-center"><?php echo ($user->active) ? anchor("admin/auth/deactivate/" . $user->id, lang('index_active_link'), 'class="label label-info"') : anchor("admin/auth/activate/" . $user->id, lang('index_inactive_link'), 'class="label label-info"'); ?></td>
 												<td class="text-center">
-													<a href="<?php echo base_url('admin/auth/edit_user/' . $user->id) ?>" class="btn btn-sm btn-flat bg-orange"><i class="fa fa-edit"></i></a>
-													<button type="button" class="btn btn-sm btn-flat btn-danger" data-whatever="<?php echo base_url('admin/auth/delete_user/' . $user->id) ?>" data-toggle="modal" data-target="#modal-danger"><i class="fa fa-trash"></i></button>
+													<a href="<?php echo site_url('admin/auth/edit_user/' . $user->id) ?>" class="btn btn-sm btn-flat bg-orange"><i class="fa fa-edit"></i></a>
+													<button type="button" class="btn btn-sm btn-flat btn-danger" data-whatever="<?php echo site_url('admin/auth/delete_user/' . $user->id) ?>" data-toggle="modal" data-target="#modal-danger"><i class="fa fa-trash"></i></button>
 												</td>
 											</tr>
 										<?php endforeach; ?>
 									</tbody>
 								</table>
 
-								<div class="btn-group"><a href="<?php echo base_url('admin/auth/create_user') ?>" class="btn btn-sm bg-blue btn-flat">Buat User Baru</a></div>
+								<div class="btn-group"><a href="<?php echo site_url('admin/auth/create_user') ?>" class="btn btn-sm bg-blue btn-flat">Buat User Baru</a></div>
 							</div>
 						</div>
 					</div>

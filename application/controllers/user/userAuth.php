@@ -20,7 +20,7 @@ class Userauth extends CI_Controller
     {
         // Security check if the user is alreadey logged in
         if (cek_login_bol()) {
-            redirect(base_url());
+            redirect(site_url());
         } else {
             $data['title'] = 'E-Voting';
             $data['identity'] = [
@@ -140,7 +140,7 @@ class Userauth extends CI_Controller
         $this->session->set_userdata($userdata);
 
         // Directed to login page
-        redirect(base_url(), 'refresh');
+        redirect(site_url(), 'refresh');
     }
 }
 

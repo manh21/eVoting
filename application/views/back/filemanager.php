@@ -101,7 +101,7 @@
     <script type="text/javascript" charset="utf-8">
         $().ready(function() {
             var elf = $('#elfinder').elfinder({
-                url: '<?= base_url(); ?>admin/filemanager/elfinder_init', // connector URL (REQUIRED)
+                url: '<?= site_url(); ?>admin/filemanager/elfinder_init', // connector URL (REQUIRED)
                 lang: 'en', // language (OPTIONAL)
                 height: 470,
             }).elfinder('instance');

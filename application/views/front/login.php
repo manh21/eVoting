@@ -36,7 +36,7 @@
 
     <div class="login-box">
         <div class="login-logo">
-            <a href="<?php echo base_url() ?>" class="login-titleHeader"><b>E-Voting</b></a>
+            <a href="<?php echo site_url() ?>" class="login-titleHeader"><b>E-Voting</b></a>
         </div>
         <!-- /.login-logo -->
         <div class="card">

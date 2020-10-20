@@ -34,11 +34,11 @@ class Kelas extends CI_Controller
         $start = intval($this->input->get('start'));
 
         if ($q <> '') {
-            $config['base_url'] = base_url() . 'admin/kelas/index.html?q=' . urlencode($q);
-            $config['first_url'] = base_url() . 'admin/kelas/index.html?q=' . urlencode($q);
+            $config['site_url'] = site_url() . 'admin/kelas/index.html?q=' . urlencode($q);
+            $config['first_url'] = site_url() . 'admin/kelas/index.html?q=' . urlencode($q);
         } else {
-            $config['base_url'] = base_url() . 'admin/kelas/index.html';
-            $config['first_url'] = base_url() . 'admin/kelas/index.html';
+            $config['site_url'] = site_url() . 'admin/kelas/index.html';
+            $config['first_url'] = site_url() . 'admin/kelas/index.html';
         }
 
         $config['per_page'] = 10;
@@ -84,7 +84,7 @@ class Kelas extends CI_Controller
     {
         $data = array(
             'button' => 'Create',
-            'action' => base_url('admin/kelas/create_action'),
+            'action' => site_url('admin/kelas/create_action'),
             'idkelas' => set_value('idkelas'),
             'kelas' => set_value('kelas'),
             'jumlah' => set_value('jumlah'),
@@ -122,7 +122,7 @@ class Kelas extends CI_Controller
         if ($row) {
             $data = array(
                 'button' => 'Update',
-                'action' => base_url('admin/kelas/update_action'),
+                'action' => site_url('admin/kelas/update_action'),
                 'idkelas' => set_value('idkelas', $row->idkelas),
                 'kelas' => set_value('kelas', $row->kelas),
                 'jumlah' => set_value('jumlah', $row->jumlah),

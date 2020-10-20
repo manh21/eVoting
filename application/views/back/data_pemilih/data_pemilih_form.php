@@ -52,7 +52,7 @@
                             </div>
                             <div class="box-footer">
                                 <button type="submit" class="btn btn-success"><?php echo $button ?></button>
-                                <a href="<?php echo base_url('admin/pemilih') ?>" class="btn btn-default">Cancel</a>
+                                <a href="<?php echo site_url('admin/pemilih') ?>" class="btn btn-default">Cancel</a>
                             </div>
                         </form>
                     </div>
