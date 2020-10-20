@@ -32,11 +32,11 @@ class Data_pemilih extends CI_Controller
         $start = intval($this->input->get('start'));
 
         if ($q <> '') {
-            $config['site_url'] = site_url() . 'admin/data_pemilih/index.html?q=' . urlencode($q);
-            $config['first_url'] = site_url() . 'admin/data_pemilih/index.html?q=' . urlencode($q);
+            $config['site_url'] = site_url() . '/admin/data_pemilih/index.html?q=' . urlencode($q);
+            $config['first_url'] = site_url() . '/admin/data_pemilih/index.html?q=' . urlencode($q);
         } else {
-            $config['site_url'] = site_url() . 'admin/data_pemilih/index.html';
-            $config['first_url'] = site_url() . 'admin/data_pemilih/index.html';
+            $config['site_url'] = site_url() . '/admin/data_pemilih/index.html';
+            $config['first_url'] = site_url() . '/admin/data_pemilih/index.html';
         }
 
         $config['per_page'] = 10;

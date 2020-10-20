@@ -34,11 +34,11 @@ class Kelas extends CI_Controller
         $start = intval($this->input->get('start'));
 
         if ($q <> '') {
-            $config['site_url'] = site_url() . 'admin/kelas/index.html?q=' . urlencode($q);
-            $config['first_url'] = site_url() . 'admin/kelas/index.html?q=' . urlencode($q);
+            $config['site_url'] = site_url() . '/admin/kelas/index.html?q=' . urlencode($q);
+            $config['first_url'] = site_url() . '/admin/kelas/index.html?q=' . urlencode($q);
         } else {
-            $config['site_url'] = site_url() . 'admin/kelas/index.html';
-            $config['first_url'] = site_url() . 'admin/kelas/index.html';
+            $config['site_url'] = site_url() . '/admin/kelas/index.html';
+            $config['first_url'] = site_url() . '/admin/kelas/index.html';
         }
 
         $config['per_page'] = 10;
