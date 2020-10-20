@@ -160,7 +160,7 @@
                             <thead>
                                 <tr>
                                     <th width="10px">No</th>
-                                    <th width="100px">NISN</th>
+                                    <th width="100px">NIS</th>
                                     <th>Nama</th>
                                     <th>Kelas</th>
                                     <th>Keterangan</th>
