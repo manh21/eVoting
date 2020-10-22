@@ -127,8 +127,7 @@ class Kandidat extends CI_Controller
                     'visi' => $this->input->post('visi', TRUE),
                     'misi' => $this->input->post('misi', TRUE),
                     'foto' => $fileName,
-                    'status' => '1',
-                    'filefoto' => $inputFileName
+                    'status' => '1'
                 );
 
                 $this->Kandidat_model->insert($data);
@@ -225,8 +224,7 @@ class Kandidat extends CI_Controller
                         'jumlahsuara' => $this->input->post('jumlahsuara', TRUE),
                         'visi' => $this->input->post('visi', TRUE),
                         'misi' => $this->input->post('misi', TRUE),
-                        'foto' => $fileName,
-                        'filefoto' => $filePath
+                        'foto' => $fileName
                     );
 
                     // Update Database
