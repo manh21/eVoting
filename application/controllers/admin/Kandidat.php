@@ -306,7 +306,7 @@ class Kandidat extends CI_Controller
         $id = (int) $id;
 
         $data = array(
-            'aktif' => '0',
+            'status' => '0',
         );
 
         $this->Kandidat_model->update($id, $data);
@@ -329,7 +329,7 @@ class Kandidat extends CI_Controller
         $id = (int) $id;
 
         $data = array(
-            'aktif' => '1',
+            'status' => '1',
         );
 
         $this->Kandidat_model->update($id, $data);
