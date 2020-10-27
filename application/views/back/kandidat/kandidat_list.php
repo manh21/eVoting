@@ -75,7 +75,7 @@
                                                 <td><?php echo $kandidat->visi ?></td>
                                                 <td><?php echo $kandidat->misi ?></td>
                                                 <td><img height="50px" src="<?php echo base_url('assets/uploads/kandidat/' . $kandidat->foto) ?>"></td>
-                                                <td class="text-center"><?php echo ($kandidat->status) ? anchor("admin/kandidat/deactivate/" . $kandidat->idkandidat, 'Active', 'class="label label-info"') : anchor("admin/kandidat/activate/" . $kandidat->idkandidat, 'Inactive', 'class="label label-info"'); ?></td>
+                                                <td class="text-center"><?php echo ($kandidat->status) ? anchor("admin/kandidat/deactivate/" . $kandidat->idkandidat, 'Active', 'class="label label-info"') : anchor("admin/kandidat/activate/" . $kandidat->idkandidat, 'Inactive', 'class="label label-danger"'); ?></td>
                                                 <td class="text-center">
                                                     <a href="<?php echo site_url('admin/kandidat/read/' . $kandidat->idkandidat) ?>" class="btn btn-sm btn-flat btn-info"><i class="fa fa-search"></i></a>
                                                     <a href="<?php echo site_url('admin/kandidat/edit/' . $kandidat->idkandidat) ?>" class="btn btn-sm btn-flat bg-orange"><i class="fa fa-edit"></i></a>
