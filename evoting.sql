@@ -39,29 +39,29 @@ CREATE TABLE `data_pemilih` (
   `jk` varchar(1) NOT NULL,
   `status` varchar(50) NOT NULL,
   `aktif` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data untuk tabel `data_pemilih`
 --
 
 INSERT INTO `data_pemilih` (`id`, `nis`, `username`, `password`, `nama`, `kelas`, `idkelas`, `jk`, `status`, `aktif`) VALUES
-(3, '10013', '10013', '10013', 'Muji', '10 IPA 3', '3', 'L', 'Sudah Memilih', 1),
-(4, '10112', '10112', '10112', '10112', '11 BB', '6', 'L', 'Belum Memilih', 0),
-(5, '101156', '101156', '101156', 'Ham', '10 IPA 1', '1', 'L', 'Sudah Memilih', 1),
-(6, '99999', '99999', '99999', 'Joni', '11 IPA 1', '5', 'L', 'Belum Memilih', 1),
-(7, '3333', '3333', '3333', 'DF', '11 BB', '6', 'L', 'Belum Memilih', 1),
-(9, '34344', '22222', '22222', 'Hun', '11 BB', '6', 'L', 'Belum Memilih', 0),
-(10, '50505', '50505', '50505', 'ad', '10 IPA 3', '3', 'L', 'Belum Memilih', 1),
-(11, '1234', '1234', '1234', 'Hun', '11 BB', '6', 'L', 'Belum Memilih', 0),
-(12, '18693', '18693', '18693', 'asdsad', '11 BB', '6', 'P', 'Sudah Memilih', 1),
-(13, '123123', '333333', '123123', 'Muji', '11 IPS 2', '14', 'L', 'Belum Memilih', 1),
-(14, '676799', '676799', '676799', 'Anasa', '11 IPA 1', '5', 'P', 'Sudah Memilih', 1),
-(15, '90809', '90809', '90809', 'Burhan', '11 IPA 1', '5', 'L', 'Belum Memilih', 1),
-(16, '58213', '58213', '58213', 'Doni', '11 BB', '6', 'L', 'Sudah Memilih', 1),
-(21, '123', '123', '123', 'Jola', '11 IPA 1', '5', 'L', 'Sudah Memilih', 1),
-(22, '333', '333', '333', 'Halim', '10 IPA 1', '1', 'L', 'Sudah Memilih', 1),
-(23, '1247', '1247', '1247', 'Raihan', '11 IPA 5', '7', 'L', 'Sudah Memilih', 1);
+(1, '10013', '10013', '10013', 'Muji', '10 IPA 3', '3', 'L', 'Sudah Memilih', 1),
+(2, '10112', '10112', '10112', '10112', '11 BB', '6', 'L', 'Belum Memilih', 0),
+(3, '101156', '101156', '101156', 'Ham', '10 IPA 1', '1', 'L', 'Sudah Memilih', 1),
+(4, '99999', '99999', '99999', 'Joni', '11 IPA 1', '5', 'L', 'Belum Memilih', 1),
+(5, '3333', '3333', '3333', 'DF', '11 BB', '6', 'L', 'Belum Memilih', 1),
+(6, '34344', '22222', '22222', 'Hun', '11 BB', '6', 'L', 'Belum Memilih', 0),
+(7, '50505', '50505', '50505', 'ad', '10 IPA 3', '3', 'L', 'Belum Memilih', 1),
+(8, '1234', '1234', '1234', 'Hun', '11 BB', '6', 'L', 'Belum Memilih', 0),
+(9, '18693', '18693', '18693', 'asdsad', '11 BB', '6', 'P', 'Sudah Memilih', 1),
+(10, '123123', '333333', '123123', 'Muji', '11 IPS 2', '14', 'L', 'Belum Memilih', 1),
+(11, '676799', '676799', '676799', 'Anasa', '11 IPA 1', '5', 'P', 'Sudah Memilih', 1),
+(12, '90809', '90809', '90809', 'Burhan', '11 IPA 1', '5', 'L', 'Belum Memilih', 1),
+(13, '58213', '58213', '58213', 'Doni', '11 BB', '6', 'L', 'Sudah Memilih', 1),
+(14, '123', '123', '123', 'Jola', '11 IPA 1', '5', 'L', 'Sudah Memilih', 1),
+(15, '333', '333', '333', 'Halim', '10 IPA 1', '1', 'L', 'Sudah Memilih', 1),
+(16, '1247', '1247', '1247', 'Raihan', '11 IPA 5', '7', 'L', 'Sudah Memilih', 1);
 
 -- --------------------------------------------------------
 
@@ -75,15 +75,15 @@ CREATE TABLE `data_pemilihan` (
   `idpemilih` varchar(9) NOT NULL,
   `idkandidat` varchar(9) NOT NULL,
   `waktu` timestamp(6) NOT NULL DEFAULT current_timestamp(6)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data untuk tabel `data_pemilihan`
 --
 
-INSERT INTO `data_pemilihan` (`idpemilihan`, `tipe`, `idpemilih`, `idkandidat`, `waktu`) VALUES
-(1, 'siswa', '21', '6', '2019-11-17 11:07:22.528254'),
-(2, 'siswa', '12', '6', '2019-12-04 22:20:23.912025');
+-- INSERT INTO `data_pemilihan` (`idpemilihan`, `tipe`, `idpemilih`, `idkandidat`, `waktu`) VALUES
+-- (1, 'siswa', '21', '6', '2019-11-17 11:07:22.528254'),
+-- (2, 'siswa', '12', '6', '2019-12-04 22:20:23.912025');
 
 -- --------------------------------------------------------
 
@@ -108,21 +108,6 @@ INSERT INTO `groups` (`id`, `name`, `description`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `import`
---
-
-CREATE TABLE `import` (
-  `id` int(11) NOT NULL,
-  `first_name` varchar(100) NOT NULL,
-  `last_name` varchar(100) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `dob` varchar(20) NOT NULL,
-  `contact_no` varchar(16) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Struktur dari tabel `kandidat`
 --
 
@@ -136,15 +121,15 @@ CREATE TABLE `kandidat` (
   `misi` text NOT NULL,
   `foto` varchar(50) NOT NULL,
   `status` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data untuk tabel `kandidat`
 --
 
 INSERT INTO `kandidat` (`idkandidat`, `organisasi`, `nama`, `nourut`, `jumlahsuara`, `visi`, `misi`, `foto`, `status`) VALUES
-(6, 'OSIS', 'OSMANSA', '01', '2', '<p>OSMANSA</p>', '<p>OSMANSA</p>', 'OSMASA.jpg', '1'),
-(7, 'MPK', 'MPK', '02', '0', '<p>MPK</p>', '<p>MPK</p>', 'MPK_VEC.png', '1');
+(1, 'OSIS', 'OSMANSA', '01', '2', '<p>OSMANSA</p>', '<p>OSMANSA</p>', 'OSMASA.jpg', '1'),
+(2, 'MPK', 'MPK', '02', '0', '<p>MPK</p>', '<p>MPK</p>', 'MPK_VEC.png', '1');
 
 -- --------------------------------------------------------
 
@@ -156,7 +141,7 @@ CREATE TABLE `kelas` (
   `idkelas` int(9) NOT NULL,
   `kelas` varchar(50) NOT NULL,
   `jumlah` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data untuk tabel `kelas`
@@ -249,7 +234,7 @@ CREATE TABLE `settings` (
   `kecamatan` text NOT NULL,
   `kelurahan` text NOT NULL,
   `alamat` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data untuk tabel `settings`
@@ -310,8 +295,8 @@ CREATE TABLE `users_groups` (
 --
 
 INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
-(8, 1, 1),
-(9, 1, 2);
+(1, 1, 1),
+(2, 1, 2);
 
 --
 -- Indexes for dumped tables
@@ -333,12 +318,6 @@ ALTER TABLE `data_pemilihan`
 -- Indeks untuk tabel `groups`
 --
 ALTER TABLE `groups`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indeks untuk tabel `import`
---
-ALTER TABLE `import`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -392,13 +371,13 @@ ALTER TABLE `users_groups`
 -- AUTO_INCREMENT untuk tabel `data_pemilih`
 --
 ALTER TABLE `data_pemilih`
-  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT untuk tabel `data_pemilihan`
 --
 ALTER TABLE `data_pemilihan`
-  MODIFY `idpemilihan` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idpemilihan` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT untuk tabel `groups`
@@ -407,16 +386,10 @@ ALTER TABLE `groups`
   MODIFY `id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT untuk tabel `import`
---
-ALTER TABLE `import`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT untuk tabel `kandidat`
 --
 ALTER TABLE `kandidat`
-  MODIFY `idkandidat` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idkandidat` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `kelas`
@@ -428,7 +401,7 @@ ALTER TABLE `kelas`
 -- AUTO_INCREMENT untuk tabel `login_attempts`
 --
 ALTER TABLE `login_attempts`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT untuk tabel `settings`
@@ -446,7 +419,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT untuk tabel `users_groups`
 --
 ALTER TABLE `users_groups`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
