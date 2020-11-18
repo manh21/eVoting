@@ -173,6 +173,24 @@ class Data_pemilih_model extends CI_Model
         $this->db->where('id', $id);
         return $this->db->get('settings')->row();
     }
+
+     /**
+     * Delete data vote user
+     *
+     * @param int $id The user ID
+     * 
+     * return boolean true
+     */
+
+    public function delete_data_vote_user($id)
+    {
+        $id = (int) $id;
+
+        $this->db->where('idpemilih', $id);
+        $this->db->delete('data_pemilihan');
+        return true;
+        
+    }
 }
 
 /* End of file Data_pemilih_model.php */

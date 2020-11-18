@@ -162,6 +162,8 @@ class Data_pemilih extends CI_Controller
      */
     public function update($id)
     {
+        $id = (int) $id;
+
         $row = $this->Data_pemilih_model->get_by_id($id);
 
         if ($row) {
@@ -219,7 +221,7 @@ class Data_pemilih extends CI_Controller
     /**
      * Activate the user
      *
-     * @param int|string|null $id The user ID
+     * @param int $id The user ID
      */
     public function Activate($id)
     {
@@ -242,7 +244,7 @@ class Data_pemilih extends CI_Controller
     /**
      * Activate the user
      *
-     * @param int|string|null $id The user ID
+     * @param int $id The user ID
      */
     public function reset_status($id)
     {
@@ -252,6 +254,7 @@ class Data_pemilih extends CI_Controller
             'status' => 'Belum Memilih',
         );
 
+        $this->Data_pemilih_model->delete_data_vote_user($id);
         $this->Data_pemilih_model->update($id, $data);
         $this->session->set_flashdata(
             'message',
