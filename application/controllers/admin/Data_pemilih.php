@@ -328,6 +328,7 @@ class Data_pemilih extends CI_Controller
                 }
                 // match excel sheet column
                 if ($flag == 1) {
+                    $fetchData = array();
                     for ($i = 1; $i < $arrayCount; $i++) {
                         $nis = $SheetDataKey['nis'];
                         $userName = $SheetDataKey['username'];
@@ -362,9 +363,32 @@ class Data_pemilih extends CI_Controller
                             'idkelas' => $idKelas,
                         );
                     }
-                    $data['dataInfo'] = $fetchData;
-                    $this->Data_pemilih_model->setBatchImport($fetchData);
-                    $this->Data_pemilih_model->importData();
+
+                    $dups = [];
+                    foreach($fetchData as $keys => $val){
+                        $res = searchForUsername($val['username'], $fetchData);
+                        if(count($res) > 1){
+                            $dups[] = $res;
+                        }
+                    }
+
+                    if(!empty($dups)){
+                        $data['dataInfo'] = $fetchData;
+                        $this->Data_pemilih_model->setBatchImport($fetchData);
+                        $this->Data_pemilih_model->importData();
+                        $this->session->set_flashdata(
+                            'message',
+                            '<div class="alert alert-danger alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            Terdapat username ganda silahkan cek kembali data anda! </div>'
+                        );
+                        unlink('./assets/uploads/' . $fileName);
+                        redirect('admin/pemilih', 'refresh');
+                    } else {
+                        $data['dataInfo'] = $fetchData;
+                        $this->Data_pemilih_model->setBatchImport($fetchData);
+                        $this->Data_pemilih_model->importData();
+                    }
                 } else {
                     $this->session->set_flashdata(
                         'message',

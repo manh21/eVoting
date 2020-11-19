@@ -143,12 +143,6 @@
             'autoWidth': true
         })
     })
-    // infoMassages Timer
-    window.setTimeout(function() {
-        $(".alert").fadeTo(500, 0).slideUp(500, function() {
-            $(this).remove();
-        });
-    }, 2000);
     // Modal Controller
     $('#modal-danger').on('show.bs.modal', function(event) {
         var button = $(event.relatedTarget) // Button that triggered the modal
