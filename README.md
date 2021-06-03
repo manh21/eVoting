@@ -60,6 +60,15 @@ protected $token_expire_time =  86400;
 ```
 
 ### Configuration
+application/config/config.php
+```
+/*
+|--------------------------------------------------------------------------
+| Time Zone
+|--------------------------------------------------------------------------
+*/
+date_default_timezone_set('Asia/Jakarta');
+```
 
 application/config/jwt.php
 Rubah JWT Secure Key

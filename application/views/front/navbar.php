@@ -12,6 +12,10 @@
                 <li class="nav-item <?php echo uri_string() == "vote" ? 'active' : ' ' ?>">
                     <a class="nav-link" href="<?php echo site_url('vote') ?>">Vote</a>
                 </li> -->
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><div id="clock"></div></a>
+                </li>
+                
                 <?php if ($this->session->userdata('logged')) :
                     $signOut = site_url('user/userauth/logout');
                     echo '<li class="nav-item active"><a class="nav-link" style="" href="' . $signOut . '"><i class="fas fa-sign-out-alt"></i> Sign Out</a></li>'

@@ -65,26 +65,35 @@
 
     <!-- Javascript -->
     <?php $this->load->view('front/js'); ?>
+    <!-- momentjs -->
+    <script src="<?php echo base_url('assets/js/jquery.countdown.min.js') ?>"></script>
 
     <script>
-        // Modal functions
-        $('#modal-visimisi').on('show.bs.modal', function(event) {
-            var button = $(event.relatedTarget) // Button that triggered the modal
-            var visi = button.data('visi'); // Extract info from data-* attributes
-            var misi = button.data('misi'); // Extract info from data-* attributes
-            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-            // modal.find('#saveChanges').val(link)
+    $('#clock').countdown("<?= $waktu_selesai?>", function(event) {
+        var totalHours = event.offset.totalDays * 24 + event.offset.hours;
+        $(this).html(event.strftime(totalHours + ' hr %M min %S sec'));
+    }).on('finish.countdown', function(event) {
+        window.location = "<?= site_url('user/userauth/logout') ?>";
+    });
 
-            var html2 = [];
-            html2.push(visi);
-            html2.push('<br>');
-            html2.push('<br>');
-            html2.push(misi);
+    // Modal functions
+    $('#modal-visimisi').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var visi = button.data('visi'); // Extract info from data-* attributes
+        var misi = button.data('misi'); // Extract info from data-* attributes
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        // modal.find('#saveChanges').val(link)
 
-            var modalBody = document.querySelector(".modal-body");
-            modalBody.innerHTML = html2.join('\n');
-        })
+        var html2 = [];
+        html2.push(visi);
+        html2.push('<br>');
+        html2.push('<br>');
+        html2.push(misi);
+
+        var modalBody = document.querySelector(".modal-body");
+        modalBody.innerHTML = html2.join('\n');
+    })
     </script>
 
 </body>

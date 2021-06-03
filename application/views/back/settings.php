@@ -26,7 +26,14 @@
                         <!-- form start -->
                         <form action="<?php echo $action ?>" class="form-horizontal" method="post">
                             <div class="box-body">
+                                <div id="infoMessage"><?php echo $this->session->userdata('message') <> '' ? $this->session->userdata('message') : ''; ?></div>
                                 <input type="hidden" name="id" value="<?php echo $id; ?>" />
+                                <div class="form-group">
+                                    <label for="waktu_pemilihan" class="col-sm-2 control-label">Waktu Pemilihan <?php echo form_error('waktu_pemilihan') ?></label>
+                                    <div class="col-sm-10">
+                                        <input required type="text" class="form-control" name="waktu_pemilihan" id="waktu_pemilihan" placeholder="Waktu Pemilihan">
+                                    </div>
+                                </div>
                                 <div class="form-group">
                                     <label for="penyelenggara" class="col-sm-2 control-label">Penyelenggara <?php echo form_error('penyelenggara') ?></label>
                                     <div class="col-sm-10">
@@ -158,6 +165,21 @@
 
 <!-- page script -->
 <script>
+    $(function () {
+        //Date range picker with time picker
+        $('#waktu_pemilihan').daterangepicker(
+            { 
+                timePicker: true, 
+                timePicker24Hour: true,
+                startDate: '<?= $mulai?>',
+                endDate: '<?= $selesai?>',
+                locale: { 
+                    format: 'DD/MM/YYYY H:mm' 
+                }
+            }
+        )
+    });
+
     // infoMassages Timer
     window.setTimeout(function() {
         $(".alert").fadeTo(500, 0).slideUp(500, function() {
