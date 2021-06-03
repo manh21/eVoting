@@ -19,13 +19,14 @@ use Matrix\Operators\Division;
  * @return Matrix
  * @throws Exception
  */
-function divideinto(...$matrixValues)
+function divideinto(...$matrixValues): Matrix
 {
     if (count($matrixValues) < 2) {
         throw new Exception('Division operation requires at least 2 arguments');
     }
 
-    $matrix = array_shift($matrixValues);
+    $matrix = array_pop($matrixValues);
+    $matrixValues = array_reverse($matrixValues);
 
     if (is_array($matrix)) {
         $matrix = new Matrix($matrix);
