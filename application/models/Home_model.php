@@ -46,6 +46,16 @@ class Home_model extends CI_Model
         $this->db->where($q, $idkandidat);
         return $this->db->count_all_results($table);
     }
+
+    // Check sudah memilih atau belum
+    public function is_voted($idpemilih)
+    {
+        $result = $this->get_by_id('id', $idpemilih, 'data_pemilih');
+        if(!empty($result) && $result->status === 'Belum Memilih'){
+            return false;
+        }
+        return true;
+    }
 }
 
 /* End of file Home_modal.php */
