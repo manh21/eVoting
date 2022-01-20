@@ -155,6 +155,7 @@ class Vote extends RestController
                             'error' => 403,
                             'message' => 'user sudah memilih'
                         );
+                        $this->response($message, 200);
                     }
                 } else {
                     $message = array(
