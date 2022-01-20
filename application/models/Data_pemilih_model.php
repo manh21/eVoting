@@ -191,6 +191,24 @@ class Data_pemilih_model extends CI_Model
         return true;
         
     }
+
+    /**
+     * Check if exist user
+     * @param   string  username
+     * @param   string  nis
+     * @return  boolean
+     */
+    public function is_exist($username, $nis)
+    {
+        $this->db->where('username', $username);
+        $this->db->or_where('nis', $nis);
+        $q = $this->db->get('data_pemilih');
+        if($q->num_rows() > 0){
+            return true;
+        }
+
+        return false;
+    }
 }
 
 /* End of file Data_pemilih_model.php */
