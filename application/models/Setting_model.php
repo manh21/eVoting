@@ -13,6 +13,11 @@ class Setting_model extends CI_Model
   public $id = 'id';
   public $order = 'DESC';
 
+  function __construct()
+  {
+    parent::__construct();
+  }
+
   // Get All
   public function get_all($q, $table, $order)
   {

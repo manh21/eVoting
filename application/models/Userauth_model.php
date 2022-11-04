@@ -8,6 +8,11 @@ class Userauth_model extends CI_Model
     public $id = 'id';
     public $order = 'DESC';
 
+    function __construct()
+    {
+        parent::__construct();
+    }
+
     public function akses($username, $password)
     {
         $this->db->where('username', $username);
