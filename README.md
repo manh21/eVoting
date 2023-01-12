@@ -2,6 +2,8 @@
 
 Aplikasi ini dibuat untuk meningkatkan kesadaran akan pentingnya menggunakan hak pilih kita dalam demokrasi di dunia yang modern ini.
 
+![Visitor](https://visitor-badge.laobi.icu/badge?page_id=manh21.eVoting)
+
 # Server Requierment
 
 PHP version 7.3 or newer
