@@ -618,10 +618,6 @@ class Data_pemilih extends CI_Controller
         // Data Pemilih
         $data_pemilih = $this->Data_pemilih_model->get_all();
 
-        // Settings Data
-        $q = $this->Data_pemilih_model->settings_data_all();
-        $setting_data = $q[0];
-
         $data = array(
             "dataku" => array(
                 "nama" => "Data Pemilih",
@@ -629,7 +625,6 @@ class Data_pemilih extends CI_Controller
             ),
             'data_pemilih_data' => $data_pemilih,
             'start' => 0,
-            'setting_data' => $setting_data
         );
         $this->load->view('back/data_pemilih/data_pemilih_cetak', $data);
     }

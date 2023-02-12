@@ -24,56 +24,69 @@
                             <h3 class="box-title">General Settings</h3>
                         </div>
                         <!-- form start -->
-                        <form action="<?php echo $action ?>" class="form-horizontal" method="post">
+                        <form action="<?= site_url('admin/settings') ?>" class="form-horizontal" method="post" enctype="multipart/form-data">
                             <div class="box-body">
-                                <input type="hidden" name="id" value="<?php echo $id; ?>" />
                                 <div class="form-group">
                                     <label for="penyelenggara" class="col-sm-2 control-label">Penyelenggara <?php echo form_error('penyelenggara') ?></label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="penyelenggara" id="penyelenggara" placeholder="Penyelenggara" value="<?php echo $penyelenggara; ?>">
+                                        <input type="text" class="form-control" name="penyelenggara" id="penyelenggara" placeholder="Penyelenggara" value="<?= get_pengaturan('penyelenggara'); ?>">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="tps" class="col-sm-2 control-label">TPS <?php echo form_error('tps') ?></label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="tps" id="tps" placeholder="Tempat Pemungutan Suara (TPS)" value="<?php echo $tps; ?>">
+                                        <input type="text" class="form-control" name="tps" id="tps" placeholder="Tempat Pemungutan Suara (TPS)" value="<?= get_pengaturan('tps'); ?>">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="provinsi" class="col-sm-2 control-label">Provinsi <?php echo form_error('provinsi') ?></label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="provinsi" id="provinsi" placeholder="Provinsi" value="<?php echo $provinsi; ?>">
+                                        <input type="text" class="form-control" name="provinsi" id="provinsi" placeholder="Provinsi" value="<?= get_pengaturan('provinsi'); ?>">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="kota" class="col-sm-2 control-label">Kota / Kabupaten <?php echo form_error('kota') ?></label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="kota" id="kota" placeholder="Kota / Kabupaten" value="<?php echo $kota; ?>">
+                                        <input type="text" class="form-control" name="kota" id="kota" placeholder="Kota / Kabupaten" value="<?= get_pengaturan('kota'); ?>">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="kecamatan" class="col-sm-2 control-label">Kecamatan <?php echo form_error('kota') ?></label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="kecamatan" id="kecamatan" placeholder="Kecamatan" value="<?php echo $kecamatan; ?>">
+                                        <input type="text" class="form-control" name="kecamatan" id="kecamatan" placeholder="Kecamatan" value="<?= get_pengaturan('kecamatan'); ?>">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="kelurahan" class="col-sm-2 control-label">Desa / Kelurahan <?php echo form_error('kota') ?></label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="kelurahan" id="kelurahan" placeholder="Desa / Kelurahan" value="<?php echo $kelurahan; ?>">
+                                        <input type="text" class="form-control" name="kelurahan" id="kelurahan" placeholder="Desa / Kelurahan" value="<?= get_pengaturan('kelurahan'); ?>">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="alamat" class="col-sm-2 control-label">Alamat <?php echo form_error('alamat') ?></label>
                                     <div class="col-sm-10">
-                                        <textarea rows="3" type="text" class="form-control" name="alamat" id="alamat" placeholder="Alamat"><?php echo $alamat; ?></textarea>
+                                        <textarea rows="3" type="text" class="form-control" name="alamat" id="alamat" placeholder="Alamat"><?= get_pengaturan('alamat'); ?></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2" for="site_icon">Site Icon</label>
+                                    <div class="col-md-10">
+                                        <input type="file" class="form-control-file" id="site_icon" name="site_icon">
+                                        <img src="<?= get_url_file(cleanValue(get_pengaturan('site_icon'))) ?>" height="80px" alt="" srcset="">
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <label class="control-label col-sm-2" for="site_logo">Site Logo</label>
+                                    <div class="col-md-10">
+                                        <input type="file" class="form-control-file" id="site_logo" name="site_logo">
+                                        <img src="<?= get_url_file(cleanValue(get_pengaturan('site_logo'))) ?>" height="80px" alt="" srcset="">
                                     </div>
                                 </div>
                             </div>
                             <!-- ./box-body -->
                             <div class=" box-footer">
-                                <button type="submit" class="btn btn-success  pull-right"><?php echo $button ?></button>
-                                <a href="<?php echo site_url('admin') ?>" class="btn btn-default">Cancel</a>
+                                <button type="submit" class="btn btn-success  pull-right">Save</button>
+                                <a href="<?php echo base_url('admin/settings') ?>" class="btn btn-default">Cancel</a>
                             </div>
                             <!-- ./box-footer -->
                         </form>
@@ -87,7 +100,7 @@
                 <div class="col-sm-3">
                     <div class="box box-solid">
                         <div class="box-body text-center">
-                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-danger" data-whatever="<?php echo site_url('admin/settings/reset_data_pemilih') ?>"><i class="fa fa-warning"></i> Reset Seluruh Data Pemilih <i class="fa fa-warning"></i></button>
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-danger" data-whatever="<?php echo base_url('admin/settings/reset_data_pemilih') ?>"><i class="fa fa-warning"></i> Reset Seluruh Data Pemilih <i class="fa fa-warning"></i></button>
                         </div>
                         <!-- ./box-body -->
                     </div>
@@ -97,7 +110,7 @@
                 <div class="col-sm-3">
                     <div class="box box-solid">
                         <div class="box-body text-center">
-                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-danger" data-whatever="<?php echo site_url('admin/settings/reset_data_kandidat') ?>"><i class="fa fa-warning"></i> Reset Seluruh Data Kandidat <i class="fa fa-warning"></i></button>
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-danger" data-whatever="<?php echo base_url('admin/settings/reset_data_kandidat') ?>"><i class="fa fa-warning"></i> Reset Seluruh Data Kandidat <i class="fa fa-warning"></i></button>
                         </div>
                         <!-- ./box-body -->
                     </div>
@@ -107,7 +120,7 @@
                 <div class="col-sm-3">
                     <div class="box box-solid">
                         <div class="box-body text-center">
-                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-danger" data-whatever="<?php echo site_url('admin/settings/reset_data_kelas') ?>"><i class="fa fa-warning"></i> Reset Seluruh Data Kelas <i class="fa fa-warning"></i></button>
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-danger" data-whatever="<?php echo base_url('admin/settings/reset_data_kelas') ?>"><i class="fa fa-warning"></i> Reset Seluruh Data Kelas <i class="fa fa-warning"></i></button>
                         </div>
                         <!-- ./box-body -->
                     </div>
@@ -117,7 +130,7 @@
                 <div class="col-sm-3">
                     <div class="box box-solid">
                         <div class="box-body text-center">
-                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-danger" data-whatever="<?php echo site_url('admin/settings/reset_pemilihan') ?>"><i class="fa fa-warning"></i> Reset Hasil Pemilihan <i class="fa fa-warning"></i></button>
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-danger" data-whatever="<?php echo base_url('admin/settings/reset_pemilihan') ?>"><i class="fa fa-warning"></i> Reset Hasil Pemilihan <i class="fa fa-warning"></i></button>
                         </div>
                         <!-- ./box-body -->
                     </div>
@@ -164,6 +177,7 @@
             $(this).remove();
         });
     }, 2000);
+
     // Modal Controller
     $('#modal-danger').on('show.bs.modal', function(event) {
         var button = $(event.relatedTarget) // Button that triggered the modal
@@ -174,6 +188,7 @@
         var modal = document.getElementById("saveChanges")
         modal.setAttribute("href", link);
     })
+
 </script>
 </body>
 

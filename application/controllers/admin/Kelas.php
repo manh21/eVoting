@@ -409,15 +409,10 @@ class Kelas extends CI_Controller
      */
     public function cetak()
     {
-        // Setting Data
-        $q = $this->Kelas_model->settings_data_all();
-        $setting_data = $q[0];
-
         // Data Kelas
         $kelas_data = $this->Kelas_model->get_all();
 
         $data = array(
-            'setting_data' => $setting_data,
             'start' => 0,
             'kelas_data' => $kelas_data
         );

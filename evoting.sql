@@ -224,24 +224,32 @@ CREATE TABLE `login_attempts` (
 -- Struktur dari tabel `settings`
 --
 
-CREATE TABLE `settings` (
-  `id` int(32) NOT NULL,
-  `timestamp` timestamp NOT NULL DEFAULT current_timestamp(),
-  `penyelenggara` text NOT NULL,
-  `tps` text NOT NULL,
-  `provinsi` text NOT NULL,
-  `kota` text NOT NULL,
-  `kecamatan` text NOT NULL,
-  `kelurahan` text NOT NULL,
-  `alamat` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+-- Dumping structure for table vote.settings
+CREATE TABLE IF NOT EXISTS `settings` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `key` varchar(255) NOT NULL,
+  `value` text NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET==utf8;
 
 --
 -- Dumping data untuk tabel `settings`
 --
 
-INSERT INTO `settings` (`id`, `timestamp`, `penyelenggara`, `tps`, `provinsi`, `kota`, `kecamatan`, `kelurahan`, `alamat`) VALUES
-(1, '2019-12-03 19:35:11', 'E-Voting SMANSA', '01', 'Jawa Tengah', 'Surakarta', 'Kartasura', 'Pabelan', 'UMS Secretariat, Main Building Siti Walidah UMS, Jl. A. Yani No.284, Pabelan, Kartasura, Kota Surakarta, Jawa Tengah 57162');
+-- Dumping data for table vote.settings: ~0 rows (approximately)
+/*!40000 ALTER TABLE `settings` DISABLE KEYS */;
+INSERT INTO `settings` (`id`, `key`, `value`, `timestamp`) VALUES
+	(1, 'penyelenggara', 'SMA Negeri 1 Sukoharjo', '2023-02-09 17:03:53'),
+	(2, 'tps', '01', '2023-02-09 17:03:53'),
+	(3, 'provinsi', 'Jawa Tengah', '2023-02-09 17:03:53'),
+	(4, 'kota', 'Sukoharjo', '2023-02-09 17:03:54'),
+	(5, 'kecamatan', 'Sukoharjo', '2023-02-09 17:03:54'),
+	(6, 'kelurahan', 'Sukoharjo', '2023-02-09 17:03:54'),
+	(7, 'alamat', '8R9P+QFF, Kutorejo, Sukoharjo, Kec. Sukoharjo, Kabupaten Sukoharjo, Jawa Tengah 57512', '2023-02-09 17:03:54'),
+	(8, 'site_icon', 'site_icon1.png', '2023-02-09 18:37:24'),
+	(9, 'site_logo', 'site_logo1.png', '2023-02-09 18:37:24');
+/*!40000 ALTER TABLE `settings` ENABLE KEYS */;
 
 -- --------------------------------------------------------
 

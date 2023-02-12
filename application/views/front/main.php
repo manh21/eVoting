@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>E-Voting | SMANSA</title>
+    <title>E-Voting | <?= get_pengaturan('penyelenggara'); ?></title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
@@ -23,7 +23,7 @@
                         <span class="d-block mb-3 caption" data-aos="fade-up" data-aos-delay="100">Welcome!</span>
                         <h1 class="d-block mb-4" data-aos="fade-up" data-aos-delay="200">
                             E-Voting <br />
-                            SMANSA
+                            <?= get_pengaturan('penyelenggara'); ?>
                         </h1>
                         <span class="d-block mb-5 caption" data-aos="fade-up" data-aos-delay="300">Silahkan Login untuk melanjutkan</span>
                         <a href="<?php echo site_url('user') ?>" class="btn-custom" data-aos="fade-up" data-aos-delay="400"><span>Login</span></a>

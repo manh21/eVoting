@@ -153,7 +153,7 @@
                         <div style="text-align: center">
                             <h4 style="font-weight: bolder;">DATA PEMILIH</h4>
                             <h4 style="font-weight: bolder;">PESERTA PEMUNGUTAN DAN PENGHITUNGAN SUARA</h4>
-                            <h4 style="font-weight: bolder;"><?php echo $setting_data->penyelenggara; ?> </h4>
+                            <h4 style="font-weight: bolder;"><?= get_pengaturan('penyelenggara'); ?> </h4>
                         </div>
                         </br>
                         <table class="table">

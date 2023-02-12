@@ -46,14 +46,7 @@ class Laporan extends CI_Controller
 
   public function daftar_hadir()
   {
-    // Settings Data
-    $q = $this->Home_model->get_all('id', 'settings', 'ASC');
-    $setting_data = $q[0];
-
-    $data_pemilih = $this->Home_model->get_all('id', 'data_pemilih', 'ASC');
-
     $data = array(
-      "penyelenggara" => $setting_data->penyelenggara,
       "data_pemilih" => $data_pemilih,
       "start" => 0,
       "dataku" => array(

@@ -16,6 +16,7 @@ class Settings extends CI_Controller
     parent::__construct();
     $this->load->library('ion_auth', 'form_validation', 'session', 'form_helper');
     $this->load->model('Setting_model');
+    $this->load->model('Kandidat_model');
     $this->load->helper('url', 'language', 'form', 'file');
 
     // Security check if the user is admin
@@ -28,57 +29,61 @@ class Settings extends CI_Controller
     }
   }
 
-  public function index()
-  {
-    $q = $this->Setting_model->get_all('id', 'settings', 'ASC');
-    $row = $q[0];
+    public function index()
+    {
+        $this->_rules();
+        if ($this->form_validation->run() == true) {
 
-    $data = array(
-      'action' => site_url('admin/settings/update_action'),
-      'button' => 'Save Changes',
-      'id' => set_value('id', $row->id),
-      'penyelenggara' => set_value('penyelenggara', $row->penyelenggara),
-      'tps' => set_value('tps', $row->tps),
-      'provinsi' => set_value('provinsi', $row->provinsi),
-      'kota' => set_value('kota', $row->kota),
-      'kecamatan' => set_value('kecamatan', $row->kecamatan),
-      'kelurahan' => set_value('kelurahan', $row->kelurahan),
-      'alamat' => set_value('alamat', $row->alamat),
-    );
+            foreach ($_POST as $key => $val) {
+                # cek ada tidak, kalo ada update
+                $retrieve = $this->Setting_model->retrieve($key);
+                if (!empty($retrieve)) {
+                    $this->Setting_model->update($key, $val);
+                } else {
+                    $this->Setting_model->create($key, $val);
+                }
+            }
 
-    // Load View
-    $this->load->view('back/settings', $data);;
-  }
+            // Check and create folder
+            if (!is_dir(get_path_file())) {
+                mkdir(get_path_file(), 0777, true);
+            }
 
-  public function update_action()
-  {
-    $this->_rules();
+            # untuk upload gambar
+            foreach ($_FILES as $key => $val) {
+                if (!empty($val['tmp_name'])) {
+                    $config = array();
+                    $config['upload_path']   = get_path_file();
+                    $config['allowed_types'] = 'jpg|jpeg|png|gif';
+                    $config['file_name']     = $key;
+                    $this->load->library('upload', $config);
+                    $this->upload->initialize($config);
 
-    if ($this->form_validation->run() == FALSE) {
-      $this->index();
-    } else {
-      $data = array(
-        'id' => $this->input->post('id', TRUE),
-        'penyelenggara' => $this->input->post('penyelenggara', TRUE),
-        'tps' => $this->input->post('tps', TRUE),
-        'provinsi' => $this->input->post('provinsi', TRUE),
-        'kota' => $this->input->post('kota', TRUE),
-        'kecamatan' => $this->input->post('kecamatan', TRUE),
-        'kelurahan' => $this->input->post('kelurahan', TRUE),
-        'alamat' => $this->input->post('alamat', TRUE),
-      );
+                    if ($this->upload->do_upload($key)) {
+                        # hapus file sebelumnya
+                        $old_file = get_pengaturan($key, 'value');
+                        if (is_file(get_path_file($old_file))) {
+                            unlink(get_path_file($old_file));
+                        }
 
-      $this->Setting_model->update('id', $this->input->post('id', TRUE), 'settings', $data);
-      $this->session->set_flashdata(
-        'message',
-        '<div class="alert alert-info alert-dismissible">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        <h4><i class="icon fa fa-info"></i> Alert!</h4>
-        Update Record Success </div>'
-      );
-      redirect('admin/settings', 'refresh');
+                        $upload_data = $this->upload->data();
+
+                        $retrieve = $this->Setting_model->retrieve($key);
+                        if (!empty($retrieve)) {
+                            $this->Setting_model->update($key, $upload_data['file_name']);
+                        } else {
+                            $this->Setting_model->create($key, $upload_data['file_name']);
+                        }
+                    }
+                }
+            }
+
+            $this->session->set_flashdata('settings', successAlert('success', 'Pengaturan berhasil diperbaharui.'));
+            redirect('admin/settings');
+        }
+        
+        $this->load->view('back/settings');
     }
-  }
 
   public function reset_data_pemilih()
   {
@@ -132,7 +137,9 @@ class Settings extends CI_Controller
         );
 
         // Update Database
-        $this->Setting_model->update('id', $id, 'data_pemilih', $data);
+        $this->Setting_model->update_pemilih('id', $id, 'data_pemilih', $data);
+        
+        $this->Kandidat_model->reset_jumlah_suara();
       }
     }
 
@@ -155,6 +162,9 @@ class Settings extends CI_Controller
     $this->form_validation->set_rules('kecamatan', 'kecamatan', 'trim|required');
     $this->form_validation->set_rules('kelurahan', 'kelurahan', 'trim|required');
     $this->form_validation->set_rules('alamat', 'alamat', 'trim|required');
+    $this->form_validation->set_rules('site_name', 'site_name', 'trim');
+    $this->form_validation->set_rules('site_title', 'site_title', 'trim');
+    $this->form_validation->set_rules('site_description', 'site_description', 'trim');
 
     $this->form_validation->set_rules('id', 'id', 'trim');
     $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');

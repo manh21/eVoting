@@ -56,22 +56,12 @@ class Home extends CI_Controller
             redirect('user/userauth', 'refresh');
         }
 
-        $selesai = null;
-
         // Get All Kandidat
         $kandidat_data = $this->Home_model->get_all('nourut', 'kandidat', 'ASC');
-
-        // Get Settings
-        $setting_q = $this->Setting_model->get_all('id', 'settings', 'ASC');
-        $settings = $setting_q[0];
-        if (isset($settings->selesai)) {
-            $selesai = DateTime::createFromFormat('Y-m-d H:i:s', $settings->selesai)->format('Y/m/d H:i:s');
-        }
 
         $data = [
             // Data kandidat diambil dari database
             'kandidat_data' => $kandidat_data,
-            'waktu_selesai' => $selesai,
         ];
 
         $idpemilih = $this->session->userdata('userid');
