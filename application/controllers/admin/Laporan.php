@@ -46,6 +46,8 @@ class Laporan extends CI_Controller
 
   public function daftar_hadir()
   {
+    $data_pemilih = $this->Laporan_model->get_all('nis', 'data_pemilih');
+
     $data = array(
       "data_pemilih" => $data_pemilih,
       "start" => 0,
