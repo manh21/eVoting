@@ -10,7 +10,7 @@ PHP version 7.3 or newer
 
 Database mySQL 5.x
 
-# Instalation
+# Installation
 
 - ekstrak file eVoting ke dalam folder htdocs
 - buat database baru dengan nama **evoting**
@@ -24,7 +24,7 @@ Database mySQL 5.x
 
 # User
 
-**Administrator**'
+**Administrator**
 
 ```
 localhost/admin
