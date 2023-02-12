@@ -1,6 +1,6 @@
 <footer class="main-footer">
     <div class="pull-right hidden-xs">
-        <b>Version</b> 1.0.0 beta
+        <b>Version</b> <?= APP_VERSION ?>
     </div>
     <strong>Copyright &copy; <script>
             document.write(new Date().getFullYear())
