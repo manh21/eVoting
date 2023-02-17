@@ -5,7 +5,7 @@
     "require": {
         "phpoffice/phpspreadsheet": "^1.10",
         "chriskacerguis/codeigniter-restserver": "^3.1",
-        "firebase/php-jwt": "^5.1"
+        "firebase/php-jwt": "^6.0"
     },
     "require-dev": {
         "phpoffice/phpspreadsheet": "^1.10"
