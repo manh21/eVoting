@@ -1,0 +1,5 @@
+localhost {
+    root * /app/public
+    php_fastcgi php-fpm:9000
+    file_server
+}

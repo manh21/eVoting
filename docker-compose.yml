@@ -1,0 +1,55 @@
+version: '3.3'
+
+services:
+  caddy:
+    container_name: caddy
+    image: caddy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - .:/app/public
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - php-fpm
+  php-fpm:
+    container_name: php-fpm
+    build: .
+    restart: unless-stopped
+    volumes:
+      - .:/app/public
+    depends_on:
+      - database
+  database:
+    image: mysql:5.7
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_HOST=database
+      - MYSQL_PORT=3306
+      - MYSQL_DATABASE=evoting
+      - MYSQL_USER=ci
+      - MYSQL_PASSWORD=ci
+      - MYSQL_ROOT_PASSWORD=ci
+  phpmyadmin:
+    depends_on:
+      - database
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    ports:
+      - '8282:80'
+    environment:
+      - PHP_ENABLE_XDEBUG=0
+      - PMA_HOST=database
+
+volumes:
+  caddy_data:
+  caddy_config:
+
+networks:
+  default:
+    external:
+      name: main
