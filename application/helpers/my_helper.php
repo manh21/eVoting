@@ -20,6 +20,15 @@ function initialize_elfinder($value = '')
     return $opts;
 }
 
+function searchForUsername($username, $array) {
+    $res = [];
+    foreach ($array as $key => $val) {
+        if ($val['username'] === $username) {
+            $res[] = $key;
+        }
+    }
+    return $res;
+}
 
 function j($data)
 {
